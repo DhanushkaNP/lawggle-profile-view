@@ -1,3 +1,11 @@
+document.addEventListener("DOMContentLoaded", function () {
+  console.log("DOM fully loaded and parsed");
+  document.getElementById("loading-screen").style.display = "flex";
+  console.log("Showing loading screen");
+  document.getElementById("pv-page-wrapper").style.display = "none";
+  console.log("Hiding page wrapper");
+});
+
 window.onload = async function () {
   console.log("DOM fully loaded and parsed");
   console.log("testyyyssasasa");
