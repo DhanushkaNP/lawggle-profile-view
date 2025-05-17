@@ -604,29 +604,42 @@ async function fetchBlogByCreator(creatorId) {
 }
 
 async function mapBoxMap(latitude, longitude) {
-  // Your Mapbox access token
-  mapboxgl.accessToken =
-    "pk.eyJ1IjoibGF3Z2dsZSIsImEiOiJja2RraDU0ZnYwb2lqMnhwbWw2eXVrMjNrIn0.ShD8eyKTv7exWDKR44bSoA";
+  try {
+    // Your Mapbox access token
+    mapboxgl.accessToken =
+      "pk.eyJ1IjoibGF3Z2dsZSIsImEiOiJja2RraDU0ZnYwb2lqMnhwbWw2eXVrMjNrIn0.ShD8eyKTv7exWDKR44bSoA";
 
-  // Coordinates: [latitude, longitude]
-  lat = Number(latitude);
-  long = Number(longitude);
-  console.log(lat, "💧💧💧💧", long);
-  const coordinates = [long, lat]; // San Francisco
+    // Coordinates: [latitude, longitude]
+    lat = Number(latitude);
+    long = Number(longitude);
+    console.log(lat, "💧💧💧💧", long);
 
-  // Initialize the map
-  const map = new mapboxgl.Map({
-    container: "mapbox",
-    style: "mapbox://styles/lawggle/ckdkhap9e159e1imq6foj0ln5",
-    center: coordinates,
-    zoom: 12,
-  });
+    if (isNaN(lat) || isNaN(long)) {
+      throw new Error("Invalid latitude or longitude values");
+    }
 
-  // Add a marker
-  new mapboxgl.Marker()
-    .setLngLat(coordinates)
-    .setPopup(new mapboxgl.Popup().setText("Lawyer's Address")) // Optional popup
-    .addTo(map);
+    const coordinates = [long, lat];
+
+    // Initialize the map
+    const map = new mapboxgl.Map({
+      container: "mapbox",
+      style: "mapbox://styles/lawggle/ckdkhap9e159e1imq6foj0ln5",
+      center: coordinates,
+      zoom: 12,
+    });
+
+    // Add a marker
+    new mapboxgl.Marker()
+      .setLngLat(coordinates)
+      .setPopup(new mapboxgl.Popup().setText("Lawyer's Address"))
+      .addTo(map);
+
+    return map;
+  } catch (error) {
+    console.error("Error creating map:", error);
+    document.getElementById("sectionmap").style.display = "none";
+    return null;
+  }
 }
 
 function loading() {
