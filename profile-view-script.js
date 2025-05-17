@@ -519,6 +519,7 @@ window.onload = async function () {
             resolve("Profile setup complete");
           } catch (error) {
             console.error("Error setting up profile:", error);
+            console.log("Error setting up profile:", error);
             reject(error);
           }
         });
@@ -537,15 +538,13 @@ window.onload = async function () {
             alert("Error loading lawyer profile");
             // Still hide loader even if there's an error
             document.getElementById("loading-screen").style.display = "none";
+            document.getElementById("pv-page-wrapper").style.display = "block";
           });
       } else {
         alert("No such lawyer profile");
         document.getElementById("loading-screen").style.display = "none";
+        document.getElementById("pv-page-wrapper").style.display = "block";
       }
-
-      // Hide the loader
-      document.getElementById("loading-screen").style.display = "none";
-      document.getElementById("pv-page-wrapper").style.display = "block";
     } else {
       alert("No such lawyer profile");
     }
@@ -647,13 +646,17 @@ function loading() {
 
   console.log("Canvas found. Initializing Rive...");
 
+  const layoutSearch = new rive.Layout({
+    fit: rive.Fit.FitWidth,
+  });
+
   const rumplelooksSearch = new rive.Rive({
     src: "https://cdn.jsdelivr.net/gh/boske999/lawggle/search.riv",
     canvas: canvas,
     artboard: "Search",
     autoplay: true,
     stateMachines: ["StateMachine1"],
-    layout: layoutSearch, // ⚠️ make sure layoutSearch is defined!
+    layout: layoutSearch,
     onLoad: () => {
       console.log("Rive animation loaded.");
 
