@@ -528,7 +528,9 @@ window.onload = async function () {
           .then(() => {
             // Hide the loader only after profile setup is complete
             document.getElementById("loading-screen").style.display = "none";
+            console.log("Hiding loading screen");
             document.getElementById("pv-page-wrapper").style.display = "block";
+            console.log("showing page wrapper");
           })
           .catch((error) => {
             console.error("Failed to setup profile:", error);
@@ -633,10 +635,6 @@ async function mapBoxMap(latitude, longitude) {
     .setPopup(new mapboxgl.Popup().setText("Lawyer's Address")) // Optional popup
     .addTo(map);
 }
-
-// Loafing UI
-// load the Rive library
-<script src="https://unpkg.com/@rive-app/canvas@1.0.98/rive.js"></script>;
 
 function loading() {
   console.log("Starting loading function...");
