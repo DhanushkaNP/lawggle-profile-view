@@ -292,7 +292,9 @@ document.addEventListener("DOMContentLoaded", async function () {
               flagImage.src = theuserLanguages[userlang].image;
               languagetext = document.createElement("p");
               languagetext.classList.add("countrytext");
-              languagetext.innerText = theuserLanguages[userlang].value;
+              languagetext.innerText =
+                theuserLanguages[userlang].value.charAt(0).toUpperCase() +
+                theuserLanguages[userlang].value.slice(1);
               langholder.append(flagImage, languagetext);
               languagecontainer.append(langholder);
             }
