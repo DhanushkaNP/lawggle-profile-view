@@ -184,17 +184,21 @@ document.addEventListener("DOMContentLoaded", async function () {
           } else {
             expertholder.innerText = "N/A";
           }
+
           let thehobbies = parsedBody["interests and hobbies"];
-          let interestscontainer = document.getElementById("interestshobbies");
+          let hobbiesContainer = document.getElementById("interestshobbies");
+          hobbiesContainer.innerHTML = "";
+
           if (thehobbies.length > 0) {
             for (let eachhobby in thehobbies) {
               hobbyholder = document.createElement("div");
               hobbyholder.classList.add("expertisecontainer");
               let hobbyText = thehobbies[eachhobby].title;
               hobbyholder.innerText = capitalizeWords(hobbyText);
+              hobbiesContainer.append(hobbyholder);
             }
           } else {
-            interestscontainer.innerText = "NA";
+            hobbiesContainer.innerText = "NA";
           }
 
           let educactionList = parsedBody["AllEducation"];
