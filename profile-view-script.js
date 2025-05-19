@@ -490,8 +490,8 @@ document.addEventListener("DOMContentLoaded", async function () {
 
               theqaheadertext = document.createElement("p");
               theqaheadertext.classList.add("text-block-60-c");
-              console.log(theQAs[eachQa].question);
-              theqaheadertext.innerText = theQAs[eachQa].question;
+              console.log(theQAs[eachQa].title);
+              theqaheadertext.innerText = theQAs[eachQa].title;
               theqaheadertext.setAttribute("trackno", eachQa);
               thearrow = document.createElement("img");
               thearrow.classList.add("accordionclose");
@@ -503,10 +503,10 @@ document.addEventListener("DOMContentLoaded", async function () {
               qaBody.setAttribute("trackno", eachQa);
               qaanswer = document.createElement("p");
               qaanswer.classList.add("para-2c");
-              qaanswer.innerText = theQAs[eachQa].answer;
+              qaanswer.innerText = theQAs[eachQa].description;
 
               theqaheader.append(theqaheadertext, thearrow);
-              qaBody.append(qaanswer);
+              qaBody.append(description);
               theqacontainer.append(theqaheader, qaBody);
               thequizcontainer.append(theqacontainer);
             }
