@@ -44,18 +44,22 @@ document.addEventListener("DOMContentLoaded", async function () {
             firmUrl.length > 22 ? firmUrl.substring(0, 22) + "..." : firmUrl;
           document.getElementById("thefirmurl").href = firmUrl;
 
-          let minrate = `${parsedBody["min hourly rate"]}`;
-          let maxrate = `-${parsedBody["max hourly rate"]}`;
-          let ratecombined = `${minrate}-${maxrate}`;
-          if (
-            minrate == null ||
-            minrate == "null" ||
-            minrate == "" ||
-            minrate == undefined
-          ) {
-            ratecombined = "NA";
+          let minrate = parsedBody["min hourly rate"];
+          let maxrate = parsedBody["max hourly rate"];
+          let ratecombined = "NA";
+
+          if (minrate && maxrate) {
+            // Both rates available - show range
+            ratecombined = "$" + `${minrate}/hour-${maxrate}/hour`;
+          } else if (minrate) {
+            // Only min rate available
+            ratecombined = "$" + `${minrate}/hour`;
+          } else if (maxrate) {
+            // Only max rate available
+            ratecombined = "$" + `${maxrate}/hour`;
           }
-          document.getElementById("ratetext").innerText = `${ratecombined}`;
+
+          document.getElementById("ratetext").innerText = ratecombined;
 
           let bannerimage = parsedBody["profile banner"];
           console.log("🥪🥪🔷", bannerimage);
