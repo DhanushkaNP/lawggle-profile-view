@@ -39,8 +39,11 @@ document.addEventListener("DOMContentLoaded", async function () {
           }
 
           document.getElementById("NameText").innerText = parsedBody["name"];
+          let firmUrl = parsedBody["firm url"];
           document.getElementById("thefirmurl").innerText =
-            parsedBody["firm url"];
+            firmUrl.length > 22 ? firmUrl.substring(0, 22) + "..." : firmUrl;
+          document.getElementById("thefirmurl").href = firmUrl;
+
           let minrate = `${parsedBody["min hourly rate"]}`;
           let maxrate = `-${parsedBody["max hourly rate"]}`;
           let ratecombined = `${minrate}-${maxrate}`;
