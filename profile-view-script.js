@@ -28,13 +28,16 @@ document.addEventListener("DOMContentLoaded", async function () {
           let parsedBody = JSON.parse(JSON.parse(body));
           console.log(parsedBody, "🧑🏿‍❤️‍💋‍🧑🏾🧑🏿‍❤️‍💋‍🧑🏾🧑🏿‍❤️‍💋‍🧑🏾🥪🥪", parsedBody["profile image"]);
           let imageurl = parsedBody["profile image"];
-          let imagecontainer = document.getElementById(
-            "theprofileimagecontainer"
-          );
-          imagecontainer.style.backgroundImage = `url(${imageurl})`;
-          imagecontainer.style.backgroundSize = "cover";
-          imagecontainer.style.backgroundPosition = "center";
-          imagecontainer.style.backgroundRepeat = "no-repeat";
+          if (imageurl == null || imageurl == "" || imageurl == undefined) {
+            let imagecontainer = document.getElementById(
+              "theprofileimagecontainer"
+            );
+            imagecontainer.style.backgroundImage = `url(${imageurl})`;
+            imagecontainer.style.backgroundSize = "cover";
+            imagecontainer.style.backgroundPosition = "center";
+            imagecontainer.style.backgroundRepeat = "no-repeat";
+          }
+
           document.getElementById("NameText").innerText = parsedBody["name"];
           document.getElementById("thefirmurl").innerText =
             parsedBody["firm url"];
