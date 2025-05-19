@@ -506,7 +506,7 @@ document.addEventListener("DOMContentLoaded", async function () {
               qaanswer.innerText = theQAs[eachQa].description;
 
               theqaheader.append(theqaheadertext, thearrow);
-              qaBody.append(description);
+              qaBody.append(qaanswer);
               theqacontainer.append(theqaheader, qaBody);
               thequizcontainer.append(theqacontainer);
             }
