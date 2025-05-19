@@ -622,14 +622,27 @@ async function fetchBlogByCreator(creatorId) {
 
 async function mapBoxMap(latitude, longitude) {
   try {
+    // Make sure the map container exists and is visible
+    const mapContainer = document.getElementById("mapbox");
+    if (!mapContainer) {
+      console.error("Map container #mapbox not found");
+      document.getElementById("sectionmap").style.display = "none";
+      return null;
+    }
+
+    // Ensure the container has height (critical for MapBox to render)
+    if (mapContainer.offsetHeight === 0) {
+      mapContainer.style.height = "400px";
+    }
+
     // Your Mapbox access token
     mapboxgl.accessToken =
       "pk.eyJ1IjoibGF3Z2dsZSIsImEiOiJja2RraDU0ZnYwb2lqMnhwbWw2eXVrMjNrIn0.ShD8eyKTv7exWDKR44bSoA";
 
-    // Coordinates: [latitude, longitude]
-    lat = Number(latitude);
-    long = Number(longitude);
-    console.log(lat, "💧💧💧💧", long);
+    // Convert and validate coordinates
+    const lat = Number(latitude);
+    const long = Number(longitude);
+    console.log("Map coordinates:", lat, long);
 
     if (isNaN(lat) || isNaN(long)) {
       throw new Error("Invalid latitude or longitude values");
@@ -637,19 +650,37 @@ async function mapBoxMap(latitude, longitude) {
 
     const coordinates = [long, lat];
 
-    // Initialize the map
+    // Force redraw of container before initializing map
+    mapContainer.style.display = "none";
+    mapContainer.offsetHeight; // Force reflow
+    mapContainer.style.display = "block";
+
+    // Initialize the map with explicit dimensions
     const map = new mapboxgl.Map({
       container: "mapbox",
       style: "mapbox://styles/lawggle/ckdkhap9e159e1imq6foj0ln5",
       center: coordinates,
       zoom: 12,
+      width: mapContainer.offsetWidth || 600,
+      height: mapContainer.offsetHeight || 400,
     });
 
-    // Add a marker
-    new mapboxgl.Marker()
-      .setLngLat(coordinates)
-      .setPopup(new mapboxgl.Popup().setText("Lawyer's Address"))
-      .addTo(map);
+    // Wait for map to load before adding marker
+    map.on("load", function () {
+      // Add a marker
+      new mapboxgl.Marker()
+        .setLngLat(coordinates)
+        .setPopup(new mapboxgl.Popup().setText("Lawyer's Address"))
+        .addTo(map);
+
+      // Force map resize after load to ensure proper rendering
+      map.resize();
+    });
+
+    // Handle window resize
+    window.addEventListener("resize", () => {
+      if (map) map.resize();
+    });
 
     return map;
   } catch (error) {
