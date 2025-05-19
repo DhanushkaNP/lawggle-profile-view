@@ -177,7 +177,8 @@ document.addEventListener("DOMContentLoaded", async function () {
             for (let eachexpertise in theexpertise) {
               expertcontainer = document.createElement("div");
               expertcontainer.classList.add("expertisecontainer");
-              expertcontainer.innerText = theexpertise[eachexpertise];
+              let expertText = theexpertise[eachexpertise];
+              expertcontainer.innerText = capitalizeWords(expertText);
               expertholder.append(expertcontainer);
             }
           } else {
@@ -189,7 +190,8 @@ document.addEventListener("DOMContentLoaded", async function () {
             for (let eachhobby in thehobbies) {
               hobbyholder = document.createElement("div");
               hobbyholder.classList.add("expertisecontainer");
-              hobbyholder.innerText = thehobbies[eachhobby];
+              let hobbyText = thehobbies[eachhobby].title;
+              hobbyholder.innerText = capitalizeWords(hobbyText);
             }
           } else {
             interestscontainer.innerText = "NA";
@@ -707,3 +709,12 @@ $(document).ready(function () {
   console.log("Document ready. Calling loading()...");
   loading();
 });
+
+// Capitalize first letter of each word
+// Function to capitalize the first letter of each word in a string
+function capitalizeWords(text) {
+  return text
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
