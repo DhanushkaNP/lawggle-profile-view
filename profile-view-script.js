@@ -639,7 +639,7 @@ async function mapBoxMap(latitude, longitude) {
 
     // Initialize the map
     const map = new mapboxgl.Map({
-      container: "#mapbox",
+      container: "mapbox",
       style: "mapbox://styles/lawggle/ckdkhap9e159e1imq6foj0ln5",
       center: coordinates,
       zoom: 12,
