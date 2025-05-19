@@ -50,13 +50,13 @@ document.addEventListener("DOMContentLoaded", async function () {
 
           if (minrate && maxrate) {
             // Both rates available - show range
-            ratecombined = "$" + `${minrate}/hour - ${maxrate}/hour`;
+            ratecombined = "$" + `${minrate} - ` + "$" + `${maxrate}/Hour`;
           } else if (minrate) {
             // Only min rate available
-            ratecombined = "$" + `${minrate}/hour`;
+            ratecombined = "$" + `${minrate}/Hour`;
           } else if (maxrate) {
             // Only max rate available
-            ratecombined = "$" + `${maxrate}/hour`;
+            ratecombined = "$" + `${maxrate}/Hour`;
           }
 
           document.getElementById("ratetext").innerText = ratecombined;
