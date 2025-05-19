@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
           if (minrate && maxrate) {
             // Both rates available - show range
-            ratecombined = "$" + `${minrate}/hour-${maxrate}/hour`;
+            ratecombined = "$" + `${minrate}/hour - ${maxrate}/hour`;
           } else if (minrate) {
             // Only min rate available
             ratecombined = "$" + `${minrate}/hour`;
