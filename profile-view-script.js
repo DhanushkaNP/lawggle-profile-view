@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", async function () {
           let parsedBody = JSON.parse(JSON.parse(body));
           console.log(parsedBody, "🧑🏿‍❤️‍💋‍🧑🏾🧑🏿‍❤️‍💋‍🧑🏾🧑🏿‍❤️‍💋‍🧑🏾🥪🥪", parsedBody["profile image"]);
           let imageurl = parsedBody["profile image"];
-          if (imageurl == null || imageurl == "" || imageurl == undefined) {
+          if (imageurl != null && imageurl != "" && !imageurl != undefined) {
             let imagecontainer = document.getElementById(
               "theprofileimagecontainer"
             );
