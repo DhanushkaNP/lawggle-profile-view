@@ -1,12 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
-  console.log("DOM fully loaded and parsed");
   document.getElementById("loading-screen").style.display = "flex";
-  console.log("Showing loading screen");
   document.getElementById("pv-page-wrapper").style.display = "none";
-  console.log("Hiding page wrapper");
 });
 
-window.onload = async function () {
+document.addEventListener("DOMContentLoaded", async function () {
   console.log("DOM fully loaded and parsed");
   console.log("testyyyssasasa");
   let thepageparams = new URLSearchParams(window.location.search);
@@ -527,25 +524,19 @@ window.onload = async function () {
           .then(() => {
             // Hide the loader only after profile setup is complete
             document.getElementById("loading-screen").style.display = "none";
-            console.log("Hiding loading screen");
             document.getElementById("pv-page-wrapper").style.display = "block";
-            console.log("showing page wrapper");
           })
           .catch((error) => {
             console.error("Failed to setup profile:", error);
             alert("Error loading lawyer profile");
             // Still hide loader even if there's an error
             document.getElementById("loading-screen").style.display = "none";
-            console.log("Hiding loading screen");
             document.getElementById("pv-page-wrapper").style.display = "block";
-            console.log("showing page wrapper");
           });
       } else {
         alert("No such lawyer profile");
         document.getElementById("loading-screen").style.display = "none";
-        console.log("Hiding loading screen");
         document.getElementById("pv-page-wrapper").style.display = "block";
-        console.log("showing page wrapper");
       }
     } else {
       alert("No such lawyer profile");
@@ -553,7 +544,7 @@ window.onload = async function () {
   } else {
     alert("No such lawyer profile");
   }
-};
+});
 
 async function getUserById(userId) {
   const myHeaders = new Headers();
