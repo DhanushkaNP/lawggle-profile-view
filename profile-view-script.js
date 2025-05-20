@@ -289,12 +289,12 @@ document.addEventListener("DOMContentLoaded", async function () {
                 "certificate-swiper",
                 "media-swiper"
               );
+              certicateContainer.style.cssText = `width: 100%; overflow: hidden;`;
             } else {
               document.getElementById("biography-container").style.display =
                 "none";
             }
 
-            certicateContainer.style.cssText = `width: 100%; overflow: hidden;`;
             let firstCert = certificates[0];
             if (
               firstCert != null &&
