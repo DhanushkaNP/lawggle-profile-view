@@ -46,20 +46,24 @@ document.addEventListener("DOMContentLoaded", async function () {
 
           let minrate = parsedBody["min hourly rate"];
           let maxrate = parsedBody["max hourly rate"];
-          let ratecombined = "NA";
 
-          if (minrate && maxrate) {
-            // Both rates available - show range
-            ratecombined = "$" + `${minrate} - ` + "$" + `${maxrate}/Hour`;
-          } else if (minrate) {
-            // Only min rate available
-            ratecombined = "$" + `${minrate}/Hour`;
-          } else if (maxrate) {
-            // Only max rate available
-            ratecombined = "$" + `${maxrate}/Hour`;
+          if (!minrate && !maxrate) {
+            // Neither rate available - show "N/A"
+            document.getElementById("hourly-rate").style.display = "none";
+          } else {
+            if (minrate && maxrate) {
+              // Both rates available - show range
+              ratecombined = "$" + `${minrate} - ` + "$" + `${maxrate}/Hour`;
+            } else if (minrate) {
+              // Only min rate available
+              ratecombined = "$" + `${minrate}/Hour`;
+            } else if (maxrate) {
+              // Only max rate available
+              ratecombined = "$" + `${maxrate}/Hour`;
+            }
+
+            document.getElementById("ratetext").innerText = ratecombined;
           }
-
-          document.getElementById("ratetext").innerText = ratecombined;
 
           let bannerimage = parsedBody["profile banner"];
           console.log("🥪🥪🔷", bannerimage);
@@ -259,7 +263,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             "media-swiper"
           );
 
-          certicateContainer.style.cssText = `width: 100%; padding: 20px 0; overflow: hidden;`;
+          certicateContainer.style.cssText = `width: 100%; overflow: hidden;`;
 
           console.log(certificates);
           if (certificates.length > 0) {
