@@ -227,7 +227,8 @@ document.addEventListener("DOMContentLoaded", async function () {
               hobbiesContainer.append(hobbyholder);
             }
           } else {
-            hobbiesContainer.innerText = "NA";
+            document.getElementById("interest-hobby-container").style.display =
+              "none";
           }
 
           let educactionList = parsedBody["AllEducation"];
@@ -275,19 +276,21 @@ document.addEventListener("DOMContentLoaded", async function () {
             dynamicBio == undefined ||
             dynamicBio == ""
           ) {
-            dynamicBio = "N/A";
-          }
-          document.getElementById("biotext").innerText = dynamicBio;
+            document.getElementById("biotext").innerText = dynamicBio;
 
-          let certificates = parsedBody["certificates"];
-          let certicateContainer =
-            document.getElementById("certificate-swiper");
-          certicateContainer.innerHTML = "";
-          certicateContainer.classList.add(
-            "swiper",
-            "certificate-swiper",
-            "media-swiper"
-          );
+            let certificates = parsedBody["certificates"];
+            let certicateContainer =
+              document.getElementById("certificate-swiper");
+            certicateContainer.innerHTML = "";
+            certicateContainer.classList.add(
+              "swiper",
+              "certificate-swiper",
+              "media-swiper"
+            );
+          } else {
+            document.getElementById("biography-container").style.display =
+              "none";
+          }
 
           certicateContainer.style.cssText = `width: 100%; overflow: hidden;`;
 
