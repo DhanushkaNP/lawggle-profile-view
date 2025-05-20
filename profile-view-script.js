@@ -241,10 +241,9 @@ document.addEventListener("DOMContentLoaded", async function () {
               let educationwrapper = document.getElementById("educationwrap");
               educationwrapper.innerHTML = "";
               if (
-                (education1 != null &&
-                  education1 != undefined &&
-                  education1 != "null") ||
-                education1 != ""
+                education1 != null &&
+                education1 != undefined &&
+                education1 != "null"
               ) {
                 for (let eachEducation in educactionList) {
                   let educationText = educactionList[eachEducation].education;
@@ -279,23 +278,23 @@ document.addEventListener("DOMContentLoaded", async function () {
             document.getElementById("biotext").innerText = dynamicBio;
 
             let certificates = parsedBody["certificates"];
-            let certicateContainer =
-              document.getElementById("certificate-swiper");
-            certicateContainer.innerHTML = "";
-            certicateContainer.classList.add(
-              "swiper",
-              "certificate-swiper",
-              "media-swiper"
-            );
-          } else {
-            document.getElementById("biography-container").style.display =
-              "none";
-          }
 
-          certicateContainer.style.cssText = `width: 100%; overflow: hidden;`;
+            console.log(certificates);
+            if (certificates.length > 0) {
+              let certicateContainer =
+                document.getElementById("certificate-swiper");
+              certicateContainer.innerHTML = "";
+              certicateContainer.classList.add(
+                "swiper",
+                "certificate-swiper",
+                "media-swiper"
+              );
+            } else {
+              document.getElementById("biography-container").style.display =
+                "none";
+            }
 
-          console.log(certificates);
-          if (certificates.length > 0) {
+            certicateContainer.style.cssText = `width: 100%; overflow: hidden;`;
             let firstCert = certificates[0];
             if (
               firstCert != null &&
