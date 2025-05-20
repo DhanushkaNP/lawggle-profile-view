@@ -627,8 +627,8 @@ async function mapBoxMap(latitude, longitude) {
       "pk.eyJ1IjoibGF3Z2dsZSIsImEiOiJja2RraDU0ZnYwb2lqMnhwbWw2eXVrMjNrIn0.ShD8eyKTv7exWDKR44bSoA";
 
     // Coordinates: [latitude, longitude]
-    lat = Number(latitude);
-    long = Number(longitude);
+    lat = Number(36.778259);
+    long = Number(-119.417931);
     console.log(lat, "💧💧💧💧", long);
 
     if (isNaN(lat) || isNaN(long)) {
@@ -640,17 +640,37 @@ async function mapBoxMap(latitude, longitude) {
     // Initialize the map
     const map = new mapboxgl.Map({
       container: "mapbox",
-      style: "mapbox://styles/mapbox/streets-v9",
-      projection: "globe",
-      center: [30, 15],
+      style: "mapbox://styles/mapbox/streets-v11",
+      center: coordinates,
       zoom: 12,
     });
 
+    const el = document.createElement("div");
+    el.className = "pin-marker";
+
     // Add a marker
-    new mapboxgl.Marker()
-      .setLngLat(coordinates)
-      .setPopup(new mapboxgl.Popup().setText("Lawyer's Address"))
-      .addTo(map);
+    new mapboxgl.Marker(el).setLngLat(coordinates).addTo(map);
+
+    fetch(
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/${long},${lat}.json?access_token=${mapboxgl.accessToken}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        const parts = data.features
+          .filter((f) =>
+            ["place", "region", "country"].some((type) =>
+              f.place_type.includes(type)
+            )
+          )
+          .map((f) => f.text);
+
+        const address = parts.join(", ");
+
+        // Update the address card
+        document.querySelector(".address-card div:last-child").textContent =
+          address;
+      })
+      .catch((err) => console.error("Geocoding error:", err));
 
     return map;
   } catch (error) {
