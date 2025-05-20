@@ -676,7 +676,7 @@ async function mapBoxMap(latitude, longitude) {
 
     let resizeAttempts = 0;
     const resizeInterval = setInterval(() => {
-      if (map && resizeAttempts < 10) {
+      if (map && resizeAttempts < 3) {
         // Try 10 times (5 seconds total)
         map.resize();
         resizeAttempts++;
