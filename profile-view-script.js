@@ -642,8 +642,8 @@ async function mapBoxMap(latitude, longitude) {
       container: "mapbox",
       style: "mapbox://styles/mapbox/streets-v9",
       projection: "globe",
-      center: [30, 15],
-      zoom: 1,
+      center: [-79.383555, 43.647938],
+      zoom: 12,
     });
 
     // Add a marker
