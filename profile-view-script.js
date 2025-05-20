@@ -250,8 +250,17 @@ document.addEventListener("DOMContentLoaded", async function () {
           document.getElementById("biotext").innerText = dynamicBio;
 
           let certificates = parsedBody["certificates"];
-          let certicateslider = document.getElementById("certificate-swiper");
-          certicateslider.innerHTML = "";
+          let certicateContainer =
+            document.getElementById("certificate-swiper");
+          certicateContainer.innerHTML = "";
+          certicateContainer.classList.add(
+            "swiper",
+            "certificate-swiper",
+            "media-swiper"
+          );
+
+          certicateContainer.style.cssText = `width: 100%; padding: 20px 0; overflow: hidden;`;
+
           console.log(certificates);
           if (certificates.length > 0) {
             let firstCert = certificates[0];
@@ -261,15 +270,6 @@ document.addEventListener("DOMContentLoaded", async function () {
               firstCert != "null" &&
               firstCert != ""
             ) {
-              // Create Swiper container structure
-              const swiperContainer = document.createElement("div");
-              swiperContainer.classList.add(
-                "swiper",
-                "certificate-swiper",
-                "media-swiper"
-              );
-              swiperContainer.style.cssText = `width: 100%; padding: 20px 0; overflow: hidden;`;
-
               const swiperWrapper = document.createElement("div");
               swiperWrapper.classList.add("swiper-wrapper");
 
@@ -292,9 +292,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 swiperSlide.append(imageContainer);
                 swiperWrapper.append(swiperSlide);
               }
-
-              swiperContainer.append(swiperWrapper);
-              certicateslider.append(swiperContainer);
+              certicateContainer.append(swiperWrapper);
 
               // Initialize Swiper after DOM is fully loaded
               loadSwiperJS().then(() => {
@@ -306,12 +304,12 @@ document.addEventListener("DOMContentLoaded", async function () {
                 });
               });
             } else {
-              document.getElementById("certificatethehold").style.display ==
+              document.getElementById("certificate-swiper").style.display ==
                 "none";
             }
           } else {
             console.log(document.querySelectorAll("#certificatethehold"));
-            document.getElementById("certificatethehold").style.display =
+            document.getElementById("certificate-swiper").style.display =
               "none";
           }
 
