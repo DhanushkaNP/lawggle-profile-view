@@ -371,33 +371,443 @@ document.addEventListener("DOMContentLoaded", async function () {
           }
 
           let themediaandPress = parsedBody["media press mentions"];
-          themediacontainer = document.getElementById("mediawrapper");
-          mediawrapper.innerHTML = "";
+          let themediacontainer = document.getElementById("mediawrapper");
+          themediacontainer.innerHTML = "";
 
-          if (themediaandPress.length > 0) {
-            let themax = themediaandPress.length;
-            if (themax > 3) {
-              themax = 3;
+          // Fallback data for when metadata can't be retrieved
+          const fallbackData = {
+            title: "Visit Website",
+            description: "Click to view the full content",
+            favicon: null,
+            host: "",
+          };
+
+          // Function to extract domain name from URL
+          function extractDomain(url) {
+            try {
+              const urlObj = new URL(url);
+              return urlObj.hostname.replace("www.", "");
+            } catch (e) {
+              return url;
+            }
+          }
+
+          // Function to create a link preview card
+          async function createLinkPreviewCard(url, uniqueId) {
+            // Create the basic card structure that we'll populate with metadata
+            const mediaCard = document.createElement("a");
+            mediaCard.href = url;
+            mediaCard.target = "_blank"; // Open in new tab
+            mediaCard.classList.add("media-preview-card");
+            mediaCard.id = `preview-${uniqueId}`;
+            mediaCard.style.cssText = `
+    min-width: 300px;
+    max-width: 300px;
+    height: 220px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  `;
+
+            // Hover effect
+            mediaCard.onmouseover = () => {
+              mediaCard.style.transform = "translateY(-5px)";
+              mediaCard.style.boxShadow = "0 10px 20px rgba(0,0,0,0.15)";
+            };
+            mediaCard.onmouseout = () => {
+              mediaCard.style.transform = "translateY(0)";
+              mediaCard.style.boxShadow = "0 2px 10px rgba(0,0,0,0.1)";
+            };
+
+            // Image container (we'll populate this with the metadata image if available)
+            const imageContainer = document.createElement("div");
+            imageContainer.style.cssText = `
+    height: 120px;
+    overflow: hidden;
+    background-color: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  `;
+
+            // Content container for text
+            const contentContainer = document.createElement("div");
+            contentContainer.style.cssText = `
+    padding: 12px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  `;
+
+            // Loading indicator
+            const loadingElement = document.createElement("div");
+            loadingElement.textContent = "Loading preview...";
+            loadingElement.style.cssText = `
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #888;
+    font-size: 14px;
+  `;
+            imageContainer.appendChild(loadingElement);
+
+            // Initial placeholder elements
+            const titleElement = document.createElement("h3");
+            titleElement.textContent = "Loading...";
+            titleElement.style.cssText = `
+    margin: 0 0 6px 0;
+    font-size: 16px;
+    line-height: 1.3;
+    font-weight: 600;
+    color: #000;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  `;
+
+            const descElement = document.createElement("p");
+            descElement.textContent = "Loading preview...";
+            descElement.style.cssText = `
+    margin: 0 0 8px 0;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #686868;
+    flex-grow: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  `;
+
+            // Source (domain) element
+            const sourceElement = document.createElement("div");
+            sourceElement.style.cssText = `
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    color: #888;
+    gap: 5px;
+  `;
+
+            // Assemble the card structure
+            contentContainer.appendChild(titleElement);
+            contentContainer.appendChild(descElement);
+            contentContainer.appendChild(sourceElement);
+
+            mediaCard.appendChild(imageContainer);
+            mediaCard.appendChild(contentContainer);
+
+            // Try to fetch metadata using a proxy service (like allOrigins or similar)
+            // Note: In a production environment, you might want to use a proper backend service for this
+            try {
+              // For demonstration, we'll use a direct approach, but in production you'd need a CORS proxy
+              // or a server-side solution to fetch the metadata
+
+              // Since direct fetching will likely fail due to CORS, let's simulate the metadata result
+              // with some logic based on the URL
+
+              let metadata = { ...fallbackData };
+
+              // Domain-specific fallbacks for common sites
+              const domain = extractDomain(url);
+
+              if (url.includes("youtube.com") || url.includes("youtu.be")) {
+                metadata = {
+                  title: "YouTube Video",
+                  description: "Click to watch this video on YouTube",
+                  imageUrl:
+                    "https://via.placeholder.com/300x200/FF0000/FFFFFF?text=YouTube",
+                  favicon: "https://www.youtube.com/favicon.ico",
+                  host: "youtube.com",
+                };
+              } else if (url.includes("linkedin.com")) {
+                metadata = {
+                  title: "LinkedIn Article",
+                  description: "Professional content shared on LinkedIn",
+                  imageUrl:
+                    "https://via.placeholder.com/300x200/0077B5/FFFFFF?text=LinkedIn",
+                  favicon: "https://www.linkedin.com/favicon.ico",
+                  host: "linkedin.com",
+                };
+              } else if (url.includes("medium.com")) {
+                metadata = {
+                  title: "Medium Article",
+                  description: "Read this story on Medium",
+                  imageUrl:
+                    "https://via.placeholder.com/300x200/000000/FFFFFF?text=Medium",
+                  favicon: "https://medium.com/favicon.ico",
+                  host: "medium.com",
+                };
+              } else if (url.includes("twitter.com") || url.includes("x.com")) {
+                metadata = {
+                  title: "Tweet",
+                  description: "View this post on Twitter/X",
+                  imageUrl:
+                    "https://via.placeholder.com/300x200/1DA1F2/FFFFFF?text=Twitter",
+                  favicon: "https://twitter.com/favicon.ico",
+                  host: "twitter.com",
+                };
+              } else if (url.includes("instagram.com")) {
+                metadata = {
+                  title: "Instagram Post",
+                  description: "View this post on Instagram",
+                  imageUrl:
+                    "https://via.placeholder.com/300x200/E1306C/FFFFFF?text=Instagram",
+                  favicon: "https://www.instagram.com/favicon.ico",
+                  host: "instagram.com",
+                };
+              } else if (url.includes("facebook.com")) {
+                metadata = {
+                  title: "Facebook Post",
+                  description: "View this content on Facebook",
+                  imageUrl:
+                    "https://via.placeholder.com/300x200/4267B2/FFFFFF?text=Facebook",
+                  favicon: "https://www.facebook.com/favicon.ico",
+                  host: "facebook.com",
+                };
+              } else {
+                // Generic fallback with domain name
+                metadata = {
+                  title: `Article on ${domain}`,
+                  description: `View this content on ${domain}`,
+                  imageUrl: `https://via.placeholder.com/300x200/cccccc/333333?text=${domain}`,
+                  favicon: null,
+                  host: domain,
+                };
+              }
+
+              // Update the card with the metadata
+              titleElement.textContent = metadata.title;
+              descElement.textContent = metadata.description;
+
+              // Create favicon + domain display
+              sourceElement.innerHTML = "";
+              if (metadata.favicon) {
+                const faviconImg = document.createElement("img");
+                faviconImg.src = metadata.favicon;
+                faviconImg.alt = "";
+                faviconImg.style.cssText = `
+        width: 14px;
+        height: 14px;
+        margin-right: 4px;
+      `;
+                sourceElement.appendChild(faviconImg);
+              }
+
+              const domainText = document.createElement("span");
+              domainText.textContent = metadata.host || domain;
+              sourceElement.appendChild(domainText);
+
+              // Update image
+              imageContainer.innerHTML = "";
+              if (metadata.imageUrl) {
+                const image = document.createElement("img");
+                image.src = metadata.imageUrl;
+                image.alt = metadata.title;
+                image.style.cssText = `
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      `;
+                imageContainer.appendChild(image);
+              } else {
+                // If no image, create a colored placeholder with the domain initial
+                const initialPlaceholder = document.createElement("div");
+                initialPlaceholder.style.cssText = `
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f0f0f0;
+        color: #555;
+        font-size: 40px;
+        font-weight: bold;
+      `;
+                initialPlaceholder.textContent = domain.charAt(0).toUpperCase();
+                imageContainer.appendChild(initialPlaceholder);
+              }
+            } catch (error) {
+              console.error("Error fetching link preview:", error);
+
+              // Fill with fallback data if fetch fails
+              titleElement.textContent = fallbackData.title;
+              descElement.textContent = `Visit ${extractDomain(url)}`;
+
+              // Create a domain-colored placeholder
+              imageContainer.innerHTML = "";
+              const domainInitial = document.createElement("div");
+              domainInitial.style.cssText = `
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f0f0f0;
+      color: #555;
+      font-size: 40px;
+      font-weight: bold;
+    `;
+              const domain = extractDomain(url);
+              domainInitial.textContent = domain.charAt(0).toUpperCase();
+              imageContainer.appendChild(domainInitial);
+
+              // Update source with just the domain
+              sourceElement.textContent = domain;
             }
 
-            for (let i = 0; i < themax; i++) {
-              mediacard = document.createElement("div");
-              mediacard.classList.add("crds");
-              previewLink = document.createElement("previewbox-link");
+            return mediaCard;
+          }
 
-              previewLink.setAttribute(
-                "style",
-                "--pb-background-color: transparent; --pb-text-color: #000000; --pb-text-color-light:#686868; height: 100%;"
-              );
-              previewLink.setAttribute(
-                "href",
-                "https://lawggle-b065c1-7854620dcb65bd8d14aa462e.webflow.io/"
-              );
+          if (themediaandPress && themediaandPress.length > 0) {
+            // Create a scrollable container
+            const scrollContainer = document.createElement("div");
+            scrollContainer.classList.add("media-scroll-container");
+            scrollContainer.style.cssText = `
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 20px 0;
+    gap: 20px;
+    scrollbar-width: thin;
+    scrollbar-color: #ccc transparent;
+  `;
 
-              // Append it to the body or any container
-              mediacard.append(previewLink);
-              themediacontainer.append(mediacard);
-            }
+            // Create scroll navigation buttons
+            const leftScrollBtn = document.createElement("button");
+            leftScrollBtn.innerHTML = "&#10094;"; // Left arrow
+            leftScrollBtn.classList.add("scroll-btn", "scroll-left");
+            leftScrollBtn.style.cssText = `
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  `;
+
+            const rightScrollBtn = document.createElement("button");
+            rightScrollBtn.innerHTML = "&#10095;"; // Right arrow
+            rightScrollBtn.classList.add("scroll-btn", "scroll-right");
+            rightScrollBtn.style.cssText = `
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  `;
+
+            // Container for the scroll container and buttons
+            const scrollWrapper = document.createElement("div");
+            scrollWrapper.style.cssText = `
+    position: relative;
+    width: 100%;
+  `;
+
+            // Add loading message while cards are being created
+            const loadingMsg = document.createElement("div");
+            loadingMsg.textContent = "Loading link previews...";
+            loadingMsg.style.cssText = `
+    padding: 20px;
+    text-align: center;
+    color: #888;
+    width: 100%;
+  `;
+            scrollContainer.appendChild(loadingMsg);
+
+            // Assemble initial structure
+            scrollWrapper.appendChild(scrollContainer);
+            scrollWrapper.appendChild(leftScrollBtn);
+            scrollWrapper.appendChild(rightScrollBtn);
+            themediacontainer.appendChild(scrollWrapper);
+
+            // Initial button visibility
+            leftScrollBtn.style.display = "none";
+            rightScrollBtn.style.display =
+              themediaandPress.length > 1 ? "flex" : "none";
+
+            // Process each media item and create preview cards
+            Promise.all(
+              themediaandPress.map(async (mediaItem) => {
+                const url =
+                  mediaItem.url ||
+                  "https://lawggle-b065c1-7854620dcb65bd8d14aa462e.webflow.io/";
+                const uniqueId =
+                  mediaItem.uniqueId ||
+                  `id-${Math.random().toString(36).substr(2, 9)}`;
+
+                return await createLinkPreviewCard(url, uniqueId);
+              })
+            ).then((cards) => {
+              // Remove loading message
+              scrollContainer.innerHTML = "";
+
+              // Add all cards to the container
+              cards.forEach((card) => {
+                scrollContainer.appendChild(card);
+              });
+
+              // Add event listeners to scroll buttons
+              leftScrollBtn.addEventListener("click", () => {
+                scrollContainer.scrollBy({ left: -350, behavior: "smooth" });
+              });
+
+              rightScrollBtn.addEventListener("click", () => {
+                scrollContainer.scrollBy({ left: 350, behavior: "smooth" });
+              });
+
+              // Show/hide scroll buttons based on scroll position
+              const updateScrollButtonVisibility = () => {
+                leftScrollBtn.style.display =
+                  scrollContainer.scrollLeft > 0 ? "flex" : "none";
+                rightScrollBtn.style.display =
+                  scrollContainer.scrollLeft <
+                  scrollContainer.scrollWidth - scrollContainer.clientWidth - 10
+                    ? "flex"
+                    : "none";
+              };
+
+              // Initialize button visibility after cards are loaded
+              updateScrollButtonVisibility();
+
+              // Update button visibility on scroll
+              scrollContainer.addEventListener("scroll", () => {
+                updateScrollButtonVisibility();
+              });
+
+              // Also update on window resize
+              window.addEventListener("resize", () => {
+                updateScrollButtonVisibility();
+              });
+            });
           } else {
             document.getElementById("sectionmedia").style.display = "none";
           }
