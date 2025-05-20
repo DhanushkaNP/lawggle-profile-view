@@ -250,7 +250,7 @@ document.addEventListener("DOMContentLoaded", async function () {
           document.getElementById("biotext").innerText = dynamicBio;
 
           let certificates = parsedBody["certificates"];
-          let certicateslider = document.getElementById("certificatediv");
+          let certicateslider = document.getElementById("certificate-swiper");
           certicateslider.innerHTML = "";
           console.log(certificates);
           if (certificates.length > 0) {
@@ -262,17 +262,23 @@ document.addEventListener("DOMContentLoaded", async function () {
               firstCert != ""
             ) {
               for (let eachcert in certificates) {
-                let imageslide = document.createElement("div");
-                imageslide.classList.add("slide-img", "2ne", "w-slide");
-                imageslide.style.maxWidth = "300px";
                 let imageContainer = document.createElement("div");
                 imageContainer.classList.add("img-wrap");
                 let certimage = document.createElement("img");
                 certimage.classList.add("imagyclass");
                 certimage.src = certificates[eachcert].url;
                 imageContainer.append(certimage);
-                imageslide.append(imageContainer);
-                certicateslider.append(imageslide);
+                certicateslider.append(imageContainer);
+
+                // Add the certificate to the slider
+                loadSwiperJS().then(() => {
+                  new Swiper(".certificate-swiper", {
+                    slidesPerView: "auto",
+                    spaceBetween: 5,
+                    freeMode: true,
+                    pagination: false,
+                  });
+                });
               }
             } else {
               document.getElementById("certificatethehold").style.display ==
