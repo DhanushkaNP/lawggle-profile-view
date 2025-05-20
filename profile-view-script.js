@@ -418,7 +418,12 @@ document.addEventListener("DOMContentLoaded", async function () {
           );
           notablecasewinscontainer.innerHTML = "";
 
-          if (notableCaseWins.length > 0) {
+          if (
+            notableCaseWins != null &&
+            notableCaseWins != undefined &&
+            notableCaseWins != "" &&
+            notableCaseWins.length > 0
+          ) {
             for (let eachcase in notableCaseWins) {
               caseWinDiv = document.createElement("div");
               caseWinDiv.classList.add("crd");
@@ -436,7 +441,13 @@ document.addEventListener("DOMContentLoaded", async function () {
           let clientTestimonialContainer =
             document.getElementById("testimonialholder");
           clientTestimonialContainer.innerHTML = "";
-          if (clientTestimonials.length > 0) {
+
+          if (
+            clientTestimonials != null &&
+            clientTestimonials != undefined &&
+            clientTestimonials != "" &&
+            clientTestimonials.length > 0
+          ) {
             let max = clientTestimonials.length;
             if (clientTestimonials.length > 3) {
               max = 3;
@@ -466,7 +477,12 @@ document.addEventListener("DOMContentLoaded", async function () {
           let videocaseslider = document.getElementById("casestudyslider");
           videocaseslider.innerHTML = "";
 
-          if (thecasestudies.length > 0) {
+          if (
+            thecasestudies != null &&
+            thecasestudies != "" &&
+            thecasestudies != undefined &&
+            thecasestudies.length > 0
+          ) {
             for (let eachcase in thecasestudies) {
               caseSlide = document.createElement("div");
               caseSlide.classList.add("slide-img", "2ni", "w-slide");
@@ -491,7 +507,13 @@ document.addEventListener("DOMContentLoaded", async function () {
           let themainblogcontainer =
             document.getElementById("mainblogscontainer");
           themainblogcontainer.innerHTML = "";
-          if (blogsJson.length > 0) {
+
+          if (
+            blogs != null &&
+            blogs != "" &&
+            blogs != undefined &&
+            blogs.length > 0
+          ) {
             for (let blog in blogsJson) {
               blogslide = document.createElement("div");
               blogslide.classList.add("slide-img", "2ni", "w-slide");
@@ -527,7 +549,12 @@ document.addEventListener("DOMContentLoaded", async function () {
           let thequizcontainer = document.getElementById("qanaswercontainer");
           thequizcontainer.innerHTML = "";
 
-          if (theQAs.length > 0) {
+          if (
+            theQAs != null &&
+            theQAs != "" &&
+            theQAs != undefined &&
+            theQAs.length > 0
+          ) {
             for (let eachQa in theQAs) {
               theqacontainer = document.createElement("div");
               theqacontainer.classList.add("accordion-item-c");
