@@ -260,10 +260,12 @@ document.addEventListener("DOMContentLoaded", async function () {
                 }
               }
             } else {
+              console.log("No education found");
               document.getElementById("education-container").style.display =
                 "none";
             }
           } else {
+            console.log("No education found");
             document.getElementById("education-container").style.display =
               "none";
           }
