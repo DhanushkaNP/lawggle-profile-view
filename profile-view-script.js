@@ -804,32 +804,6 @@ function setupMediaAndPress(parsedBody) {
       }
     }
 
-    // Load Swiper CSS if not already loaded
-    if (!document.getElementById("swiper-css")) {
-      const swiperCSS = document.createElement("link");
-      swiperCSS.id = "swiper-css";
-      swiperCSS.rel = "stylesheet";
-      swiperCSS.href =
-        "https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css";
-      document.head.appendChild(swiperCSS);
-    }
-
-    // Load Swiper JS
-    function loadSwiperJS() {
-      return new Promise((resolve) => {
-        if (window.Swiper) {
-          resolve();
-          return;
-        }
-
-        const swiperScript = document.createElement("script");
-        swiperScript.src =
-          "https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js";
-        swiperScript.onload = resolve;
-        document.body.appendChild(swiperScript);
-      });
-    }
-
     // Create Swiper container
     const swiperContainer = document.createElement("div");
     swiperContainer.classList.add("swiper", "media-swiper");
@@ -901,14 +875,39 @@ function setupMediaAndPress(parsedBody) {
     swiperContainer.appendChild(swiperWrapper);
     themediacontainer.appendChild(swiperContainer);
 
-    // Load and initialize Swiper
-    loadSwiperJS().then(() => {
-      new Swiper(".media-swiper", {
-        slidesPerView: "auto",
-        spaceBetween: 5,
-        freeMode: true,
-        pagination: false,
-      });
-    });
+    configureSwiperJS();
   }
+}
+
+// Load Swiper JS
+function configureSwiperJS() {
+  return new Promise((resolve) => {
+    if (window.Swiper) {
+      resolve();
+      return;
+    }
+
+    // Load Swiper CSS if not already loaded
+    if (!document.getElementById("swiper-css")) {
+      const swiperCSS = document.createElement("link");
+      swiperCSS.id = "swiper-css";
+      swiperCSS.rel = "stylesheet";
+      swiperCSS.href =
+        "https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css";
+      document.head.appendChild(swiperCSS);
+    }
+
+    const swiperScript = document.createElement("script");
+    swiperScript.src =
+      "https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js";
+    swiperScript.onload = resolve;
+    document.body.appendChild(swiperScript);
+
+    new Swiper(".media-swiper", {
+      slidesPerView: "auto",
+      spaceBetween: 5,
+      freeMode: true,
+      pagination: false,
+    });
+  });
 }
