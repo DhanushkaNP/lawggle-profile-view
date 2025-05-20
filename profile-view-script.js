@@ -186,7 +186,8 @@ document.addEventListener("DOMContentLoaded", async function () {
               expertholder.append(expertcontainer);
             }
           } else {
-            expertholder.innerText = "N/A";
+            document.getElementById("area-expertise-container").style.display =
+              "none";
           }
 
           let thehobbies = parsedBody["interests and hobbies"];
