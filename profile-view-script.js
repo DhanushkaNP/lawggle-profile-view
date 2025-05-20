@@ -639,18 +639,38 @@ async function mapBoxMap(latitude, longitude) {
 
     // Initialize the map
     const map = new mapboxgl.Map({
-      container: "mapbox",
-      style: "mapbox://styles/mapbox/streets-v9",
-      projection: "globe",
-      center: [-79.383555, 43.647938],
+      container: "map",
+      style: "mapbox://styles/mapbox/streets-v11",
+      center: [lng, lat],
       zoom: 12,
     });
 
+    const el = document.createElement("div");
+    el.className = "pin-marker";
+
     // Add a marker
-    new mapboxgl.Marker()
-      .setLngLat(coordinates)
-      .setPopup(new mapboxgl.Popup().setText("Lawyer's Address"))
-      .addTo(map);
+    new mapboxgl.Marker(el).setLngLat(coordinates).addTo(map);
+
+    fetch(
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?access_token=${mapboxgl.accessToken}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        const parts = data.features
+          .filter((f) =>
+            ["place", "region", "country"].some((type) =>
+              f.place_type.includes(type)
+            )
+          )
+          .map((f) => f.text);
+
+        const address = parts.join(", ");
+
+        // Update the address card
+        document.querySelector(".address-card div:last-child").textContent =
+          address;
+      })
+      .catch((err) => console.error("Geocoding error:", err));
 
     return map;
   } catch (error) {
