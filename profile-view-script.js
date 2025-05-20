@@ -637,6 +637,8 @@ async function mapBoxMap(latitude, longitude) {
 
     const coordinates = [long, lat];
 
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
     // Initialize the map
     const map = new mapboxgl.Map({
       container: "mapbox",
