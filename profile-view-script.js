@@ -115,6 +115,8 @@ document.addEventListener("DOMContentLoaded", async function () {
             let twittergo = document.getElementById("xlink");
             twittergo.href = twitterLink;
             twittergo.style.display = "block";
+          } else {
+            document.getElementById("xlink").style.display = "none";
           }
 
           if (
@@ -126,6 +128,8 @@ document.addEventListener("DOMContentLoaded", async function () {
             let linkedingo = document.getElementById("linkedinlink");
             linkedingo.href = linkedinLink;
             linkedingo.style.display = "block";
+          } else {
+            document.getElementById("linkedinlink").style.display = "none";
           }
 
           if (
@@ -137,6 +141,8 @@ document.addEventListener("DOMContentLoaded", async function () {
             let facebookgo = document.getElementById("facebooklink");
             facebookgo.href = facebookLink;
             facebookgo.style.display = "block";
+          } else {
+            document.getElementById("facebooklink").style.display = "none";
           }
 
           if (
@@ -148,6 +154,8 @@ document.addEventListener("DOMContentLoaded", async function () {
             let instagramgo = document.getElementById("instagramlink");
             instagramgo.href = twitterLink;
             instagramgo.style.display = "block";
+          } else {
+            document.getElementById("instagramlink").style.display = "none";
           }
 
           let freeconsult = parsedBody["free consultation"];
