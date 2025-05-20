@@ -244,8 +244,8 @@ document.addEventListener("DOMContentLoaded", async function () {
                 }
               }
             } else {
-              let educationwrapper = document.getElementById("educationwrap");
-              educationwrapper.innerText = "N/A";
+              document.getElementById("education-container").style.display =
+                "none";
             }
           } else {
             educationwrapper.innerText = "N/A";
