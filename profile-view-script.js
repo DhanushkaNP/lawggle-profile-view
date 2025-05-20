@@ -729,82 +729,10 @@ function capitalizeWords(text) {
 }
 
 // Function to handle media and press mentions section
-function setupMediaAndPress(parsedBody) {
-  let themediaandPress = parsedBody["media press mentions"];
-  let themediacontainer = document.getElementById("mediawrapper");
-  themediacontainer.innerHTML = "";
-
-  if (themediaandPress && themediaandPress.length > 0) {
-    function extractDomain(url) {
-      try {
-        const urlObj = new URL(url);
-        return urlObj.hostname.replace("www.", "");
-      } catch (e) {
-        return url;
-      }
-    }
-
-    function getMetadataByDomain(url, domain) {
-      if (url.includes("youtube.com") || url.includes("youtu.be")) {
-        return {
-          title: "YouTube Video",
-          description: "Click to watch this video on YouTube",
-          imageUrl: "https://placehold.co/300x200/FF0000/FFFFFF?text=YouTube",
-          favicon: "https://www.youtube.com/favicon.ico",
-          host: "youtube.com",
-        };
-      } else if (url.includes("linkedin.com")) {
-        return {
-          title: "LinkedIn Article",
-          description: "Professional content shared on LinkedIn",
-          imageUrl: "https://placehold.co/300x200/0077B5/FFFFFF?text=LinkedIn",
-          favicon: "https://www.linkedin.com/favicon.ico",
-          host: "linkedin.com",
-        };
-      } else if (url.includes("medium.com")) {
-        return {
-          title: "Medium Article",
-          description: "Read this story on Medium",
-          imageUrl: "https://placehold.co/300x200/000000/FFFFFF?text=Medium",
-          favicon: "https://medium.com/favicon.ico",
-          host: "medium.com",
-        };
-      } else if (url.includes("twitter.com") || url.includes("x.com")) {
-        return {
-          title: "Tweet",
-          description: "View this post on Twitter/X",
-          imageUrl: "https://placehold.co/300x200/1DA1F2/FFFFFF?text=Twitter",
-          favicon: "https://twitter.com/favicon.ico",
-          host: "twitter.com",
-        };
-      } else if (url.includes("instagram.com")) {
-        return {
-          title: "Instagram Post",
-          description: "View this post on Instagram",
-          imageUrl: "https://placehold.co/300x200/E1306C/FFFFFF?text=Instagram",
-          favicon: "https://www.instagram.com/favicon.ico",
-          host: "instagram.com",
-        };
-      } else if (url.includes("facebook.com")) {
-        return {
-          title: "Facebook Post",
-          description: "View this content on Facebook",
-          imageUrl: "https://placehold.co/300x200/4267B2/FFFFFF?text=Facebook",
-          favicon: "https://www.facebook.com/favicon.ico",
-          host: "facebook.com",
-        };
-      } else {
-        return {
-          title: `Article on ${domain}`,
-          description: `View this content on ${domain}`,
-          imageUrl: `https://placehold.co/300x200/333333/cccccc?text=${domain}`,
-          favicon: null,
-          host: domain,
-        };
-      }
-    }
-
-    // Load Swiper CSS if not already loaded
+// Load Swiper CSS and JS only once when document is ready
+function loadSwiperResources() {
+  return new Promise((resolve) => {
+    // Load CSS if not already loaded
     if (!document.getElementById("swiper-css")) {
       const swiperCSS = document.createElement("link");
       swiperCSS.id = "swiper-css";
@@ -814,101 +742,233 @@ function setupMediaAndPress(parsedBody) {
       document.head.appendChild(swiperCSS);
     }
 
-    // Load Swiper JS
-    function loadSwiperJS() {
-      return new Promise((resolve) => {
-        if (window.Swiper) {
-          resolve();
-          return;
-        }
-
-        const swiperScript = document.createElement("script");
-        swiperScript.src =
-          "https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js";
-        swiperScript.onload = resolve;
-        document.body.appendChild(swiperScript);
-      });
+    // Load JS if not already loaded
+    if (window.Swiper) {
+      resolve();
+      return;
     }
 
-    // Create Swiper container
-    const swiperContainer = document.createElement("div");
-    swiperContainer.classList.add("swiper", "media-swiper");
-    swiperContainer.style.cssText = `width: 100%; padding: 20px 0; overflow: hidden;`;
+    const swiperScript = document.createElement("script");
+    swiperScript.src =
+      "https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js";
+    swiperScript.onload = resolve;
+    document.body.appendChild(swiperScript);
+  });
+}
 
-    const swiperWrapper = document.createElement("div");
+// Initialize all swipers with the media-swiper class
+function initializeSwipers() {
+  const swiperOptions = {
+    slidesPerView: "auto",
+    spaceBetween: 5,
+    freeMode: true,
+    pagination: false,
+  };
+
+  // Find all elements with the media-swiper class and initialize Swiper on them
+  document.querySelectorAll(".media-swiper").forEach((container) => {
+    if (
+      !container.swiper &&
+      !container.classList.contains("swiper-initialized")
+    ) {
+      new Swiper(container, swiperOptions);
+    }
+  });
+}
+
+// Helper function to extract domain from URL
+function extractDomain(url) {
+  try {
+    const urlObj = new URL(url);
+    return urlObj.hostname.replace("www.", "");
+  } catch (e) {
+    return url;
+  }
+}
+
+// Helper function to get metadata based on domain
+function getMetadataByDomain(url, domain) {
+  if (url.includes("youtube.com") || url.includes("youtu.be")) {
+    return {
+      title: "YouTube Video",
+      description: "Click to watch this video on YouTube",
+      imageUrl: "https://placehold.co/300x200/FF0000/FFFFFF?text=YouTube",
+      favicon: "https://www.youtube.com/favicon.ico",
+      host: "youtube.com",
+    };
+  } else if (url.includes("linkedin.com")) {
+    return {
+      title: "LinkedIn Article",
+      description: "Professional content shared on LinkedIn",
+      imageUrl: "https://placehold.co/300x200/0077B5/FFFFFF?text=LinkedIn",
+      favicon: "https://www.linkedin.com/favicon.ico",
+      host: "linkedin.com",
+    };
+  } else if (url.includes("medium.com")) {
+    return {
+      title: "Medium Article",
+      description: "Read this story on Medium",
+      imageUrl: "https://placehold.co/300x200/000000/FFFFFF?text=Medium",
+      favicon: "https://medium.com/favicon.ico",
+      host: "medium.com",
+    };
+  } else if (url.includes("twitter.com") || url.includes("x.com")) {
+    return {
+      title: "Tweet",
+      description: "View this post on Twitter/X",
+      imageUrl: "https://placehold.co/300x200/1DA1F2/FFFFFF?text=Twitter",
+      favicon: "https://twitter.com/favicon.ico",
+      host: "twitter.com",
+    };
+  } else if (url.includes("instagram.com")) {
+    return {
+      title: "Instagram Post",
+      description: "View this post on Instagram",
+      imageUrl: "https://placehold.co/300x200/E1306C/FFFFFF?text=Instagram",
+      favicon: "https://www.instagram.com/favicon.ico",
+      host: "instagram.com",
+    };
+  } else if (url.includes("facebook.com")) {
+    return {
+      title: "Facebook Post",
+      description: "View this content on Facebook",
+      imageUrl: "https://placehold.co/300x200/4267B2/FFFFFF?text=Facebook",
+      favicon: "https://www.facebook.com/favicon.ico",
+      host: "facebook.com",
+    };
+  } else {
+    return {
+      title: `Article on ${domain}`,
+      description: `View this content on ${domain}`,
+      imageUrl: `https://placehold.co/300x200/333333/cccccc?text=${domain}`,
+      favicon: null,
+      host: domain,
+    };
+  }
+}
+
+// Function to create media cards for swipers
+function createMediaCards(mediaItems, container) {
+  // Create Swiper container if it doesn't exist
+  if (!container.classList.contains("swiper")) {
+    container.classList.add("swiper", "media-swiper");
+    container.style.cssText = `width: 100%; padding: 20px 0; overflow: hidden;`;
+  }
+
+  // Create or get swiper-wrapper
+  let swiperWrapper = container.querySelector(".swiper-wrapper");
+  if (!swiperWrapper) {
+    swiperWrapper = document.createElement("div");
     swiperWrapper.classList.add("swiper-wrapper");
+    container.appendChild(swiperWrapper);
+  }
 
-    // Add cards
-    themediaandPress.forEach((mediaItem) => {
-      const url = mediaItem.url || "#";
-      const domain = extractDomain(url);
-      const meta = getMetadataByDomain(url, domain);
+  // Clear existing content if needed
+  swiperWrapper.innerHTML = "";
 
-      const swiperSlide = document.createElement("div");
-      swiperSlide.classList.add("swiper-slide");
-      swiperSlide.style.cssText = `width: auto; flex-shrink: 0; padding: 0 10px;`;
+  // Add cards
+  mediaItems.forEach((mediaItem) => {
+    const url = mediaItem.url || "#";
+    const domain = extractDomain(url);
+    const meta = getMetadataByDomain(url, domain);
 
-      const card = document.createElement("a");
-      card.href = url;
-      card.target = "_blank";
-      card.style.cssText = `
-        display: block;
-        width: 300px;
-        height: 220px;
-        border-radius: 8px;
-        overflow: hidden;
-        background: white;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        transition: transform 0.2s, box-shadow 0.2s;
-        text-decoration: none;
-        color: inherit;
-        display: flex;
-        flex-direction: column;
-      `;
+    const swiperSlide = document.createElement("div");
+    swiperSlide.classList.add("swiper-slide");
+    swiperSlide.style.cssText = `width: auto; flex-shrink: 0; padding: 0 10px;`;
 
-      // Image
-      const img = document.createElement("img");
-      img.src = meta.imageUrl;
-      img.alt = meta.title;
-      img.style.cssText = `height: 120px; object-fit: cover; width: 100%;`;
+    const card = document.createElement("a");
+    card.href = url;
+    card.target = "_blank";
+    card.style.cssText = `
+      display: block;
+      width: 300px;
+      height: 220px;
+      border-radius: 8px;
+      overflow: hidden;
+      background: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+    `;
 
-      // Content
-      const content = document.createElement("div");
-      content.style.cssText = `padding: 12px; display: flex; flex-direction: column;`;
+    // Image
+    const img = document.createElement("img");
+    img.src = meta.imageUrl;
+    img.alt = meta.title;
+    img.style.cssText = `height: 120px; object-fit: cover; width: 100%;`;
 
-      const title = document.createElement("h3");
-      title.textContent = meta.title;
-      title.style.cssText = `margin: 0 0 6px 0; font-size: 16px; line-height: 1.3; font-weight: 600;`;
+    // Content
+    const content = document.createElement("div");
+    content.style.cssText = `padding: 12px; display: flex; flex-direction: column;`;
 
-      const desc = document.createElement("p");
-      desc.textContent = meta.description;
-      desc.style.cssText = `margin: 0 0 6px 0; font-size: 13px; color: #686868; flex-grow: 1;`;
+    const title = document.createElement("h3");
+    title.textContent = meta.title;
+    title.style.cssText = `margin: 0 0 6px 0; font-size: 16px; line-height: 1.3; font-weight: 600;`;
 
-      const host = document.createElement("span");
-      host.textContent = meta.host;
-      host.style.cssText = `font-size: 12px; color: #aaa;`;
+    const desc = document.createElement("p");
+    desc.textContent = meta.description;
+    desc.style.cssText = `margin: 0 0 6px 0; font-size: 13px; color: #686868; flex-grow: 1;`;
 
-      content.appendChild(title);
-      content.appendChild(desc);
-      content.appendChild(host);
+    const host = document.createElement("span");
+    host.textContent = meta.host;
+    host.style.cssText = `font-size: 12px; color: #aaa;`;
 
-      card.appendChild(img);
-      card.appendChild(content);
-      swiperSlide.appendChild(card);
-      swiperWrapper.appendChild(swiperSlide);
+    content.appendChild(title);
+    content.appendChild(desc);
+    content.appendChild(host);
+
+    card.appendChild(img);
+    card.appendChild(content);
+    swiperSlide.appendChild(card);
+    swiperWrapper.appendChild(swiperSlide);
+  });
+
+  return container;
+}
+
+// Initialize Swiper when the document is ready
+document.addEventListener("DOMContentLoaded", function () {
+  loadSwiperResources().then(() => {
+    initializeSwipers();
+
+    // Re-initialize on window resize for responsive behavior
+    window.addEventListener("resize", initializeSwipers);
+
+    // You can also set up a MutationObserver to detect when new swipers are added to the DOM
+    const observer = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        if (mutation.addedNodes.length) {
+          // Check if we need to initialize any new swipers
+          initializeSwipers();
+        }
+      });
     });
 
-    swiperContainer.appendChild(swiperWrapper);
+    observer.observe(document.body, { childList: true, subtree: true });
+  });
+});
+
+// Updated setupMediaAndPress function that uses the separated swiper functionality
+function setupMediaAndPress(parsedBody) {
+  let themediaandPress = parsedBody["media press mentions"];
+  let themediacontainer = document.getElementById("mediawrapper");
+  themediacontainer.innerHTML = "";
+
+  if (themediaandPress && themediaandPress.length > 0) {
+    // Create the container that will become a swiper
+    const swiperContainer = document.createElement("div");
+    swiperContainer.classList.add("media-swiper", "swiper");
     themediacontainer.appendChild(swiperContainer);
 
-    // Load and initialize Swiper
-    loadSwiperJS().then(() => {
-      new Swiper(".media-swiper", {
-        slidesPerView: "auto",
-        spaceBetween: 5,
-        freeMode: true,
-        pagination: false,
-      });
+    // Create the media cards
+    createMediaCards(themediaandPress, swiperContainer);
+
+    // Load Swiper resources and initialize the swiper
+    loadSwiperResources().then(() => {
+      initializeSwipers();
     });
   }
 }
