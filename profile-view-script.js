@@ -247,7 +247,8 @@ document.addEventListener("DOMContentLoaded", async function () {
               if (
                 education1 != null &&
                 education1 != undefined &&
-                education1 != "null"
+                education1 != "null" &&
+                education1 != ""
               ) {
                 for (let eachEducation in educactionList) {
                   let educationText = educactionList[eachEducation].education;
