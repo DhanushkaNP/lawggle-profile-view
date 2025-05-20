@@ -218,7 +218,12 @@ document.addEventListener("DOMContentLoaded", async function () {
           let hobbiesContainer = document.getElementById("interestshobbies");
           hobbiesContainer.innerHTML = "";
 
-          if (thehobbies.length > 0) {
+          if (
+            thehobbies != null &&
+            thehobbies != undefined &&
+            thehobbies != "" &&
+            thehobbies.length > 0
+          ) {
             for (let eachhobby in thehobbies) {
               hobbyholder = document.createElement("div");
               hobbyholder.classList.add("expertisecontainer");
