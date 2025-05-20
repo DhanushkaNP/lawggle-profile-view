@@ -281,10 +281,19 @@ document.addEventListener("DOMContentLoaded", async function () {
             dynamicBio == undefined ||
             dynamicBio == ""
           ) {
+            document.getElementById("biography-container").style.display =
+              "none";
+          } else {
             document.getElementById("biotext").innerText = dynamicBio;
+          }
 
-            let certificates = parsedBody["certificates"];
-
+          let certificates = parsedBody["certificates"];
+          if (
+            certificates != null &&
+            certificates != "" &&
+            certificates != "null" &&
+            certificates != undefined
+          ) {
             console.log(certificates);
             if (certificates.length > 0) {
               let certicateContainer =
@@ -296,52 +305,52 @@ document.addEventListener("DOMContentLoaded", async function () {
                 "media-swiper"
               );
               certicateContainer.style.cssText = `width: 100%; overflow: hidden;`;
+
+              let firstCert = certificates[0];
+              if (
+                firstCert != null &&
+                firstCert != undefined &&
+                firstCert != "null" &&
+                firstCert != ""
+              ) {
+                const swiperWrapper = document.createElement("div");
+                swiperWrapper.classList.add("swiper-wrapper");
+
+                // Add each certificate as a slide
+                for (let eachcert in certificates) {
+                  const swiperSlide = document.createElement("div");
+                  swiperSlide.classList.add("swiper-slide");
+                  swiperSlide.style.cssText = `width: auto; flex-shrink: 0; padding: 0 10px;`;
+
+                  let imageContainer = document.createElement("div");
+                  imageContainer.classList.add("img-wrap-2");
+
+                  let certimage = document.createElement("img");
+                  certimage.classList.add("cert-image");
+                  certimage.src = certificates[eachcert].url;
+                  certimage.style.width = "auto";
+
+                  imageContainer.append(certimage);
+                  swiperSlide.append(imageContainer);
+                  swiperWrapper.append(swiperSlide);
+                }
+                certicateContainer.append(swiperWrapper);
+
+                // Initialize Swiper after DOM is fully loaded
+                loadSwiperJS().then(() => {
+                  new Swiper(".media-swiper", {
+                    slidesPerView: "auto",
+                    spaceBetween: 5,
+                    freeMode: true,
+                    pagination: false,
+                  });
+                });
+              } else {
+                document.getElementById("certificate-swiper").style.display ==
+                  "none";
+              }
             } else {
               document.getElementById("biography-container").style.display =
-                "none";
-            }
-
-            let firstCert = certificates[0];
-            if (
-              firstCert != null &&
-              firstCert != undefined &&
-              firstCert != "null" &&
-              firstCert != ""
-            ) {
-              const swiperWrapper = document.createElement("div");
-              swiperWrapper.classList.add("swiper-wrapper");
-
-              // Add each certificate as a slide
-              for (let eachcert in certificates) {
-                const swiperSlide = document.createElement("div");
-                swiperSlide.classList.add("swiper-slide");
-                swiperSlide.style.cssText = `width: auto; flex-shrink: 0; padding: 0 10px;`;
-
-                let imageContainer = document.createElement("div");
-                imageContainer.classList.add("img-wrap-2");
-
-                let certimage = document.createElement("img");
-                certimage.classList.add("cert-image");
-                certimage.src = certificates[eachcert].url;
-                certimage.style.width = "auto";
-
-                imageContainer.append(certimage);
-                swiperSlide.append(imageContainer);
-                swiperWrapper.append(swiperSlide);
-              }
-              certicateContainer.append(swiperWrapper);
-
-              // Initialize Swiper after DOM is fully loaded
-              loadSwiperJS().then(() => {
-                new Swiper(".media-swiper", {
-                  slidesPerView: "auto",
-                  spaceBetween: 5,
-                  freeMode: true,
-                  pagination: false,
-                });
-              });
-            } else {
-              document.getElementById("certificate-swiper").style.display ==
                 "none";
             }
           } else {
