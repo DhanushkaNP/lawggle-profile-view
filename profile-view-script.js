@@ -905,20 +905,9 @@ function setupMediaAndPress(parsedBody) {
     loadSwiperJS().then(() => {
       new Swiper(".media-swiper", {
         slidesPerView: "auto",
-        spaceBetween: 10,
+        spaceBetween: 5,
         freeMode: true,
         pagination: false,
-        breakpoints: {
-          320: {
-            slidesPerView: 1,
-          },
-          768: {
-            slidesPerView: 2,
-          },
-          1024: {
-            slidesPerView: 3,
-          },
-        },
       });
     });
   }
