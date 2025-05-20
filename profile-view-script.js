@@ -263,7 +263,8 @@ document.addEventListener("DOMContentLoaded", async function () {
                 "none";
             }
           } else {
-            educationwrapper.innerText = "N/A";
+            document.getElementById("education-container").style.display =
+              "none";
           }
 
           let dynamicBio = parsedBody["dynamic bio"];
