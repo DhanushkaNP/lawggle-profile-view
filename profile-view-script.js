@@ -640,9 +640,10 @@ async function mapBoxMap(latitude, longitude) {
     // Initialize the map
     const map = new mapboxgl.Map({
       container: "mapbox",
-      style: "mapbox://styles/lawggle/ckdkhap9e159e1imq6foj0ln5",
-      center: coordinates,
-      zoom: 12,
+      style: "mapbox://styles/mapbox/streets-v9",
+      projection: "globe",
+      center: [30, 15],
+      zoom: 1,
     });
 
     // Add a marker
