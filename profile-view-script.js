@@ -263,9 +263,9 @@ document.addEventListener("DOMContentLoaded", async function () {
             ) {
               for (let eachcert in certificates) {
                 let imageContainer = document.createElement("div");
-                imageContainer.classList.add("img-wrap");
+                imageContainer.classList.add("img-wrap-2");
                 let certimage = document.createElement("img");
-                certimage.classList.add("imagyclass");
+                certimage.classList.add("cert-image");
                 certimage.src = certificates[eachcert].url;
                 imageContainer.append(certimage);
                 certicateslider.append(imageContainer);
