@@ -362,7 +362,7 @@ document.addEventListener("DOMContentLoaded", async function () {
               languagecontainer.append(langholder);
             }
           } else {
-            languagecontainer.innerText = "N/A";
+            document.getElementById("language-section").style.display = "none";
           }
 
           let profileVideo = parsedBody["profile video"];
