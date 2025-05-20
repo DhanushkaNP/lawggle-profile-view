@@ -910,13 +910,13 @@ function setupMediaAndPress(parsedBody) {
         pagination: false,
         breakpoints: {
           320: {
-            slidesPerView: "auto",
+            slidesPerView: 1,
           },
           768: {
-            slidesPerView: "auto",
+            slidesPerView: 2,
           },
           1024: {
-            slidesPerView: "auto",
+            slidesPerView: 3,
           },
         },
       });
