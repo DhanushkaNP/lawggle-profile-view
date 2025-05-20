@@ -728,7 +728,6 @@ function capitalizeWords(text) {
     .join(" ");
 }
 
-// Function to handle media and press mentions section
 function setupMediaAndPress(parsedBody) {
   let themediaandPress = parsedBody["media press mentions"];
   let themediacontainer = document.getElementById("mediawrapper");
@@ -804,32 +803,6 @@ function setupMediaAndPress(parsedBody) {
       }
     }
 
-    // Load Swiper CSS if not already loaded
-    if (!document.getElementById("swiper-css")) {
-      const swiperCSS = document.createElement("link");
-      swiperCSS.id = "swiper-css";
-      swiperCSS.rel = "stylesheet";
-      swiperCSS.href =
-        "https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css";
-      document.head.appendChild(swiperCSS);
-    }
-
-    // Load Swiper JS
-    function loadSwiperJS() {
-      return new Promise((resolve) => {
-        if (window.Swiper) {
-          resolve();
-          return;
-        }
-
-        const swiperScript = document.createElement("script");
-        swiperScript.src =
-          "https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js";
-        swiperScript.onload = resolve;
-        document.body.appendChild(swiperScript);
-      });
-    }
-
     // Create Swiper container
     const swiperContainer = document.createElement("div");
     swiperContainer.classList.add("swiper", "media-swiper");
@@ -900,15 +873,66 @@ function setupMediaAndPress(parsedBody) {
 
     swiperContainer.appendChild(swiperWrapper);
     themediacontainer.appendChild(swiperContainer);
+  }
+}
 
-    // Load and initialize Swiper
-    loadSwiperJS().then(() => {
-      new Swiper(".media-swiper", {
+// Function to handle media and press mentions section
+// Global function to load Swiper once
+let swiperLoaded = false;
+function loadSwiperLibrary() {
+  return new Promise((resolve) => {
+    if (window.Swiper || swiperLoaded) {
+      resolve();
+      return;
+    }
+
+    // Load Swiper CSS if not already loaded
+    if (!document.getElementById("swiper-css")) {
+      const swiperCSS = document.createElement("link");
+      swiperCSS.id = "swiper-css";
+      swiperCSS.rel = "stylesheet";
+      swiperCSS.href =
+        "https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css";
+      document.head.appendChild(swiperCSS);
+    }
+
+    // Load Swiper JS
+    const swiperScript = document.createElement("script");
+    swiperScript.src =
+      "https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js";
+    swiperScript.onload = () => {
+      swiperLoaded = true;
+      resolve();
+    };
+    document.body.appendChild(swiperScript);
+  });
+}
+
+// Initialize Swiper on page load
+document.addEventListener("DOMContentLoaded", function () {
+  loadSwiperLibrary().then(() => {
+    // Initialize any existing swipers on the page
+    initializeSwipers();
+  });
+});
+
+// Function to initialize all swiper instances
+function initializeSwipers() {
+  if (!window.Swiper) return;
+
+  document.querySelectorAll(".media-swiper").forEach((container) => {
+    if (!container.classList.contains("swiper-initialized")) {
+      new Swiper(container, {
         slidesPerView: "auto",
         spaceBetween: 5,
         freeMode: true,
         pagination: false,
       });
-    });
-  }
+      container.classList.add("swiper-initialized");
+    }
+  });
 }
+
+// loadSwiperLibrary().then(() => {
+//   initializeSwipers();
+// });
