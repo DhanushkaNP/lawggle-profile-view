@@ -941,6 +941,8 @@ function setupMediaAndPress(parsedBody) {
         pagination: false,
       });
     });
+  } else {
+    document.getElementById("sectionmedia").style.display = "none";
   }
 }
 
