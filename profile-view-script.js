@@ -261,25 +261,46 @@ document.addEventListener("DOMContentLoaded", async function () {
               firstCert != "null" &&
               firstCert != ""
             ) {
+              // Create Swiper container structure
+              const swiperContainer = document.createElement("div");
+              swiperContainer.classList.add("swiper", "certificate-swiper");
+              swiperContainer.style.cssText = `width: 100%; padding: 20px 0; overflow: hidden;`;
+
+              const swiperWrapper = document.createElement("div");
+              swiperWrapper.classList.add("swiper-wrapper");
+
+              // Add each certificate as a slide
               for (let eachcert in certificates) {
+                const swiperSlide = document.createElement("div");
+                swiperSlide.classList.add("swiper-slide");
+                swiperSlide.style.cssText = `width: auto; flex-shrink: 0; padding: 0 10px;`;
+
                 let imageContainer = document.createElement("div");
                 imageContainer.classList.add("img-wrap-2");
+
                 let certimage = document.createElement("img");
                 certimage.classList.add("cert-image");
                 certimage.src = certificates[eachcert].url;
-                imageContainer.append(certimage);
-                certicateslider.append(imageContainer);
+                certimage.style.maxHeight = "200px";
+                certimage.style.width = "auto";
 
-                // Add the certificate to the slider
-                loadSwiperJS().then(() => {
-                  new Swiper(".certificate-swiper", {
-                    slidesPerView: "auto",
-                    spaceBetween: 5,
-                    freeMode: true,
-                    pagination: false,
-                  });
-                });
+                imageContainer.append(certimage);
+                swiperSlide.append(imageContainer);
+                swiperWrapper.append(swiperSlide);
               }
+
+              swiperContainer.append(swiperWrapper);
+              certicateslider.append(swiperContainer);
+
+              // Initialize Swiper after DOM is fully loaded
+              loadSwiperJS().then(() => {
+                new Swiper(".certificate-swiper", {
+                  slidesPerView: "auto",
+                  spaceBetween: 10,
+                  freeMode: true,
+                  pagination: false,
+                });
+              });
             } else {
               document.getElementById("certificatethehold").style.display ==
                 "none";
