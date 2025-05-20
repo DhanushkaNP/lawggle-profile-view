@@ -875,12 +875,20 @@ function setupMediaAndPress(parsedBody) {
     swiperContainer.appendChild(swiperWrapper);
     themediacontainer.appendChild(swiperContainer);
 
-    configureSwiperJS();
+    // Load and initialize Swiper
+    loadSwiperJS().then(() => {
+      new Swiper(".media-swiper", {
+        slidesPerView: "auto",
+        spaceBetween: 5,
+        freeMode: true,
+        pagination: false,
+      });
+    });
   }
 }
 
 // Load Swiper JS
-function configureSwiperJS() {
+function loadSwiperJS() {
   return new Promise((resolve) => {
     if (window.Swiper) {
       resolve();
@@ -902,12 +910,5 @@ function configureSwiperJS() {
       "https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js";
     swiperScript.onload = resolve;
     document.body.appendChild(swiperScript);
-
-    new Swiper(".media-swiper", {
-      slidesPerView: "auto",
-      spaceBetween: 5,
-      freeMode: true,
-      pagination: false,
-    });
   });
 }
