@@ -674,6 +674,17 @@ async function mapBoxMap(latitude, longitude) {
       })
       .catch((err) => console.error("Geocoding error:", err));
 
+    let resizeAttempts = 0;
+    const resizeInterval = setInterval(() => {
+      if (map && resizeAttempts < 10) {
+        // Try 10 times (5 seconds total)
+        map.resize();
+        resizeAttempts++;
+      } else {
+        clearInterval(resizeInterval);
+      }
+    }, 500); // Check every 500ms
+
     return map;
   } catch (error) {
     console.error("Error creating map:", error);
