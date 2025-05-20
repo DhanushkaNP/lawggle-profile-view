@@ -84,8 +84,8 @@ document.addEventListener("DOMContentLoaded", async function () {
             theLawyeraddress != undefined &&
             theLawyeraddress != ""
           ) {
-            let theaddressLong = theLawyeraddress.lat;
-            let theaddressLat = theLawyeraddress.long;
+            let theaddressLong = theLawyeraddress.long;
+            let theaddressLat = theLawyeraddress.lat;
 
             if (theaddressLat && theaddressLong) {
               map = await mapBoxMap(theaddressLat, theaddressLong);
