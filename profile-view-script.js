@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         // Create a promise to handle all profile configurations
         const setupProfile = new Promise(async (resolve, reject) => {
           let parseonce = JSON.parse(thisUser);
+          console.log("parsed data:", parseonce);
           let body = parseonce.data.body;
 
           let parsedBody = JSON.parse(JSON.parse(body));
