@@ -474,9 +474,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     overflow: hidden;
   `;
 
-            const descElement = document.createElement("p");
-            descElement.textContent = "Loading preview...";
-            descElement.style.cssText = `
+            const urlElement = document.createElement("p");
+            urlElement.textContent = "Loading preview...";
+            urlElement.style.cssText = `
     margin: 0 0 8px 0;
     font-size: 13px;
     line-height: 1.4;
@@ -500,7 +500,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
             // Assemble the card structure
             contentContainer.appendChild(titleElement);
-            contentContainer.appendChild(descElement);
+            contentContainer.appendChild(urlElement);
             contentContainer.appendChild(sourceElement);
 
             mediaCard.appendChild(imageContainer);
@@ -579,7 +579,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 metadata = {
                   title: `Article on ${domain}`,
                   description: `View this content on ${domain}`,
-                  imageUrl: `https://placehold.co/300x200/cccccc/333333?text=${domain}`,
+                  imageUrl: `https://placehold.co/300x200/333333/cccccc?text=${domain}`,
                   favicon: null,
                   host: domain,
                 };
@@ -587,7 +587,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
               // Update the card with the metadata
               titleElement.textContent = metadata.title;
-              descElement.textContent = metadata.description;
+              urlElement.textContent = url;
 
               // Create favicon + domain display
               sourceElement.innerHTML = "";
@@ -641,7 +641,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
               // Fill with fallback data if fetch fails
               titleElement.textContent = fallbackData.title;
-              descElement.textContent = `Visit ${extractDomain(url)}`;
+              urlElement.textContent = `Visit ${extractDomain(url)}`;
 
               // Create a domain-colored placeholder
               imageContainer.innerHTML = "";
