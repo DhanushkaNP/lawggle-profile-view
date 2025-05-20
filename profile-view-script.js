@@ -372,7 +372,13 @@ document.addEventListener("DOMContentLoaded", async function () {
             "thelanguagecontainer"
           );
           languagecontainer.innerHTML = "";
-          if (theuserLanguages.length > 0) {
+
+          if (
+            theuserLanguages != null &&
+            theuserLanguages != undefined &&
+            theuserLanguages != "" &&
+            theuserLanguages.length > 0
+          ) {
             for (let userlang in theuserLanguages) {
               langholder = document.createElement("div");
               langholder.classList.add("eng");
