@@ -642,12 +642,9 @@ async function mapBoxMap(latitude, longitude) {
       container: "mapbox",
       style: "mapbox://styles/mapbox/streets-v9",
       projection: "globe",
-      center: coordinates,
+      center: [30, 15],
       zoom: 12,
     });
-
-    const el = document.createElement("div");
-    el.className = "pin-marker";
 
     // Add a marker
     new mapboxgl.Marker()
