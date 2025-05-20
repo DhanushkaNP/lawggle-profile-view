@@ -39,10 +39,16 @@ document.addEventListener("DOMContentLoaded", async function () {
           }
 
           document.getElementById("NameText").innerText = parsedBody["name"];
-          let firmUrl = parsedBody["firm url"];
-          document.getElementById("thefirmurl").innerText =
-            firmUrl.length > 22 ? firmUrl.substring(0, 22) + "..." : firmUrl;
-          document.getElementById("thefirmurl").href = firmUrl;
+
+          const firmUrl = parsedBody["firm url"];
+
+          if (firmUrl == null || firmUrl == undefined || firmUrl == "") {
+            document.getElementById("thefirmurl").innerText =
+              firmUrl.length > 22 ? firmUrl.substring(0, 22) + "..." : firmUrl;
+            document.getElementById("thefirmurl").href = firmUrl;
+          } else {
+            document.getElementById("thefirmurl").style.display = "none";
+          }
 
           let minrate = parsedBody["min hourly rate"];
           let maxrate = parsedBody["max hourly rate"];
