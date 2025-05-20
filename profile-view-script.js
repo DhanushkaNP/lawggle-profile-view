@@ -107,6 +107,15 @@ document.addEventListener("DOMContentLoaded", async function () {
           let instagramLink = socialMedias[3].url;
 
           if (
+            twitterLink == "" &&
+            linkedinLink == "" &&
+            facebookLink == "" &&
+            instagramLink == ""
+          ) {
+            document.getElementById("socialmediahold").style.display = "none";
+          }
+
+          if (
             twitterLink != null &&
             twitterLink != "" &&
             twitterLink != undefined
