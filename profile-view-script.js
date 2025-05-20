@@ -735,7 +735,6 @@ function setupMediaAndPress(parsedBody) {
   themediacontainer.innerHTML = "";
 
   if (themediaandPress && themediaandPress.length > 0) {
-    // Extract domain name from URL
     function extractDomain(url) {
       try {
         const urlObj = new URL(url);
@@ -745,7 +744,6 @@ function setupMediaAndPress(parsedBody) {
       }
     }
 
-    // Get metadata based on domain
     function getMetadataByDomain(url, domain) {
       if (url.includes("youtube.com") || url.includes("youtu.be")) {
         return {
@@ -796,7 +794,6 @@ function setupMediaAndPress(parsedBody) {
           host: "facebook.com",
         };
       } else {
-        // Generic fallback with domain name
         return {
           title: `Article on ${domain}`,
           description: `View this content on ${domain}`,
@@ -807,25 +804,7 @@ function setupMediaAndPress(parsedBody) {
       }
     }
 
-    // Create domain initial placeholder
-    function createDomainInitialPlaceholder(container, domain) {
-      const initialPlaceholder = document.createElement("div");
-      initialPlaceholder.style.cssText = `
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #f0f0f0;
-        color: #555;
-        font-size: 40px;
-        font-weight: bold;
-      `;
-      initialPlaceholder.textContent = domain.charAt(0).toUpperCase();
-      container.appendChild(initialPlaceholder);
-    }
-
-    // Load Swiper CSS - Add this to your HTML head or load it here
+    // Load Swiper CSS if not already loaded
     if (!document.getElementById("swiper-css")) {
       const swiperCSS = document.createElement("link");
       swiperCSS.id = "swiper-css";
@@ -835,7 +814,7 @@ function setupMediaAndPress(parsedBody) {
       document.head.appendChild(swiperCSS);
     }
 
-    // Load Swiper JS - Either add this to your HTML before closing body or load it here
+    // Load Swiper JS
     function loadSwiperJS() {
       return new Promise((resolve) => {
         if (window.Swiper) {
@@ -851,272 +830,96 @@ function setupMediaAndPress(parsedBody) {
       });
     }
 
-    // Create Swiper structure
+    // Create Swiper container
     const swiperContainer = document.createElement("div");
     swiperContainer.classList.add("swiper", "media-swiper");
-    swiperContainer.style.cssText = `
-      width: 100%;
-      padding: 20px 0;
-    `;
+    swiperContainer.style.cssText = `width: 100%; padding: 20px 0; overflow: hidden;`;
 
     const swiperWrapper = document.createElement("div");
     swiperWrapper.classList.add("swiper-wrapper");
 
-    // Add loading message while cards are being created
-    const loadingMsg = document.createElement("div");
-    loadingMsg.textContent = "Loading link previews...";
-    loadingMsg.style.cssText = `
-      padding: 20px;
-      text-align: center;
-      color: #888;
-      width: 100%;
-    `;
-    swiperContainer.appendChild(loadingMsg);
+    // Add cards
+    themediaandPress.forEach((mediaItem) => {
+      const url = mediaItem.url || "#";
+      const domain = extractDomain(url);
+      const meta = getMetadataByDomain(url, domain);
 
-    // Add container to the page
+      const swiperSlide = document.createElement("div");
+      swiperSlide.classList.add("swiper-slide");
+      swiperSlide.style.cssText = `width: auto; flex-shrink: 0; padding: 0 10px;`;
+
+      const card = document.createElement("a");
+      card.href = url;
+      card.target = "_blank";
+      card.style.cssText = `
+        display: block;
+        width: 300px;
+        height: 220px;
+        border-radius: 8px;
+        overflow: hidden;
+        background: white;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        transition: transform 0.2s, box-shadow 0.2s;
+        text-decoration: none;
+        color: inherit;
+        display: flex;
+        flex-direction: column;
+      `;
+
+      // Image
+      const img = document.createElement("img");
+      img.src = meta.imageUrl;
+      img.alt = meta.title;
+      img.style.cssText = `height: 120px; object-fit: cover; width: 100%;`;
+
+      // Content
+      const content = document.createElement("div");
+      content.style.cssText = `padding: 12px; display: flex; flex-direction: column;`;
+
+      const title = document.createElement("h3");
+      title.textContent = meta.title;
+      title.style.cssText = `margin: 0 0 6px 0; font-size: 16px; line-height: 1.3; font-weight: 600;`;
+
+      const desc = document.createElement("p");
+      desc.textContent = meta.description;
+      desc.style.cssText = `margin: 0 0 6px 0; font-size: 13px; color: #686868; flex-grow: 1;`;
+
+      const host = document.createElement("span");
+      host.textContent = meta.host;
+      host.style.cssText = `font-size: 12px; color: #aaa;`;
+
+      content.appendChild(title);
+      content.appendChild(desc);
+      content.appendChild(host);
+
+      card.appendChild(img);
+      card.appendChild(content);
+      swiperSlide.appendChild(card);
+      swiperWrapper.appendChild(swiperSlide);
+    });
+
+    swiperContainer.appendChild(swiperWrapper);
     themediacontainer.appendChild(swiperContainer);
 
-    // Process each media item and create preview cards
-    Promise.all(
-      themediaandPress.map(async (mediaItem) => {
-        const url =
-          mediaItem.url ||
-          "https://lawggle-b065c1-7854620dcb65bd8d14aa462e.webflow.io/";
-        const uniqueId =
-          mediaItem.uniqueId || `id-${Math.random().toString(36).substr(2, 9)}`;
-
-        // Create the swiper slide
-        const swiperSlide = document.createElement("div");
-        swiperSlide.classList.add("swiper-slide");
-        swiperSlide.style.cssText = `
-          display: flex;
-          justify-content: center;
-          padding: 0 10px;
-        `;
-
-        // Create the basic card structure
-        const mediaCard = document.createElement("a");
-        mediaCard.href = url;
-        mediaCard.target = "_blank"; // Open in new tab
-        mediaCard.classList.add("media-preview-card");
-        mediaCard.id = `preview-${uniqueId}`;
-        mediaCard.style.cssText = `
-          width: 300px;
-          height: 220px;
-          border-radius: 8px;
-          overflow: hidden;
-          background: white;
-          box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-          transition: transform 0.2s, box-shadow 0.2s;
-          text-decoration: none;
-          color: inherit;
-          display: flex;
-          flex-direction: column;
-          position: relative;
-        `;
-
-        // Hover effect
-        mediaCard.onmouseover = () => {
-          mediaCard.style.transform = "translateY(-5px)";
-          mediaCard.style.boxShadow = "0 10px 20px rgba(0,0,0,0.15)";
-        };
-        mediaCard.onmouseout = () => {
-          mediaCard.style.transform = "translateY(0)";
-          mediaCard.style.boxShadow = "0 2px 10px rgba(0,0,0,0.1)";
-        };
-
-        // Create image container
-        const imageContainer = document.createElement("div");
-        imageContainer.style.cssText = `
-          height: 120px;
-          overflow: hidden;
-          background-color: #f5f5f5;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        `;
-
-        // Add loading indicator
-        const loadingElement = document.createElement("div");
-        loadingElement.textContent = "Loading preview...";
-        loadingElement.style.cssText = `
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          height: 100%;
-          color: #888;
-          font-size: 14px;
-        `;
-        imageContainer.appendChild(loadingElement);
-
-        // Create content container
-        const contentContainer = document.createElement("div");
-        contentContainer.style.cssText = `
-          padding: 12px;
-          flex-grow: 1;
-          display: flex;
-          flex-direction: column;
-        `;
-
-        // Create content elements
-        const titleElement = document.createElement("h3");
-        titleElement.textContent = "Loading...";
-        titleElement.style.cssText = `
-          margin: 0 0 6px 0;
-          font-size: 16px;
-          line-height: 1.3;
-          font-weight: 600;
-          color: #000;
-          display: -webkit-box;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-        `;
-
-        const urlElement = document.createElement("p");
-        urlElement.textContent = "Loading preview...";
-        urlElement.style.cssText = `
-          margin: 0 0 8px 0;
-          font-size: 13px;
-          line-height: 1.4;
-          color: #686868;
-          flex-grow: 1;
-          display: -webkit-box;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-        `;
-
-        // Source (domain) element
-        const sourceElement = document.createElement("div");
-        sourceElement.style.cssText = `
-          display: flex;
-          align-items: center;
-          font-size: 12px;
-          color: #888;
-          gap: 5px;
-        `;
-
-        // Assemble content structure
-        contentContainer.appendChild(titleElement);
-        contentContainer.appendChild(urlElement);
-        contentContainer.appendChild(sourceElement);
-
-        // Assemble card structure
-        mediaCard.appendChild(imageContainer);
-        mediaCard.appendChild(contentContainer);
-        swiperSlide.appendChild(mediaCard);
-
-        // Populate with metadata
-        try {
-          const domain = extractDomain(url);
-          let metadata = getMetadataByDomain(url, domain);
-
-          // Update with metadata
-          titleElement.textContent = metadata.title;
-          urlElement.textContent = url;
-
-          // Update source with favicon and domain
-          sourceElement.innerHTML = "";
-          if (metadata.favicon) {
-            const faviconImg = document.createElement("img");
-            faviconImg.src = metadata.favicon;
-            faviconImg.alt = "";
-            faviconImg.style.cssText = `
-              width: 14px;
-              height: 14px;
-              margin-right: 4px;
-            `;
-            sourceElement.appendChild(faviconImg);
-          }
-
-          const domainText = document.createElement("span");
-          domainText.textContent = metadata.host || domain;
-          sourceElement.appendChild(domainText);
-
-          // Update image
-          imageContainer.innerHTML = "";
-          if (metadata.imageUrl) {
-            const image = document.createElement("img");
-            image.src = metadata.imageUrl;
-            image.alt = metadata.title;
-            image.style.cssText = `
-              width: 100%;
-              height: 100%;
-              object-fit: cover;
-            `;
-            imageContainer.appendChild(image);
-          } else {
-            createDomainInitialPlaceholder(imageContainer, domain);
-          }
-        } catch (error) {
-          console.error("Error fetching link preview:", error);
-
-          // Fill with fallback data
-          titleElement.textContent = "Visit Website";
-          urlElement.textContent = `Visit ${extractDomain(url)}`;
-
-          // Create a domain-colored placeholder
-          imageContainer.innerHTML = "";
-          createDomainInitialPlaceholder(imageContainer, extractDomain(url));
-
-          // Update source with just the domain
-          sourceElement.textContent = extractDomain(url);
-        }
-
-        return swiperSlide;
-      })
-    ).then(async (slides) => {
-      // Clear loading message
-      swiperContainer.innerHTML = "";
-
-      // Add the wrapper to the container
-      swiperContainer.appendChild(swiperWrapper);
-
-      // Add all slides to the wrapper
-      slides.forEach((slide) => {
-        swiperWrapper.appendChild(slide);
-      });
-
-      // Add pagination
-      const pagination = document.createElement("div");
-      pagination.classList.add("swiper-pagination");
-      swiperContainer.appendChild(pagination);
-
-      // Wait for Swiper.js to load
-      await loadSwiperJS();
-
-      // Initialize Swiper
-      const swiper = new Swiper(".media-swiper", {
+    // Load and initialize Swiper
+    loadSwiperJS().then(() => {
+      new Swiper(".media-swiper", {
         slidesPerView: "auto",
-        spaceBetween: 20,
-        centeredSlides: themediaandPress.length > 1,
-        grabCursor: true,
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true,
-          dynamicBullets: themediaandPress.length > 5,
-        },
+        spaceBetween: 10,
+        freeMode: true,
+        pagination: false,
         breakpoints: {
-          // Mobile
           320: {
-            slidesPerView: 1,
-            spaceBetween: 10,
+            slidesPerView: "auto",
           },
-          // Tablet
-          640: {
-            slidesPerView: 2,
-            spaceBetween: 15,
+          768: {
+            slidesPerView: "auto",
           },
-          // Desktop
           1024: {
-            slidesPerView: 3,
-            spaceBetween: 20,
+            slidesPerView: "auto",
           },
         },
       });
     });
-  } else {
-    document.getElementById("sectionmedia").style.display = "none";
   }
 }
