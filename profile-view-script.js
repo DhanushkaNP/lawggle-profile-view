@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
           const firmUrl = parsedBody["firm url"];
 
-          if (firmUrl == null || firmUrl == undefined || firmUrl == "") {
+          if (firmUrl != null && firmUrl != undefined && firmUrl != "") {
             document.getElementById("thefirmurl").innerText =
               firmUrl.length > 22 ? firmUrl.substring(0, 22) + "..." : firmUrl;
             document.getElementById("thefirmurl").href = firmUrl;
