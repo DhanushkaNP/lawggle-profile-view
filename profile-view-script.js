@@ -652,7 +652,7 @@ async function mapBoxMap(latitude, longitude) {
     new mapboxgl.Marker(el).setLngLat(coordinates).addTo(map);
 
     fetch(
-      `https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?access_token=${mapboxgl.accessToken}`
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/${long},${lat}.json?access_token=${mapboxgl.accessToken}`
     )
       .then((res) => res.json())
       .then((data) => {
