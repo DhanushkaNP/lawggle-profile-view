@@ -651,26 +651,26 @@ async function mapBoxMap(latitude, longitude) {
     // Add a marker
     new mapboxgl.Marker(el).setLngLat(coordinates).addTo(map);
 
-    fetch(
-      `https://api.mapbox.com/geocoding/v5/mapbox.places/${long},${lat}.json?access_token=${mapboxgl.accessToken}`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        const parts = data.features
-          .filter((f) =>
-            ["place", "region", "country"].some((type) =>
-              f.place_type.includes(type)
-            )
-          )
-          .map((f) => f.text);
+    // fetch(
+    //   `https://api.mapbox.com/geocoding/v5/mapbox.places/${long},${lat}.json?access_token=${mapboxgl.accessToken}`
+    // )
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     const parts = data.features
+    //       .filter((f) =>
+    //         ["place", "region", "country"].some((type) =>
+    //           f.place_type.includes(type)
+    //         )
+    //       )
+    //       .map((f) => f.text);
 
-        const address = parts.join(", ");
+    //     const address = parts.join(", ");
 
-        // Update the address card
-        document.querySelector(".address-card div:last-child").textContent =
-          address;
-      })
-      .catch((err) => console.error("Geocoding error:", err));
+    //     // Update the address card
+    //     document.querySelector(".address-card div:last-child").textContent =
+    //       address;
+    //   })
+    //   .catch((err) => console.error("Geocoding error:", err));
 
     return map;
   } catch (error) {
