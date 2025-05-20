@@ -285,7 +285,6 @@ document.addEventListener("DOMContentLoaded", async function () {
                 let certimage = document.createElement("img");
                 certimage.classList.add("cert-image");
                 certimage.src = certificates[eachcert].url;
-                certimage.style.maxHeight = "200px";
                 certimage.style.width = "auto";
 
                 imageContainer.append(certimage);
