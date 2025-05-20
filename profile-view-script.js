@@ -525,7 +525,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                   title: "YouTube Video",
                   description: "Click to watch this video on YouTube",
                   imageUrl:
-                    "https://via.placeholder.com/300x200/FF0000/FFFFFF?text=YouTube",
+                    "https://placehold.co/300x200/FF0000/FFFFFF?text=YouTube",
                   favicon: "https://www.youtube.com/favicon.ico",
                   host: "youtube.com",
                 };
@@ -534,7 +534,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                   title: "LinkedIn Article",
                   description: "Professional content shared on LinkedIn",
                   imageUrl:
-                    "https://via.placeholder.com/300x200/0077B5/FFFFFF?text=LinkedIn",
+                    "https://placehold.co/300x200/0077B5/FFFFFF?text=LinkedIn",
                   favicon: "https://www.linkedin.com/favicon.ico",
                   host: "linkedin.com",
                 };
@@ -543,7 +543,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                   title: "Medium Article",
                   description: "Read this story on Medium",
                   imageUrl:
-                    "https://via.placeholder.com/300x200/000000/FFFFFF?text=Medium",
+                    "https://placehold.co/300x200/000000/FFFFFF?text=Medium",
                   favicon: "https://medium.com/favicon.ico",
                   host: "medium.com",
                 };
@@ -552,7 +552,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                   title: "Tweet",
                   description: "View this post on Twitter/X",
                   imageUrl:
-                    "https://via.placeholder.com/300x200/1DA1F2/FFFFFF?text=Twitter",
+                    "https://placehold.co/300x200/1DA1F2/FFFFFF?text=Twitter",
                   favicon: "https://twitter.com/favicon.ico",
                   host: "twitter.com",
                 };
@@ -561,7 +561,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                   title: "Instagram Post",
                   description: "View this post on Instagram",
                   imageUrl:
-                    "https://via.placeholder.com/300x200/E1306C/FFFFFF?text=Instagram",
+                    "https://placehold.co/300x200/E1306C/FFFFFF?text=Instagram",
                   favicon: "https://www.instagram.com/favicon.ico",
                   host: "instagram.com",
                 };
@@ -570,7 +570,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                   title: "Facebook Post",
                   description: "View this content on Facebook",
                   imageUrl:
-                    "https://via.placeholder.com/300x200/4267B2/FFFFFF?text=Facebook",
+                    "https://placehold.co/300x200/4267B2/FFFFFF?text=Facebook",
                   favicon: "https://www.facebook.com/favicon.ico",
                   host: "facebook.com",
                 };
@@ -579,7 +579,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 metadata = {
                   title: `Article on ${domain}`,
                   description: `View this content on ${domain}`,
-                  imageUrl: `https://via.placeholder.com/300x200/cccccc/333333?text=${domain}`,
+                  imageUrl: `https://placehold.co/300x200/cccccc/333333?text=${domain}`,
                   favicon: null,
                   host: domain,
                 };
