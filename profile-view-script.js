@@ -627,8 +627,8 @@ async function mapBoxMap(latitude, longitude) {
       "pk.eyJ1IjoibGF3Z2dsZSIsImEiOiJja2RraDU0ZnYwb2lqMnhwbWw2eXVrMjNrIn0.ShD8eyKTv7exWDKR44bSoA";
 
     // Coordinates: [latitude, longitude]
-    const lat = 49.2827; // Example coordinates (update if needed)
-    const long = -123.1207;
+    const lat = 43.647938; // Example coordinates (update if needed)
+    const long = -79.38355;
     console.log(lat, "💧💧💧💧", long);
 
     if (isNaN(lat) || isNaN(long)) {
