@@ -233,7 +233,11 @@ document.addEventListener("DOMContentLoaded", async function () {
 
           let educactionList = parsedBody["AllEducation"];
           let education1;
-          if (educactionList != null && educactionList != undefined) {
+          if (
+            educactionList != null &&
+            educactionList != undefined &&
+            educactionList != ""
+          ) {
             console.log(educactionList);
             if (educactionList.length > 0) {
               education1 = educactionList[0].education;
