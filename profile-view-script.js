@@ -627,8 +627,8 @@ async function mapBoxMap(latitude, longitude) {
       "pk.eyJ1IjoibGF3Z2dsZSIsImEiOiJja2RraDU0ZnYwb2lqMnhwbWw2eXVrMjNrIn0.ShD8eyKTv7exWDKR44bSoA";
 
     // Coordinates: [latitude, longitude]
-    lat = Number(43.6532);
-    long = Number(79.3832);
+    const lat = 49.2827; // Example coordinates (update if needed)
+    const long = -123.1207;
     console.log(lat, "💧💧💧💧", long);
 
     if (isNaN(lat) || isNaN(long)) {
@@ -639,10 +639,10 @@ async function mapBoxMap(latitude, longitude) {
 
     // Initialize the map
     const map = new mapboxgl.Map({
-      container: "mapbox",
+      container: "map",
       style: "mapbox://styles/mapbox/streets-v11",
-      center: coordinates,
-      zoom: 12,
+      center: [long, lat],
+      zoom: 9,
     });
 
     const el = document.createElement("div");
