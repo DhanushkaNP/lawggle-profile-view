@@ -263,7 +263,11 @@ document.addEventListener("DOMContentLoaded", async function () {
             ) {
               // Create Swiper container structure
               const swiperContainer = document.createElement("div");
-              swiperContainer.classList.add("swiper", "certificate-swiper");
+              swiperContainer.classList.add(
+                "swiper",
+                "certificate-swiper",
+                "media-swiper"
+              );
               swiperContainer.style.cssText = `width: 100%; padding: 20px 0; overflow: hidden;`;
 
               const swiperWrapper = document.createElement("div");
@@ -294,9 +298,9 @@ document.addEventListener("DOMContentLoaded", async function () {
 
               // Initialize Swiper after DOM is fully loaded
               loadSwiperJS().then(() => {
-                new Swiper(".certificate-swiper", {
+                new Swiper(".media-swiper", {
                   slidesPerView: "auto",
-                  spaceBetween: 10,
+                  spaceBetween: 5,
                   freeMode: true,
                   pagination: false,
                 });
