@@ -232,6 +232,7 @@ document.addEventListener("DOMContentLoaded", async function () {
           }
 
           let educactionList = parsedBody["AllEducation"];
+          console.log("educactionList", educactionList);
           let education1;
           if (
             educactionList != null &&
@@ -251,6 +252,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 education1 != ""
               ) {
                 for (let eachEducation in educactionList) {
+                  console.log("Education", eachEducation);
                   let educationText = educactionList[eachEducation].education;
                   if (
                     educationText != null &&
