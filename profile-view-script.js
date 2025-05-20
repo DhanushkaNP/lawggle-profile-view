@@ -825,68 +825,42 @@ function setupMediaAndPress(parsedBody) {
       container.appendChild(initialPlaceholder);
     }
 
-    // Create a scrollable container
-    const scrollContainer = document.createElement("div");
-    scrollContainer.classList.add("media-scroll-container");
-    scrollContainer.style.cssText = `
-      display: flex;
-      overflow-x: auto;
-      scroll-behavior: smooth;
-      padding: 20px 0;
-      gap: 20px;
-      scrollbar-width: thin;
-      scrollbar-color: #ccc transparent;
-    `;
+    // Load Swiper CSS - Add this to your HTML head or load it here
+    if (!document.getElementById("swiper-css")) {
+      const swiperCSS = document.createElement("link");
+      swiperCSS.id = "swiper-css";
+      swiperCSS.rel = "stylesheet";
+      swiperCSS.href =
+        "https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css";
+      document.head.appendChild(swiperCSS);
+    }
 
-    // Create scroll navigation buttons
-    const leftScrollBtn = document.createElement("button");
-    leftScrollBtn.innerHTML = "&#10094;";
-    leftScrollBtn.classList.add("scroll-btn", "scroll-left");
-    leftScrollBtn.style.cssText = `
-      position: absolute;
-      left: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: white;
-      border: 1px solid #ddd;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      cursor: pointer;
-      z-index: 10;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    `;
+    // Load Swiper JS - Either add this to your HTML before closing body or load it here
+    function loadSwiperJS() {
+      return new Promise((resolve) => {
+        if (window.Swiper) {
+          resolve();
+          return;
+        }
 
-    const rightScrollBtn = document.createElement("button");
-    rightScrollBtn.innerHTML = "&#10095;";
-    rightScrollBtn.classList.add("scroll-btn", "scroll-right");
-    rightScrollBtn.style.cssText = `
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: white;
-      border: 1px solid #ddd;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      cursor: pointer;
-      z-index: 10;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    `;
+        const swiperScript = document.createElement("script");
+        swiperScript.src =
+          "https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js";
+        swiperScript.onload = resolve;
+        document.body.appendChild(swiperScript);
+      });
+    }
 
-    // Container for the scroll container and buttons
-    const scrollWrapper = document.createElement("div");
-    scrollWrapper.style.cssText = `
-      position: relative;
+    // Create Swiper structure
+    const swiperContainer = document.createElement("div");
+    swiperContainer.classList.add("swiper", "media-swiper");
+    swiperContainer.style.cssText = `
       width: 100%;
+      padding: 20px 0;
     `;
+
+    const swiperWrapper = document.createElement("div");
+    swiperWrapper.classList.add("swiper-wrapper");
 
     // Add loading message while cards are being created
     const loadingMsg = document.createElement("div");
@@ -897,18 +871,10 @@ function setupMediaAndPress(parsedBody) {
       color: #888;
       width: 100%;
     `;
-    scrollContainer.appendChild(loadingMsg);
+    swiperContainer.appendChild(loadingMsg);
 
-    // Assemble initial structure
-    scrollWrapper.appendChild(scrollContainer);
-    scrollWrapper.appendChild(leftScrollBtn);
-    scrollWrapper.appendChild(rightScrollBtn);
-    themediacontainer.appendChild(scrollWrapper);
-
-    // Initial button visibility
-    leftScrollBtn.style.display = "none";
-    rightScrollBtn.style.display =
-      themediaandPress.length > 1 ? "flex" : "none";
+    // Add container to the page
+    themediacontainer.appendChild(swiperContainer);
 
     // Process each media item and create preview cards
     Promise.all(
@@ -919,6 +885,15 @@ function setupMediaAndPress(parsedBody) {
         const uniqueId =
           mediaItem.uniqueId || `id-${Math.random().toString(36).substr(2, 9)}`;
 
+        // Create the swiper slide
+        const swiperSlide = document.createElement("div");
+        swiperSlide.classList.add("swiper-slide");
+        swiperSlide.style.cssText = `
+          display: flex;
+          justify-content: center;
+          padding: 0 10px;
+        `;
+
         // Create the basic card structure
         const mediaCard = document.createElement("a");
         mediaCard.href = url;
@@ -926,8 +901,7 @@ function setupMediaAndPress(parsedBody) {
         mediaCard.classList.add("media-preview-card");
         mediaCard.id = `preview-${uniqueId}`;
         mediaCard.style.cssText = `
-          min-width: 300px;
-          max-width: 300px;
+          width: 300px;
           height: 220px;
           border-radius: 8px;
           overflow: hidden;
@@ -1031,6 +1005,7 @@ function setupMediaAndPress(parsedBody) {
         // Assemble card structure
         mediaCard.appendChild(imageContainer);
         mediaCard.appendChild(contentContainer);
+        swiperSlide.appendChild(mediaCard);
 
         // Populate with metadata
         try {
@@ -1089,45 +1064,57 @@ function setupMediaAndPress(parsedBody) {
           sourceElement.textContent = extractDomain(url);
         }
 
-        return mediaCard;
+        return swiperSlide;
       })
-    ).then((cards) => {
-      // Remove loading message
-      scrollContainer.innerHTML = "";
+    ).then(async (slides) => {
+      // Clear loading message
+      swiperContainer.innerHTML = "";
 
-      // Add all cards to the container
-      cards.forEach((card) => {
-        scrollContainer.appendChild(card);
+      // Add the wrapper to the container
+      swiperContainer.appendChild(swiperWrapper);
+
+      // Add all slides to the wrapper
+      slides.forEach((slide) => {
+        swiperWrapper.appendChild(slide);
       });
 
-      // Set up scroll button event listeners
-      leftScrollBtn.addEventListener("click", () => {
-        scrollContainer.scrollBy({ left: -350, behavior: "smooth" });
+      // Add pagination
+      const pagination = document.createElement("div");
+      pagination.classList.add("swiper-pagination");
+      swiperContainer.appendChild(pagination);
+
+      // Wait for Swiper.js to load
+      await loadSwiperJS();
+
+      // Initialize Swiper
+      const swiper = new Swiper(".media-swiper", {
+        slidesPerView: "auto",
+        spaceBetween: 20,
+        centeredSlides: themediaandPress.length > 1,
+        grabCursor: true,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+          dynamicBullets: themediaandPress.length > 5,
+        },
+        breakpoints: {
+          // Mobile
+          320: {
+            slidesPerView: 1,
+            spaceBetween: 10,
+          },
+          // Tablet
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 15,
+          },
+          // Desktop
+          1024: {
+            slidesPerView: 3,
+            spaceBetween: 20,
+          },
+        },
       });
-
-      rightScrollBtn.addEventListener("click", () => {
-        scrollContainer.scrollBy({ left: 350, behavior: "smooth" });
-      });
-
-      // Show/hide scroll buttons based on scroll position
-      const updateScrollButtonVisibility = () => {
-        leftScrollBtn.style.display =
-          scrollContainer.scrollLeft > 0 ? "flex" : "none";
-        rightScrollBtn.style.display =
-          scrollContainer.scrollLeft <
-          scrollContainer.scrollWidth - scrollContainer.clientWidth - 10
-            ? "flex"
-            : "none";
-      };
-
-      // Initialize button visibility after cards are loaded
-      updateScrollButtonVisibility();
-
-      // Update button visibility on scroll
-      scrollContainer.addEventListener("scroll", updateScrollButtonVisibility);
-
-      // Also update on window resize
-      window.addEventListener("resize", updateScrollButtonVisibility);
     });
   } else {
     document.getElementById("sectionmedia").style.display = "none";
