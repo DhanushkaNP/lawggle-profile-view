@@ -430,6 +430,7 @@ document.addEventListener("DOMContentLoaded", async function () {
               caseHeading = document.createElement("h4");
               caseHeading.classList.add("notable-case-heading");
               caseHeading.innerText = notableCaseWins[eachcase].title;
+              caseWinDiv.append(caseHeading);
               caseText = document.createElement("p");
               caseText.classList.add("notablecasewintext");
               caseText.innerText = notableCaseWins[eachcase].description;
