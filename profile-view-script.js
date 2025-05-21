@@ -250,8 +250,9 @@ document.addEventListener("DOMContentLoaded", async function () {
             if (educactionList.length > 0) {
               education1 = educactionList[0].education;
 
-              let educationwrapper = document.getElementById("educationwrap");
-              educationwrapper.innerHTML = "";
+              let allEducationWrapper =
+                document.getElementById("all-education");
+              allEducationWrapper.innerHTML = "";
               if (
                 education1 != null &&
                 education1 != undefined &&
@@ -259,7 +260,8 @@ document.addEventListener("DOMContentLoaded", async function () {
                 education1 != ""
               ) {
                 for (let eachEducation in educactionList) {
-                  console.log("Education", eachEducation);
+                  let educationWrap = document.createElement("div");
+                  educationWrap.classList.add("educationwrap");
                   let educationText = educactionList[eachEducation].education;
                   if (
                     educationText != null &&
@@ -269,7 +271,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                     educationdisplay = document.createElement("p");
                     educationdisplay.classList.add("educationtexts");
                     educationdisplay.innerText = educationText;
-                    educationwrapper.append(educationdisplay);
+                    educationwrap.append(educationdisplay);
                   }
 
                   let educationDegree = educactionList[eachEducation].degree;
@@ -290,10 +292,12 @@ document.addEventListener("DOMContentLoaded", async function () {
                     educationInfo.append(degreedisplay);
                   }
 
-                  if (
-                    educactionList[eachEducation]["start date"] != "" &&
-                    educactionList[eachEducation]["end date"] != ""
-                  ) {
+                  let educationStartDate =
+                    educactionList[eachEducation]["start date"];
+                  let educationEndDate =
+                    educactionList[eachEducation]["end date"];
+
+                  if (educationStartDate != "" && educationEndDate != "") {
                     if (!educationInfo) {
                       educationInfo = document.createElement("div");
                       educationInfo.classList.add("edu-info");
@@ -319,11 +323,10 @@ document.addEventListener("DOMContentLoaded", async function () {
                       " - " +
                       formatDate(educactionList[eachEducation]["end date"]);
                     educationInfo.append(timePeriod);
-
-                    educationwrapper.append(educationInfo);
                   }
 
-                  educationInfo ? educationwrapper.append(educationInfo) : null;
+                  educationInfo ? educationWrap.append(educationInfo) : null;
+                  allEducationWrapper.append(educationWrap);
                 }
               }
             } else {
