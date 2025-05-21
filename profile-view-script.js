@@ -582,7 +582,7 @@ document.addEventListener("DOMContentLoaded", async function () {
           setupMediaAndPress(parsedBody);
 
           let thecasestudies = parsedBody["case study walkthroughs"];
-          let videocaseslider = document.getElementById("casestudyslider");
+          let videocaseslider = document.getElementById("caseStudyHolder");
           videocaseslider.innerHTML = "";
 
           if (
@@ -591,22 +591,28 @@ document.addEventListener("DOMContentLoaded", async function () {
             thecasestudies != undefined &&
             thecasestudies.length > 0
           ) {
+            clientTestimonialContainer.classList.add(
+              "swiper",
+              "case-study-container",
+              "media-swiper"
+            );
+            clientTestimonialContainer.style.cssText = `width: 100%;`;
+
+            let swiperWrapper = document.createElement("div");
+            swiperWrapper.classList.add("swiper-wrapper");
+
             for (let eachcase in thecasestudies) {
-              caseSlide = document.createElement("div");
-              caseSlide.classList.add("slide-img", "2ni", "w-slide");
-              caseSlide.style.minWidth = "48%";
-              caseSlide.style.maxWidth = "300px";
-              videocase = document.createElement("div");
-              videocase.classList.add("img-wrap", "casestudies");
-              caseVideo = document.createElement("video");
-              caseVideo.classList.add("casevideosnew");
-              caseVideo.controls = true;
-              caseVideo.width = "100%";
+              let caseSlide = document.createElement("div");
+              caseSlide.classList.add("swiper-slide", "case-study-video-wrap");
+              let caseVideo = document.createElement("video");
+              caseVideo.classList.add("case-study-video");
               caseVideo.src = thecasestudies[eachcase].url;
-              videocase.append(caseVideo);
+              caseVideo.controls = true;
+              caseVideo.preload = "auto";
               caseSlide.append(videocase);
-              videocaseslider.append(caseSlide);
+              swiperWrapper.append(caseSlide);
             }
+            videocaseslider.append(swiperWrapper);
           } else {
             document.getElementById("sectioncasestudy").style.display = "none";
           }
