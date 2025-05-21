@@ -558,7 +558,7 @@ document.addEventListener("DOMContentLoaded", async function () {
               );
               testimonialVideo.src = clientTestimonials[i].url;
               testimonialVideo.controls = true;
-              testimonialVideo.preload = "none";
+              testimonialVideo.preload = "auto";
               slide.append(testimonialVideo);
               swiperWrapper.append(slide);
             }
