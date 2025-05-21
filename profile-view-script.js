@@ -433,7 +433,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             );
             let swiperWrapper = document.createElement("div");
             swiperWrapper.classList.add("swiper-wrapper");
-            notablecasewinscontainer.style.cssText = `width: 100%; overflow: hidden;`;
+            notablecasewinscontainer.style.cssText = `width: 100%;`;
 
             for (let eachcase in notableCaseWins) {
               let caseWinDiv = document.createElement("div");
