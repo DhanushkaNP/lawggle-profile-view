@@ -494,13 +494,17 @@ document.addEventListener("DOMContentLoaded", async function () {
             for (i = 0; i <= max - 1; i++) {
               slide = document.createElement("div");
               slide.classList.add("swiper-slide", "testimonial-video-wrap");
-              testimonialVideo = document.createElement("video");
+              let testimonialVideo = document.createElement("video");
               testimonialVideo.classList.add(
                 "swiper-lazy",
                 "swiper-lazy-preloader"
               );
-              testimonialVideo.src = clientTestimonials[i].url;
+              testimonialVideo.setAttribute(
+                "data-src",
+                clientTestimonials[i].url
+              );
               testimonialVideo.controls = true;
+              testimonialVideo.preload = "none";
               let preloader = document.createElement("div");
               preloader.classList.add("swiper-lazy-preloader");
               slide.append(testimonialVideo);
