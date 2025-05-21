@@ -277,8 +277,8 @@ document.addEventListener("DOMContentLoaded", async function () {
                   let educationInfo;
                   if (
                     educationDegree != null &&
-                    (educationDegree != undefined) &
-                      (educationDegree != "null") &&
+                    educationDegree != undefined &&
+                    educationDegree != "null" &&
                     educationDegree != ""
                   ) {
                     let educationInfo = document.createElement("div");
