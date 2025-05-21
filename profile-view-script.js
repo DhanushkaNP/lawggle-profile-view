@@ -495,7 +495,10 @@ document.addEventListener("DOMContentLoaded", async function () {
               slide = document.createElement("div");
               slide.classList.add("swiper-slide", "testimonial-video-wrap");
               let testimonialVideo = document.createElement("video");
-              testimonialVideo.classList.add("swiper-lazy");
+              testimonialVideo.classList.add(
+                "swiper-lazy",
+                "testimonial-video"
+              );
               testimonialVideo.setAttribute(
                 "data-src",
                 clientTestimonials[i].url
@@ -519,9 +522,9 @@ document.addEventListener("DOMContentLoaded", async function () {
 
                 // Enable lazy loading
                 lazy: {
-                  loadPrevNext: false, // Load next and previous slides' media
-                  loadPrevNextAmount: 0, // How many slides to preload in each direction
-                  loadOnTransitionStart: false, // Load media on transition start (true/false)
+                  loadPrevNext: true, // Load next and previous slides' media
+                  loadPrevNextAmount: 3, // How many slides to preload in each direction
+                  loadOnTransitionStart: true, // Load media on transition start (true/false)
                 },
                 on: {
                   slideChangeTransitionEnd: function () {
