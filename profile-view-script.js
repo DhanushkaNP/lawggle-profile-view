@@ -283,7 +283,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                     educationDegree != "null" &&
                     educationDegree != ""
                   ) {
-                    let educationInfo = document.createElement("div");
+                    educationInfo = document.createElement("div");
                     educationInfo.classList.add("edu-info");
 
                     degreedisplay = document.createElement("p");
