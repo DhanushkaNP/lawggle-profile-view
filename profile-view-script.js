@@ -500,6 +500,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 "data-src",
                 clientTestimonials[i].url
               );
+              testimonialVideo.src = clientTestimonials[i].url;
               testimonialVideo.controls = true;
               testimonialVideo.preload = "none";
               let preloader = document.createElement("div");
