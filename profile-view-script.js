@@ -271,7 +271,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                     educationdisplay = document.createElement("p");
                     educationdisplay.classList.add("educationtexts");
                     educationdisplay.innerText = educationText;
-                    educationwrap.append(educationdisplay);
+                    educationWrap.append(educationdisplay);
                   }
 
                   let educationDegree = educactionList[eachEducation].degree;
