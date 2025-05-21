@@ -1,3 +1,5 @@
+console.log("Test 1");
+
 document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("loading-screen").style.display = "flex";
   document.getElementById("pv-page-wrapper").style.display = "none";
