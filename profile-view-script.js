@@ -429,19 +429,20 @@ document.addEventListener("DOMContentLoaded", async function () {
             notablecasewinscontainer.classList.add(
               "swiper",
               "media-swiper",
-              "case-card-wrap"
-            );
-            let swiperWrapper = document.createElement("div");
-            swiperWrapper.classList.add(
-              "case-win-swip",
-              "swiper-wrapper",
+              "case-card-wrap",
               "case-card-custom"
             );
+            let swiperWrapper = document.createElement("div");
+            swiperWrapper.classList.add("swiper-wrapper", "case-win-swip");
             notablecasewinscontainer.style.cssText = `width: 100%;`;
 
             for (let eachcase in notableCaseWins) {
               let caseWinDiv = document.createElement("div");
-              caseWinDiv.classList.add("swiper-slide", "crd");
+              caseWinDiv.classList.add(
+                "swiper-slide",
+                "crd",
+                "crd-cutom-width"
+              );
               let caseHeading = document.createElement("h4");
               caseHeading.classList.add("notable-case-heading");
               caseHeading.innerText = notableCaseWins[eachcase].title;
