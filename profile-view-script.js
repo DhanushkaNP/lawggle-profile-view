@@ -424,19 +424,34 @@ document.addEventListener("DOMContentLoaded", async function () {
             notableCaseWins != "" &&
             notableCaseWins.length > 0
           ) {
+            notablecasewinscontainer.classList.add("swiper");
+            let swiperWrapper = document.createElement("div");
+            swiperWrapper.classList.add("swiper-wrapper");
+            certicateContainer.style.cssText = `width: 100%; overflow: hidden;`;
+
             for (let eachcase in notableCaseWins) {
-              caseWinDiv = document.createElement("div");
+              let caseWinDiv = document.createElement("div");
               caseWinDiv.classList.add("crd");
-              caseHeading = document.createElement("h4");
+              let caseHeading = document.createElement("h4");
               caseHeading.classList.add("notable-case-heading");
               caseHeading.innerText = notableCaseWins[eachcase].title;
               caseWinDiv.append(caseHeading);
-              caseText = document.createElement("p");
+              let caseText = document.createElement("p");
               caseText.classList.add("notablecasewintext");
               caseText.innerText = notableCaseWins[eachcase].description;
               caseWinDiv.append(caseText);
-              notablecasewinscontainer.append(caseWinDiv);
+              swiperWrapper.append(caseWinDiv);
             }
+            notablecasewinscontainer.append(swiperWrapper);
+
+            loadSwiperJS().then(() => {
+              new Swiper(".media-swiper", {
+                slidesPerView: "auto",
+                spaceBetween: 5,
+                freeMode: true,
+                pagination: false,
+              });
+            });
           } else {
             document.getElementById("sectioncasewins").style.display = "none";
           }
