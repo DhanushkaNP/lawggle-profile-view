@@ -302,12 +302,6 @@ document.addEventListener("DOMContentLoaded", async function () {
                     let timePeriod = document.createElement("p");
                     timePeriod.classList.add("edu-time");
                     // Parse dates and format them as "MMM YYYY"
-                    timePeriod.innerText =
-                      formatDate(educactionList[eachEducation]["start date"]) +
-                      " - " +
-                      formatDate(educactionList[eachEducation]["end date"]);
-                    educationInfo.append(timePeriod);
-
                     const formatDate = (dateString) => {
                       if (!dateString) return "";
                       const date = new Date(dateString);
@@ -319,6 +313,13 @@ document.addEventListener("DOMContentLoaded", async function () {
                       const year = date.getFullYear();
                       return `${month} ${year}`;
                     };
+
+                    timePeriod.innerText =
+                      formatDate(educactionList[eachEducation]["start date"]) +
+                      " - " +
+                      formatDate(educactionList[eachEducation]["end date"]);
+                    educationInfo.append(timePeriod);
+
                     educationwrapper.append(educationInfo);
                   }
 
