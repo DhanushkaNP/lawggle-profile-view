@@ -356,16 +356,15 @@ document.addEventListener("DOMContentLoaded", async function () {
                   });
                 });
               } else {
-                document.getElementById("certificate-swiper").style.display ==
+                document.getElementById("certificatethehold").style.display ==
                   "none";
               }
             } else {
-              document.getElementById("biography-container").style.display =
+              document.getElementById("certificatethehold").style.display =
                 "none";
             }
           } else {
-            console.log(document.querySelectorAll("#certificatethehold"));
-            document.getElementById("certificate-swiper").style.display =
+            document.getElementById("certificatethehold").style.display =
               "none";
           }
 
