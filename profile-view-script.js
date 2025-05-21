@@ -453,7 +453,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             loadSwiperJS().then(() => {
               new Swiper(".case-card-wrap", {
                 slidesPerView: "auto",
-                spaceBetween: 5,
+                spaceBetween: 20,
                 freeMode: true,
                 pagination: false,
               });
