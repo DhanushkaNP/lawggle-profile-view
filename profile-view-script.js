@@ -480,7 +480,8 @@ document.addEventListener("DOMContentLoaded", async function () {
           ) {
             clientTestimonialContainer.classList.add(
               "swiper",
-              "testmonial-container"
+              "testmonial-container",
+              "media-swiper"
             );
             clientTestimonialContainer.style.cssText = `width: 100%;`;
 
