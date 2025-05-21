@@ -609,7 +609,7 @@ document.addEventListener("DOMContentLoaded", async function () {
               caseVideo.src = thecasestudies[eachcase].url;
               caseVideo.controls = true;
               caseVideo.preload = "auto";
-              caseSlide.append(videocase);
+              caseSlide.append(caseVideo);
               swiperWrapper.append(caseSlide);
             }
             videocaseslider.append(swiperWrapper);
