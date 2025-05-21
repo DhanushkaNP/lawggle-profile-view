@@ -492,13 +492,10 @@ document.addEventListener("DOMContentLoaded", async function () {
               max = 3;
             }
             for (i = 0; i <= max - 1; i++) {
-              slide = document.createElement("div");
+              let slide = document.createElement("div");
               slide.classList.add("swiper-slide", "testimonial-video-wrap");
               let testimonialVideo = document.createElement("video");
-              testimonialVideo.classList.add(
-                "swiper-lazy",
-                "testimonial-video"
-              );
+              testimonialVideo.classList.add("testimonial-video");
               testimonialVideo.setAttribute(
                 "data-src",
                 clientTestimonials[i].url
@@ -506,42 +503,18 @@ document.addEventListener("DOMContentLoaded", async function () {
               testimonialVideo.src = clientTestimonials[i].url;
               testimonialVideo.controls = true;
               testimonialVideo.preload = "none";
-              let preloader = document.createElement("div");
-              preloader.classList.add("swiper-lazy-preloader");
               slide.append(testimonialVideo);
-              slide.append(preloader);
               swiperWrapper.append(slide);
             }
 
             clientTestimonialContainer.append(swiperWrapper);
 
             loadSwiperJS().then(() => {
-              new Swiper(".testmonial-container", {
+              new Swiper(".case-card-wrap", {
                 slidesPerView: "auto",
                 spaceBetween: 30,
-
-                // Enable lazy loading
-                lazy: {
-                  loadPrevNext: true, // Load next and previous slides' media
-                  loadPrevNextAmount: 3, // How many slides to preload in each direction
-                  loadOnTransitionStart: true, // Load media on transition start (true/false)
-                },
-                on: {
-                  slideChangeTransitionEnd: function () {
-                    // Pause all videos in the slider
-                    const allVideos = this.el.querySelectorAll("video");
-                    allVideos.forEach((video) => {
-                      video.pause();
-                    });
-                  },
-                  touchStart: function () {
-                    const activeSlideVideo =
-                      this.slides[this.activeIndex].querySelector("video");
-                    if (activeSlideVideo) {
-                      activeSlideVideo.pause();
-                    }
-                  },
-                },
+                freeMode: true,
+                pagination: false,
               });
             });
           } else {
