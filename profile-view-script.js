@@ -1,4 +1,4 @@
-console.log("Test 1");
+console.log("Test 2");
 
 document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("loading-screen").style.display = "flex";
@@ -428,9 +428,9 @@ document.addEventListener("DOMContentLoaded", async function () {
           ) {
             notablecasewinscontainer.classList.add(
               "swiper",
-              "media-swiper",
               "case-card-wrap",
-              "case-card-custom"
+              "case-card-custom",
+              "case-card-wrap-custom"
             );
             let swiperWrapper = document.createElement("div");
             swiperWrapper.classList.add("swiper-wrapper", "case-win-swip");
