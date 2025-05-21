@@ -541,10 +541,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             clientTestimonialContainer.style.cssText = `width: 100%;`;
 
             let swiperWrapper = document.createElement("div");
-            swiperWrapper.classList.add(
-              "swiper-wrapper",
-              "swiper-wrapper-custom"
-            );
+            swiperWrapper.classList.add("swiper-wrapper");
 
             let max = clientTestimonials.length;
             if (clientTestimonials.length > 3) {
@@ -603,10 +600,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             clientTestimonialContainer.style.cssText = `width: 100%;`;
 
             let swiperWrapper = document.createElement("div");
-            swiperWrapper.classList.add(
-              "swiper-wrapper",
-              "swiper-wrapper-custom"
-            );
+            swiperWrapper.classList.add("swiper-wrapper");
 
             for (let eachcase in thecasestudies) {
               let caseSlide = document.createElement("div");
