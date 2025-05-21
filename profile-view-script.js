@@ -271,6 +271,58 @@ document.addEventListener("DOMContentLoaded", async function () {
                     educationdisplay.innerText = educationText;
                     educationwrapper.append(educationdisplay);
                   }
+
+                  let educationDegree = educactionList[eachEducation].degree;
+
+                  let educationInfo;
+                  if (
+                    educationDegree != null &&
+                    (educationDegree != undefined) &
+                      (educationDegree != "null") &&
+                    educationDegree != ""
+                  ) {
+                    let educationInfo = document.createElement("div");
+                    educationInfo.classList.add("edu-info");
+
+                    degreedisplay = document.createElement("p");
+                    degreedisplay.classList.add("edu-degree");
+                    degreedisplay.innerText = educationDegree;
+                    educationInfo.append(degreedisplay);
+                  }
+
+                  if (
+                    educactionList[eachEducation]["start date"] != "" &&
+                    educactionList[eachEducation]["end date"] != ""
+                  ) {
+                    if (!educationInfo) {
+                      educationInfo = document.createElement("div");
+                      educationInfo.classList.add("edu-info");
+                    }
+
+                    let timePeriod = document.createElement("p");
+                    timePeriod.classList.add("edu-time");
+                    // Parse dates and format them as "MMM YYYY"
+                    timePeriod.innerText =
+                      formatDate(educactionList[eachEducation]["start date"]) +
+                      " - " +
+                      formatDate(educactionList[eachEducation]["end date"]);
+                    educationInfo.append(timePeriod);
+
+                    const formatDate = (dateString) => {
+                      if (!dateString) return "";
+                      const date = new Date(dateString);
+                      if (isNaN(date.getTime())) return dateString; // Return original if invalid
+
+                      const month = date.toLocaleString("en-US", {
+                        month: "short",
+                      });
+                      const year = date.getFullYear();
+                      return `${month} ${year}`;
+                    };
+                    educationwrapper.append(educationInfo);
+                  }
+
+                  educationInfo ? educationwrapper.append(educationInfo) : null;
                 }
               }
             } else {
