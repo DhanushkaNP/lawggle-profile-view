@@ -613,6 +613,15 @@ document.addEventListener("DOMContentLoaded", async function () {
               swiperWrapper.append(caseSlide);
             }
             videocaseslider.append(swiperWrapper);
+
+            loadSwiperJS().then(() => {
+              new Swiper(".case-card-wrap", {
+                slidesPerView: "auto",
+                spaceBetween: 20,
+                freeMode: true,
+                pagination: false,
+              });
+            });
           } else {
             document.getElementById("sectioncasestudy").style.display = "none";
           }
