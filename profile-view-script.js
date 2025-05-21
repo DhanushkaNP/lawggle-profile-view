@@ -495,10 +495,7 @@ document.addEventListener("DOMContentLoaded", async function () {
               slide = document.createElement("div");
               slide.classList.add("swiper-slide", "testimonial-video-wrap");
               let testimonialVideo = document.createElement("video");
-              testimonialVideo.classList.add(
-                "swiper-lazy",
-                "swiper-lazy-preloader"
-              );
+              testimonialVideo.classList.add("swiper-lazy");
               testimonialVideo.setAttribute(
                 "data-src",
                 clientTestimonials[i].url
