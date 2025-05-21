@@ -562,6 +562,7 @@ document.addEventListener("DOMContentLoaded", async function () {
               testimonialVideo.src = clientTestimonials[i].url;
               testimonialVideo.controls = true;
               testimonialVideo.preload = "auto";
+              testimonialVideo.playsInline = true;
               slide.append(testimonialVideo);
               swiperWrapper.append(slide);
             }
@@ -615,6 +616,7 @@ document.addEventListener("DOMContentLoaded", async function () {
               caseVideo.src = thecasestudies[eachcase].url;
               caseVideo.controls = true;
               caseVideo.preload = "auto";
+              caseVideo.playsInline = true;
               caseSlide.append(caseVideo);
               swiperWrapper.append(caseSlide);
             }
