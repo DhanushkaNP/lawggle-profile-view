@@ -426,7 +426,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             notableCaseWins != "" &&
             notableCaseWins.length > 0
           ) {
-            notablecasewinscontainer.classList.add("swiper");
+            notablecasewinscontainer.classList.add("swiper", "media-swiper");
             let swiperWrapper = document.createElement("div");
             swiperWrapper.classList.add("swiper-wrapper");
             notablecasewinscontainer.style.cssText = `width: 100%; overflow: hidden;`;
