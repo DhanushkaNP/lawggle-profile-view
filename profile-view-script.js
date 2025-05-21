@@ -612,19 +612,15 @@ document.addEventListener("DOMContentLoaded", async function () {
               caseVideo.preload = "metadata";
               caseVideo.playsInline = true;
 
-              caseVideo.addEventListener("loadedmetadata", function () {
-                // Play and immediately pause to show the first frame
-                caseVideo
-                  .play()
-                  .then(() => {
-                    setTimeout(() => {
-                      caseVideo.pause();
-                      caseVideo.currentTime = 0.1; // Set to a small value to ensure first frame
-                    }, 100);
-                  })
-                  .catch((err) => {
-                    console.log("Auto-preview failed:", err);
-                  });
+              caseVideo.addEventListener("loadeddata", () => {
+                const canvas = document.createElement("canvas");
+                canvas.width = caseVideo.videoWidth;
+                canvas.height = caseVideo.videoHeight;
+                canvas
+                  .getContext("2d")
+                  .drawImage(caseVideo, 0, 0, canvas.width, canvas.height);
+                const dataURL = canvas.toDataURL("image/jpeg");
+                caseVideo.poster = dataURL;
               });
 
               caseSlide.append(caseVideo);
