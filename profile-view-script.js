@@ -609,8 +609,24 @@ document.addEventListener("DOMContentLoaded", async function () {
               caseVideo.classList.add("case-study-video");
               caseVideo.src = thecasestudies[eachcase].url;
               caseVideo.controls = true;
-              caseVideo.preload = "auto";
+              caseVideo.preload = "metadata";
               caseVideo.playsInline = true;
+
+              caseVideo.addEventListener("loadedmetadata", function () {
+                // Play and immediately pause to show the first frame
+                caseVideo
+                  .play()
+                  .then(() => {
+                    setTimeout(() => {
+                      caseVideo.pause();
+                      caseVideo.currentTime = 0.1; // Set to a small value to ensure first frame
+                    }, 100);
+                  })
+                  .catch((err) => {
+                    console.log("Auto-preview failed:", err);
+                  });
+              });
+
               caseSlide.append(caseVideo);
               swiperWrapper.append(caseSlide);
             }
