@@ -437,7 +437,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
             for (let eachcase in notableCaseWins) {
               let caseWinDiv = document.createElement("div");
-              caseWinDiv.classList.add("crd");
+              caseWinDiv.classList.add("crd", "swiper-slide");
               let caseHeading = document.createElement("h4");
               caseHeading.classList.add("notable-case-heading");
               caseHeading.innerText = notableCaseWins[eachcase].title;
