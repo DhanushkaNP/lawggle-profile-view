@@ -426,7 +426,11 @@ document.addEventListener("DOMContentLoaded", async function () {
             notableCaseWins != "" &&
             notableCaseWins.length > 0
           ) {
-            notablecasewinscontainer.classList.add("swiper", "media-swiper");
+            notablecasewinscontainer.classList.add(
+              "swiper",
+              "media-swiper",
+              "case-card-wrap"
+            );
             let swiperWrapper = document.createElement("div");
             swiperWrapper.classList.add("swiper-wrapper");
             notablecasewinscontainer.style.cssText = `width: 100%; overflow: hidden;`;
@@ -447,7 +451,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             notablecasewinscontainer.append(swiperWrapper);
 
             loadSwiperJS().then(() => {
-              new Swiper(".media-swiper", {
+              new Swiper(".case-card-wrap", {
                 slidesPerView: "auto",
                 spaceBetween: 5,
                 freeMode: true,
