@@ -478,23 +478,80 @@ document.addEventListener("DOMContentLoaded", async function () {
             clientTestimonials != "" &&
             clientTestimonials.length > 0
           ) {
+            clientTestimonialContainer.classList.add(
+              "swiper",
+              "testmonial-container"
+            );
+            clientTestimonialContainer.style.cssText = `width: 100%;`;
+
+            let swiperWrapper = document.createElement("div");
+            swiperWrapper.classList.add("swiper-wrapper");
+
             let max = clientTestimonials.length;
             if (clientTestimonials.length > 3) {
               max = 3;
             }
             for (i = 0; i <= max - 1; i++) {
               slide = document.createElement("div");
-              slide.classList.add("vid-wrap", "testimonialvidwrap");
+              slide.classList.add("swiper-slide", "testimonial-video-wrap");
               testimonialVideo = document.createElement("video");
               testimonialVideo.classList.add(
-                "videoclass",
-                "testimonialcontainer"
+                "swiper-lazy",
+                "swiper-lazy-preloader"
               );
               testimonialVideo.src = clientTestimonials[i].url;
               testimonialVideo.controls = true;
+              let preloader = document.createElement("div");
+              preloader.classList.add("swiper-lazy-preloader");
               slide.append(testimonialVideo);
-              clientTestimonialContainer.append(slide);
+              slide.append(preloader);
+              swiperWrapper.append(slide);
             }
+
+            clientTestimonialContainer.append(swiperWrapper);
+
+            loadSwiperJS().then(() => {
+              new Swiper(".testmonial-container", {
+                slidesPerView: "auto",
+                spaceBetween: 30,
+
+                // Enable lazy loading
+                lazy: {
+                  loadPrevNext: false, // Load next and previous slides' media
+                  loadPrevNextAmount: 0, // How many slides to preload in each direction
+                  loadOnTransitionStart: false, // Load media on transition start (true/false)
+                },
+                on: {
+                  slideChangeTransitionEnd: function () {
+                    // Pause all videos in the slider
+                    const allVideos = this.el.querySelectorAll("video");
+                    allVideos.forEach((video) => {
+                      video.pause();
+                    });
+
+                    // Play the video in the newly active slide
+                    const activeSlideVideo =
+                      this.slides[this.activeIndex].querySelector("video");
+                    if (activeSlideVideo) {
+                      activeSlideVideo.play().catch((e) => {
+                        console.error("Video autoplay failed:", e);
+                        // Most likely due to browser autoplay policies.
+                        // Suggestion: If autoplay fails, unmute the video
+                        // activeSlideVideo.muted = false;
+                        // or show a custom play button overlay.
+                      });
+                    }
+                  },
+                  touchStart: function () {
+                    const activeSlideVideo =
+                      this.slides[this.activeIndex].querySelector("video");
+                    if (activeSlideVideo) {
+                      activeSlideVideo.pause();
+                    }
+                  },
+                },
+              });
+            });
           } else {
             document.getElementById("sectiontestimonials").style.display =
               "none";
