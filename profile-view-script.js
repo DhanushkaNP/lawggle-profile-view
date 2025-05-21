@@ -592,12 +592,12 @@ document.addEventListener("DOMContentLoaded", async function () {
             thecasestudies != undefined &&
             thecasestudies.length > 0
           ) {
-            clientTestimonialContainer.classList.add(
+            videocaseslider.classList.add(
               "swiper",
               "case-study-container",
               "media-swiper"
             );
-            clientTestimonialContainer.style.cssText = `width: 100%;`;
+            videocaseslider.style.cssText = `width: 100%;`;
 
             let swiperWrapper = document.createElement("div");
             swiperWrapper.classList.add("swiper-wrapper");
