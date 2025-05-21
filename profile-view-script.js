@@ -533,19 +533,6 @@ document.addEventListener("DOMContentLoaded", async function () {
                     allVideos.forEach((video) => {
                       video.pause();
                     });
-
-                    // Play the video in the newly active slide
-                    const activeSlideVideo =
-                      this.slides[this.activeIndex].querySelector("video");
-                    if (activeSlideVideo) {
-                      activeSlideVideo.play().catch((e) => {
-                        console.error("Video autoplay failed:", e);
-                        // Most likely due to browser autoplay policies.
-                        // Suggestion: If autoplay fails, unmute the video
-                        // activeSlideVideo.muted = false;
-                        // or show a custom play button overlay.
-                      });
-                    }
                   },
                   touchStart: function () {
                     const activeSlideVideo =
