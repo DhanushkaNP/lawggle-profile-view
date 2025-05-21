@@ -432,7 +432,11 @@ document.addEventListener("DOMContentLoaded", async function () {
               "case-card-wrap"
             );
             let swiperWrapper = document.createElement("div");
-            swiperWrapper.classList.add("swiper-wrapper");
+            swiperWrapper.classList.add(
+              "case-win-swip",
+              "swiper-wrapper",
+              "case-card-custom"
+            );
             notablecasewinscontainer.style.cssText = `width: 100%;`;
 
             for (let eachcase in notableCaseWins) {
