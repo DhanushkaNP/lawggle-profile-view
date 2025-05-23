@@ -1265,7 +1265,7 @@ function setupMediaAndPress(parsedBody) {
     // Load and initialize Swiper
     loadSwiperJS().then(() => {
       new Swiper(swiperContainer, {
-        slidesPerView: 1.2,
+        slidesPerView: 1.1,
         spaceBetween: 5,
         slidesOffsetAfter: 20,
         centeredSlides: false,
