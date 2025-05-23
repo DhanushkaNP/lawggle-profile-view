@@ -682,7 +682,6 @@ document.addEventListener("DOMContentLoaded", async function () {
                     const videos = this.el.querySelectorAll("video");
                     videos.forEach((video) => {
                       video.pause();
-                      video.currentTime = 0; // Optional: reset to beginning
                     });
                   },
                 },
