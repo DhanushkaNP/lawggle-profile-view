@@ -508,57 +508,70 @@ document.addEventListener("DOMContentLoaded", async function () {
 
             loadSwiperJS().then(() => {
               new Swiper(notablecasewinscontainer, {
-                slidesPerView: 1.2,
+                // Basic setup for smooth sliding
+                slidesPerView: "auto",
                 spaceBetween: 20,
-                // Better touch handling
-                touchRatio: 1,
-                touchAngle: 45,
-                grabCursor: true,
 
-                // Smooth momentum scrolling
+                // CRITICAL: Smooth finger tracking settings
+                touchRatio: 1, // 1:1 touch movement ratio
+                touchAngle: 45, // Allow diagonal swipes
+                grabCursor: true, // Show grab cursor
+                followFinger: true, // Follow finger movement exactly
+
+                // Free mode for natural scrolling
                 freeMode: {
                   enabled: true,
                   momentum: true,
-                  momentumRatio: 0.6,
-                  momentumBounceRatio: 0.1,
-                  minimumVelocity: 0.02,
-                  sticky: false,
+                  momentumRatio: 1, // More natural momentum
+                  momentumBounceRatio: 0.2, // Gentle bounce
+                  minimumVelocity: 0.1, // Lower threshold for momentum
+                  sticky: false, // No snap points
                 },
 
-                // Performance optimizations
-                watchOverflow: true,
+                // Smooth transitions and timing
+                speed: 400, // Slightly slower for smoothness
+                longSwipes: true, // Allow long swipes
+                longSwipesRatio: 0.5, // Easier to trigger long swipes
+                longSwipesMs: 300, // Time threshold for long swipes
+
+                // Touch handling optimizations
+                touchStartPreventDefault: false, // Don't prevent default touch
+                touchStartForcePreventDefault: false,
+                touchMoveStopPropagation: false,
+
+                // Prevent interference
+                preventClicks: false, // Allow clicks
+                preventClicksPropagation: false,
+                allowTouchMove: true, // Always allow touch
+                simulateTouch: true, // Enable mouse simulation
+
+                // Resistance for edge behavior
+                resistance: true,
+                resistanceRatio: 0.7, // Less resistance at edges
+
+                // Performance settings
+                updateOnWindowResize: true,
                 observer: true,
                 observeParents: true,
+                watchOverflow: true,
 
-                // Disable pagination for cleaner look
+                // No pagination or navigation for cleaner experience
                 pagination: false,
+                navigation: false,
 
-                // Optional: Add navigation arrows if needed
-                // navigation: {
-                //   nextEl: '.swiper-button-next',
-                //   prevEl: '.swiper-button-prev',
-                // },
+                // Smooth CSS transitions
+                cssMode: false, // Use JS mode for better control
 
-                // Prevent clicks during transition
-                preventClicks: true,
-                preventClicksPropagation: true,
-
-                // Better resistance
-                resistance: true,
-                resistanceRatio: 0.85,
-
-                // Smooth transitions
-                speed: 300,
-
-                // Handle edge cases
-                allowTouchMove: true,
-                simulateTouch: true,
-
-                // Accessibility
-                a11y: {
-                  enabled: true,
-                  prevSlideMessage: "Previous case",
-                  nextSlideMessage: "Next case",
+                // Event handling for debugging (remove in production)
+                on: {
+                  touchStart: function () {
+                    // Optional: Add visual feedback on touch start
+                    this.el.style.transition = "none";
+                  },
+                  touchEnd: function () {
+                    // Restore transitions after touch
+                    this.el.style.transition = "";
+                  },
                 },
               });
             });
