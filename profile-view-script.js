@@ -744,35 +744,37 @@ document.addEventListener("DOMContentLoaded", async function () {
             }
             videocaseslider.append(swiperWrapper);
 
-            new Swiper(clientTestimonialContainer, {
-              slidesPerView: 1.4,
-              spaceBetween: 16,
-              slidesOffsetAfter: 60,
-              shortSwipes: true,
-              threshold: 6,
-              longSwipesRatio: 0.2,
-              longSwipesMs: 200,
-              touchRatio: 1.2,
-              touchAngle: 45,
-              grabCursor: true,
-              followFinger: true,
-              freeMode: false,
-              speed: 400,
-              touchMoveStopPropagation: true,
-              resistanceRatio: 0.5,
-              updateOnWindowResize: true,
-              observer: true,
-              observeParents: true,
-              watchOverflow: true,
-              on: {
-                slideChange: function () {
-                  const videos = this.el.querySelectorAll("video");
-                  videos.forEach((video) => {
-                    video.pause();
-                    video.currentTime = 0;
-                  });
+            loadSwiperJS().then(() => {
+              new Swiper(clientTestimonialContainer, {
+                slidesPerView: 1.4,
+                spaceBetween: 16,
+                slidesOffsetAfter: 60,
+                shortSwipes: true,
+                threshold: 6,
+                longSwipesRatio: 0.2,
+                longSwipesMs: 200,
+                touchRatio: 1.2,
+                touchAngle: 45,
+                grabCursor: true,
+                followFinger: true,
+                freeMode: false,
+                speed: 400,
+                touchMoveStopPropagation: true,
+                resistanceRatio: 0.5,
+                updateOnWindowResize: true,
+                observer: true,
+                observeParents: true,
+                watchOverflow: true,
+                on: {
+                  slideChange: function () {
+                    const videos = this.el.querySelectorAll("video");
+                    videos.forEach((video) => {
+                      video.pause();
+                      video.currentTime = 0;
+                    });
+                  },
                 },
-              },
+              });
             });
           } else {
             document.getElementById("sectioncasestudy").style.display = "none";
