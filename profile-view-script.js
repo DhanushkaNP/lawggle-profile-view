@@ -1169,7 +1169,7 @@ function loadSwiperJS() {
   });
 }
 
-const accordionClicked = (e) => {
+function accordionClicked(e) {
   // Stop event bubbling to prevent multiple triggers
   e.stopPropagation();
 
@@ -1194,4 +1194,4 @@ const accordionClicked = (e) => {
   } else {
     console.log("Item was active, now closed"); // Debug line
   }
-};
+}
