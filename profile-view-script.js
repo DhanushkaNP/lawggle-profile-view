@@ -693,7 +693,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             theQAs.length > 0
           ) {
             for (let eachQa in theQAs) {
-              theqacontainer = document.createElement("div");
+              const theqacontainer = document.createElement("div");
               theqacontainer.classList.add("accordion-item-c");
               theqacontainer.setAttribute("trackno", eachQa);
               theqaheader = document.createElement("div");
@@ -747,6 +747,7 @@ document.addEventListener("DOMContentLoaded", async function () {
               theqaheader.append(theqaheadertext, thearrow);
               qaBody.append(qaanswer);
               theqacontainer.append(theqaheader, qaBody);
+              theqacontainer.addEventListener("click", accordionClicked);
               thequizcontainer.append(theqacontainer);
             }
           } else {
@@ -1167,3 +1168,30 @@ function loadSwiperJS() {
     document.body.appendChild(swiperScript);
   });
 }
+
+const accordionClicked = (e) => {
+  // Stop event bubbling to prevent multiple triggers
+  e.stopPropagation();
+
+  // Check if the accordion body is already showing
+  const isActive = this.classList.contains("active");
+
+  console.log("Clicked item active status:", isActive); // Debug line
+
+  const accordionItems = document.querySelectorAll(".accordion-item-c");
+
+  // Remove active class from all items
+  accordionItems.forEach((otherItem) => {
+    otherItem.classList.remove("active");
+    const body = otherItem.querySelector(".accordion-body-c");
+    body.style.display = "";
+  });
+
+  // If the clicked item wasn't active before, make it active now
+  if (!isActive) {
+    this.classList.add("active");
+    console.log("Adding active class"); // Debug line
+  } else {
+    console.log("Item was active, now closed"); // Debug line
+  }
+};
