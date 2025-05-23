@@ -631,56 +631,45 @@ document.addEventListener("DOMContentLoaded", async function () {
                 slidesOffsetAfter: 60,
                 centeredSlides: false,
 
-                // Smooth slide-by-slide movement
                 shortSwipes: true,
-                threshold: 6, // Lower threshold for easier swiping
-                longSwipesRatio: 0.3, // Easier to trigger slide change
-                longSwipesMs: 200, // Shorter time for slide detection
+                threshold: 6,
+                longSwipesRatio: 0.3,
+                longSwipesMs: 200,
 
-                // CRITICAL: Smooth finger tracking settings
-                touchRatio: 1.2, // 1:1 touch movement ratio
-                touchAngle: 45, // Allow diagonal swipes
-                grabCursor: true, // Show grab cursor
-                followFinger: true, // Follow finger movement exactly
+                touchRatio: 1.2,
+                touchAngle: 45,
+                grabCursor: true,
+                followFinger: true,
 
-                // Disable free mode for slide-by-slide behavior
                 freeMode: false,
 
-                // Smooth transitions and timing
-                speed: 400, // Smooth transition speed
-                longSwipes: true, // Allow long swipes
-                longSwipesRatio: 0.2, // Easier to trigger slide change
-                longSwipesMs: 200, // Time threshold for slide detection
+                speed: 400,
+                longSwipes: true,
+                longSwipesRatio: 0.2,
+                longSwipesMs: 200,
 
-                // Touch handling optimizations
-                touchStartPreventDefault: false, // Don't prevent default touch
+                touchStartPreventDefault: false,
                 touchStartForcePreventDefault: false,
                 touchMoveStopPropagation: true,
 
-                // Prevent interference
-                preventClicks: false, // Allow clicks
+                preventClicks: false,
                 preventClicksPropagation: false,
-                allowTouchMove: true, // Always allow touch
-                simulateTouch: true, // Enable mouse simulation
+                allowTouchMove: true,
+                simulateTouch: true,
 
-                // Resistance for edge behavior
                 resistance: true,
-                resistanceRatio: 0.5, // Less resistance at edges
+                resistanceRatio: 0.5,
 
-                // Performance settings
                 updateOnWindowResize: true,
                 observer: true,
                 observeParents: true,
                 watchOverflow: true,
 
-                // No pagination or navigation for cleaner experience
                 pagination: false,
                 navigation: false,
 
-                // Smooth CSS transitions
-                cssMode: false, // Use JS mode for better control
+                cssMode: false,
 
-                // Event handling for debugging (remove in production)
                 on: {
                   touchStart: function () {
                     this.el.style.transition = "none";
@@ -745,35 +734,11 @@ document.addEventListener("DOMContentLoaded", async function () {
             videocaseslider.append(swiperWrapper);
 
             loadSwiperJS().then(() => {
-              new Swiper(clientTestimonialContainer, {
-                slidesPerView: 1.4,
-                spaceBetween: 16,
-                slidesOffsetAfter: 60,
-                shortSwipes: true,
-                threshold: 6,
-                longSwipesRatio: 0.2,
-                longSwipesMs: 200,
-                touchRatio: 1.2,
-                touchAngle: 45,
-                grabCursor: true,
-                followFinger: true,
-                freeMode: false,
-                speed: 400,
-                touchMoveStopPropagation: true,
-                resistanceRatio: 0.5,
-                updateOnWindowResize: true,
-                observer: true,
-                observeParents: true,
-                watchOverflow: true,
-                on: {
-                  slideChange: function () {
-                    const videos = this.el.querySelectorAll("video");
-                    videos.forEach((video) => {
-                      video.pause();
-                      video.currentTime = 0;
-                    });
-                  },
-                },
+              new Swiper(videocaseslider, {
+                slidesPerView: "auto",
+                spaceBetween: 20,
+                freeMode: true,
+                pagination: false,
               });
             });
           } else {
