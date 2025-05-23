@@ -692,34 +692,6 @@ document.addEventListener("DOMContentLoaded", async function () {
               theqaheader = document.createElement("div");
               theqaheader.classList.add("accordion-btn-c");
               theqaheader.setAttribute("trackno", eachQa);
-
-              // theqaheader.addEventListener("click", function () {
-              //   let thisButton = event.target;
-              //   let trackNumber = thisButton.getAttribute("trackno");
-
-              //   let thecontainers =
-              //     document.querySelectorAll(".accordion-item-c");
-              //   thecontainers.forEach((el) => {
-              //     let theselected = el.getAttribute("trackno");
-              //     if (theselected == trackNumber) {
-              //       el.classList.add("active");
-              //     } else {
-              //       el.classList.remove("active");
-              //     }
-              //   });
-
-              //   let thebodycontainers =
-              //     document.querySelectorAll(".accordion-body-c");
-              //   thebodycontainers.forEach((el) => {
-              //     let theselected2 = el.getAttribute("trackno");
-              //     if (theselected2 == trackNumber) {
-              //       el.style.display = "flex";
-              //     } else {
-              //       el.style.display = "none";
-              //     }
-              //   });
-              // });
-
               theqaheadertext = document.createElement("p");
               theqaheadertext.classList.add("text-block-60-c");
               console.log(theQAs[eachQa].title);
@@ -978,8 +950,8 @@ function capitalizeWords(text) {
 // Function to handle media and press mentions section
 function setupMediaAndPress(parsedBody) {
   let themediaandPress = parsedBody["media press mentions"];
-  let themediaSwiperContainer = document.getElementById("mediawrapper");
-  themediaSwiperContainer.innerHTML = "";
+  let themediacontainer = document.getElementById("mediawrapper");
+  themediacontainer.innerHTML = "";
 
   if (themediaandPress && themediaandPress.length > 0) {
     function extractDomain(url) {
@@ -1051,7 +1023,10 @@ function setupMediaAndPress(parsedBody) {
       }
     }
 
-    themediaSwiperContainer.classList.add("swiper", "media-swiper");
+    // Create Swiper container
+    const swiperContainer = document.createElement("div");
+    swiperContainer.classList.add("swiper", "media-swiper");
+    swiperContainer.style.cssText = `width: 100%; padding: 20px 0; overflow: hidden;`;
 
     const swiperWrapper = document.createElement("div");
     swiperWrapper.classList.add("swiper-wrapper");
@@ -1063,33 +1038,48 @@ function setupMediaAndPress(parsedBody) {
       const meta = getMetadataByDomain(url, domain);
 
       const swiperSlide = document.createElement("div");
-      swiperSlide.classList.add("swiper-slide", "swiper-slide-media");
+      swiperSlide.classList.add("swiper-slide");
+      swiperSlide.style.cssText = `width: auto; flex-shrink: 0; padding: 0 10px;`;
 
       const card = document.createElement("a");
       card.href = url;
-      card.classList.add("media-link");
+      card.target = "_blank";
+      card.style.cssText = `
+        display: block;
+        width: 300px;
+        height: 220px;
+        border-radius: 8px;
+        overflow: hidden;
+        background: white;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        transition: transform 0.2s, box-shadow 0.2s;
+        text-decoration: none;
+        color: inherit;
+        display: flex;
+        flex-direction: column;
+      `;
 
       // Image
       const img = document.createElement("img");
       img.src = meta.imageUrl;
       img.alt = meta.title;
-      img.classList.add("media-image");
+      img.style.cssText = `height: 120px; object-fit: cover; width: 100%;`;
 
       // Content
       const content = document.createElement("div");
-      content.classList.add("media-content");
+      content.style.cssText = `padding: 12px; display: flex; flex-direction: column;`;
 
       const title = document.createElement("h3");
       title.textContent = meta.title;
-      title.classList.add("heading-media");
+      title.style.cssText = `margin: 0 0 6px 0; font-size: 16px; line-height: 1.3; font-weight: 600;`;
 
       const desc = document.createElement("p");
       desc.textContent = meta.description;
-      desc.classList.add("media-desc");
+      desc.style.cssText = `margin: 0 0 6px 0; font-size: 13px; color: #686868; flex-grow: 1;`;
 
-      const host = document.createElement("p");
+      const host = document.createElement("span");
       host.textContent = meta.host;
-      host.classList.add("media-host");
+      host.style.cssText = `font-size: 12px; color: #aaa;`;
 
       content.appendChild(title);
       content.appendChild(desc);
@@ -1101,7 +1091,8 @@ function setupMediaAndPress(parsedBody) {
       swiperWrapper.appendChild(swiperSlide);
     });
 
-    themediaSwiperContainer.appendChild(swiperWrapper);
+    swiperContainer.appendChild(swiperWrapper);
+    themediacontainer.appendChild(swiperContainer);
 
     // Load and initialize Swiper
     loadSwiperJS().then(() => {
