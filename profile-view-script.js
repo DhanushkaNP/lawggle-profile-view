@@ -508,7 +508,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
             loadSwiperJS().then(() => {
               new Swiper(notablecasewinscontainer, {
-                slidesPerView: 1,
+                slidesPerView: 1.2,
                 spaceBetween: 20,
                 centeredSlides: false,
 
@@ -516,7 +516,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 shortSwipes: true,
                 threshold: 10, // Lower threshold for easier swiping
                 longSwipesRatio: 0.3, // Easier to trigger slide change
-                longSwipesMs: 200, // Shorter time for slide detection
+                longSwipesMs: 300, // Shorter time for slide detection
 
                 // CRITICAL: Smooth finger tracking settings
                 touchRatio: 1, // 1:1 touch movement ratio
@@ -528,7 +528,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 freeMode: false,
 
                 // Smooth transitions and timing
-                speed: 300, // Smooth transition speed
+                speed: 600, // Smooth transition speed
                 longSwipes: true, // Allow long swipes
                 longSwipesRatio: 0.3, // Easier to trigger slide change
                 longSwipesMs: 200, // Time threshold for slide detection
