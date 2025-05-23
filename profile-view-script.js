@@ -510,6 +510,7 @@ document.addEventListener("DOMContentLoaded", async function () {
               new Swiper(notablecasewinscontainer, {
                 slidesPerView: 1.1,
                 spaceBetween: 16,
+                slidesOffsetAfter: 30,
                 centeredSlides: false,
 
                 // Smooth slide-by-slide movement
