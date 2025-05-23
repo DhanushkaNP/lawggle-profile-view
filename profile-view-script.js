@@ -735,10 +735,66 @@ document.addEventListener("DOMContentLoaded", async function () {
 
             loadSwiperJS().then(() => {
               new Swiper(videocaseslider, {
-                slidesPerView: "auto",
-                spaceBetween: 20,
-                freeMode: true,
+                slidesPerView: 1.4,
+                spaceBetween: 16,
+                slidesOffsetAfter: 60,
+                centeredSlides: false,
+
+                shortSwipes: true,
+                threshold: 6,
+                longSwipesRatio: 0.3,
+                longSwipesMs: 200,
+
+                touchRatio: 1.2,
+                touchAngle: 45,
+                grabCursor: true,
+                followFinger: true,
+
+                freeMode: false,
+
+                speed: 400,
+                longSwipes: true,
+                longSwipesRatio: 0.2,
+                longSwipesMs: 200,
+
+                touchStartPreventDefault: false,
+                touchStartForcePreventDefault: false,
+                touchMoveStopPropagation: true,
+
+                preventClicks: false,
+                preventClicksPropagation: false,
+                allowTouchMove: true,
+                simulateTouch: true,
+
+                resistance: true,
+                resistanceRatio: 0.5,
+
+                updateOnWindowResize: true,
+                observer: true,
+                observeParents: true,
+                watchOverflow: true,
+
                 pagination: false,
+                navigation: false,
+
+                cssMode: false,
+
+                on: {
+                  touchStart: function () {
+                    this.el.style.transition = "none";
+                  },
+                  touchEnd: function () {
+                    this.el.style.transition = "";
+                  },
+                  slideChange: function () {
+                    // Stop all videos when sliding
+                    const videos = this.el.querySelectorAll("video");
+                    videos.forEach((video) => {
+                      video.pause();
+                      video.currentTime = 0; // Optional: reset to beginning
+                    });
+                  },
+                },
               });
             });
           } else {
