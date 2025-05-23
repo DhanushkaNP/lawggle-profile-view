@@ -508,15 +508,58 @@ document.addEventListener("DOMContentLoaded", async function () {
 
             loadSwiperJS().then(() => {
               new Swiper(".case-card-wrap", {
-                slidesPerView: "auto",
+                slidesPerView: 1.2,
                 spaceBetween: 20,
-                freeMode: true,
-                pagination: false,
-                pagination: false,
+                // Better touch handling
+                touchRatio: 1,
+                touchAngle: 45,
                 grabCursor: true,
+
+                // Smooth momentum scrolling
+                freeMode: {
+                  enabled: true,
+                  momentum: true,
+                  momentumRatio: 0.6,
+                  momentumBounceRatio: 0.1,
+                  minimumVelocity: 0.02,
+                  sticky: false,
+                },
+
+                // Performance optimizations
                 watchOverflow: true,
-                touchReleaseOnEdges: true,
-                resistanceRatio: 0.7,
+                observer: true,
+                observeParents: true,
+
+                // Disable pagination for cleaner look
+                pagination: false,
+
+                // Optional: Add navigation arrows if needed
+                // navigation: {
+                //   nextEl: '.swiper-button-next',
+                //   prevEl: '.swiper-button-prev',
+                // },
+
+                // Prevent clicks during transition
+                preventClicks: true,
+                preventClicksPropagation: true,
+
+                // Better resistance
+                resistance: true,
+                resistanceRatio: 0.85,
+
+                // Smooth transitions
+                speed: 300,
+
+                // Handle edge cases
+                allowTouchMove: true,
+                simulateTouch: true,
+
+                // Accessibility
+                a11y: {
+                  enabled: true,
+                  prevSlideMessage: "Previous case",
+                  nextSlideMessage: "Next case",
+                },
               });
             });
           } else {
@@ -1110,7 +1153,7 @@ function setupMediaAndPress(parsedBody) {
 
 // Load Swiper JS
 function loadSwiperJS() {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     if (window.Swiper) {
       resolve();
       return;
@@ -1123,13 +1166,26 @@ function loadSwiperJS() {
       swiperCSS.rel = "stylesheet";
       swiperCSS.href =
         "https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css";
+      swiperCSS.onerror = () => reject(new Error("Failed to load Swiper CSS"));
       document.head.appendChild(swiperCSS);
     }
 
+    // Check if script is already loading
+    if (document.getElementById("swiper-js")) {
+      // Wait for existing script to load
+      const existingScript = document.getElementById("swiper-js");
+      existingScript.onload = resolve;
+      existingScript.onerror = () =>
+        reject(new Error("Failed to load Swiper JS"));
+      return;
+    }
+
     const swiperScript = document.createElement("script");
+    swiperScript.id = "swiper-js";
     swiperScript.src =
       "https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js";
     swiperScript.onload = resolve;
+    swiperScript.onerror = () => reject(new Error("Failed to load Swiper JS"));
     document.body.appendChild(swiperScript);
   });
 }
