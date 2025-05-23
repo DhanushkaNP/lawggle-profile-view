@@ -625,11 +625,72 @@ document.addEventListener("DOMContentLoaded", async function () {
             clientTestimonialContainer.append(swiperWrapper);
 
             loadSwiperJS().then(() => {
-              new Swiper(".testmonial-container", {
-                slidesPerView: "auto",
-                spaceBetween: 30,
-                freeMode: true,
+              new Swiper(notablecasewinscontainer, {
+                slidesPerView: 1.2,
+                spaceBetween: 16,
+                slidesOffsetAfter: 30,
+                centeredSlides: false,
+
+                // Smooth slide-by-slide movement
+                shortSwipes: true,
+                threshold: 6, // Lower threshold for easier swiping
+                longSwipesRatio: 0.3, // Easier to trigger slide change
+                longSwipesMs: 200, // Shorter time for slide detection
+
+                // CRITICAL: Smooth finger tracking settings
+                touchRatio: 1.2, // 1:1 touch movement ratio
+                touchAngle: 45, // Allow diagonal swipes
+                grabCursor: true, // Show grab cursor
+                followFinger: true, // Follow finger movement exactly
+
+                // Disable free mode for slide-by-slide behavior
+                freeMode: false,
+
+                // Smooth transitions and timing
+                speed: 400, // Smooth transition speed
+                longSwipes: true, // Allow long swipes
+                longSwipesRatio: 0.2, // Easier to trigger slide change
+                longSwipesMs: 200, // Time threshold for slide detection
+
+                // Touch handling optimizations
+                touchStartPreventDefault: false, // Don't prevent default touch
+                touchStartForcePreventDefault: false,
+                touchMoveStopPropagation: true,
+
+                // Prevent interference
+                preventClicks: false, // Allow clicks
+                preventClicksPropagation: false,
+                allowTouchMove: true, // Always allow touch
+                simulateTouch: true, // Enable mouse simulation
+
+                // Resistance for edge behavior
+                resistance: true,
+                resistanceRatio: 0.5, // Less resistance at edges
+
+                // Performance settings
+                updateOnWindowResize: true,
+                observer: true,
+                observeParents: true,
+                watchOverflow: true,
+
+                // No pagination or navigation for cleaner experience
                 pagination: false,
+                navigation: false,
+
+                // Smooth CSS transitions
+                cssMode: false, // Use JS mode for better control
+
+                // Event handling for debugging (remove in production)
+                on: {
+                  touchStart: function () {
+                    // Optional: Add visual feedback on touch start
+                    this.el.style.transition = "none";
+                  },
+                  touchEnd: function () {
+                    // Restore transitions after touch
+                    this.el.style.transition = "";
+                  },
+                },
               });
             });
           } else {
