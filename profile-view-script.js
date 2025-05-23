@@ -693,32 +693,32 @@ document.addEventListener("DOMContentLoaded", async function () {
               theqaheader.classList.add("accordion-btn-c");
               theqaheader.setAttribute("trackno", eachQa);
 
-              theqaheader.addEventListener("click", function () {
-                let thisButton = event.target;
-                let trackNumber = thisButton.getAttribute("trackno");
+              // theqaheader.addEventListener("click", function () {
+              //   let thisButton = event.target;
+              //   let trackNumber = thisButton.getAttribute("trackno");
 
-                let thecontainers =
-                  document.querySelectorAll(".accordion-item-c");
-                thecontainers.forEach((el) => {
-                  let theselected = el.getAttribute("trackno");
-                  if (theselected == trackNumber) {
-                    el.classList.add("active");
-                  } else {
-                    el.classList.remove("active");
-                  }
-                });
+              //   let thecontainers =
+              //     document.querySelectorAll(".accordion-item-c");
+              //   thecontainers.forEach((el) => {
+              //     let theselected = el.getAttribute("trackno");
+              //     if (theselected == trackNumber) {
+              //       el.classList.add("active");
+              //     } else {
+              //       el.classList.remove("active");
+              //     }
+              //   });
 
-                let thebodycontainers =
-                  document.querySelectorAll(".accordion-body-c");
-                thebodycontainers.forEach((el) => {
-                  let theselected2 = el.getAttribute("trackno");
-                  if (theselected2 == trackNumber) {
-                    el.style.display = "flex";
-                  } else {
-                    el.style.display = "none";
-                  }
-                });
-              });
+              //   let thebodycontainers =
+              //     document.querySelectorAll(".accordion-body-c");
+              //   thebodycontainers.forEach((el) => {
+              //     let theselected2 = el.getAttribute("trackno");
+              //     if (theselected2 == trackNumber) {
+              //       el.style.display = "flex";
+              //     } else {
+              //       el.style.display = "none";
+              //     }
+              //   });
+              // });
 
               theqaheadertext = document.createElement("p");
               theqaheadertext.classList.add("text-block-60-c");
