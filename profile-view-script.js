@@ -508,18 +508,18 @@ document.addEventListener("DOMContentLoaded", async function () {
 
             loadSwiperJS().then(() => {
               new Swiper(notablecasewinscontainer, {
-                slidesPerView: 1.2,
-                spaceBetween: 20,
+                slidesPerView: 1.1,
+                spaceBetween: 16,
                 centeredSlides: false,
 
                 // Smooth slide-by-slide movement
                 shortSwipes: true,
-                threshold: 10, // Lower threshold for easier swiping
+                threshold: 6, // Lower threshold for easier swiping
                 longSwipesRatio: 0.3, // Easier to trigger slide change
                 longSwipesMs: 200, // Shorter time for slide detection
 
                 // CRITICAL: Smooth finger tracking settings
-                touchRatio: 1, // 1:1 touch movement ratio
+                touchRatio: 1.2, // 1:1 touch movement ratio
                 touchAngle: 45, // Allow diagonal swipes
                 grabCursor: true, // Show grab cursor
                 followFinger: true, // Follow finger movement exactly
@@ -530,13 +530,13 @@ document.addEventListener("DOMContentLoaded", async function () {
                 // Smooth transitions and timing
                 speed: 400, // Smooth transition speed
                 longSwipes: true, // Allow long swipes
-                longSwipesRatio: 0.3, // Easier to trigger slide change
+                longSwipesRatio: 0.2, // Easier to trigger slide change
                 longSwipesMs: 200, // Time threshold for slide detection
 
                 // Touch handling optimizations
                 touchStartPreventDefault: false, // Don't prevent default touch
                 touchStartForcePreventDefault: false,
-                touchMoveStopPropagation: false,
+                touchMoveStopPropagation: true,
 
                 // Prevent interference
                 preventClicks: false, // Allow clicks
@@ -546,7 +546,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
                 // Resistance for edge behavior
                 resistance: true,
-                resistanceRatio: 0.7, // Less resistance at edges
+                resistanceRatio: 0.5, // Less resistance at edges
 
                 // Performance settings
                 updateOnWindowResize: true,
