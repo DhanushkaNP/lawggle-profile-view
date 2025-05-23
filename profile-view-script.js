@@ -978,8 +978,8 @@ function capitalizeWords(text) {
 // Function to handle media and press mentions section
 function setupMediaAndPress(parsedBody) {
   let themediaandPress = parsedBody["media press mentions"];
-  let themediacontainer = document.getElementById("mediawrapper");
-  themediacontainer.innerHTML = "";
+  let themediaSwiperContainer = document.getElementById("mediawrapper");
+  themediaSwiperContainer.innerHTML = "";
 
   if (themediaandPress && themediaandPress.length > 0) {
     function extractDomain(url) {
@@ -1051,10 +1051,7 @@ function setupMediaAndPress(parsedBody) {
       }
     }
 
-    // Create Swiper container
-    const swiperContainer = document.createElement("div");
-    swiperContainer.classList.add("swiper", "media-swiper");
-    swiperContainer.style.cssText = `width: 100%; padding: 20px 0; overflow: hidden;`;
+    themediaSwiperContainer.classList.add("swiper", "media-swiper");
 
     const swiperWrapper = document.createElement("div");
     swiperWrapper.classList.add("swiper-wrapper");
@@ -1066,48 +1063,33 @@ function setupMediaAndPress(parsedBody) {
       const meta = getMetadataByDomain(url, domain);
 
       const swiperSlide = document.createElement("div");
-      swiperSlide.classList.add("swiper-slide");
-      swiperSlide.style.cssText = `width: auto; flex-shrink: 0; padding: 0 10px;`;
+      swiperSlide.classList.add("swiper-slide", "swiper-slide-media");
 
       const card = document.createElement("a");
       card.href = url;
-      card.target = "_blank";
-      card.style.cssText = `
-        display: block;
-        width: 300px;
-        height: 220px;
-        border-radius: 8px;
-        overflow: hidden;
-        background: white;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        transition: transform 0.2s, box-shadow 0.2s;
-        text-decoration: none;
-        color: inherit;
-        display: flex;
-        flex-direction: column;
-      `;
+      card.classList.add("media-link");
 
       // Image
       const img = document.createElement("img");
       img.src = meta.imageUrl;
       img.alt = meta.title;
-      img.style.cssText = `height: 120px; object-fit: cover; width: 100%;`;
+      img.classList.add("media-image");
 
       // Content
       const content = document.createElement("div");
-      content.style.cssText = `padding: 12px; display: flex; flex-direction: column;`;
+      content.classList.add("media-content");
 
       const title = document.createElement("h3");
       title.textContent = meta.title;
-      title.style.cssText = `margin: 0 0 6px 0; font-size: 16px; line-height: 1.3; font-weight: 600;`;
+      title.classList.add("heading-media");
 
       const desc = document.createElement("p");
       desc.textContent = meta.description;
-      desc.style.cssText = `margin: 0 0 6px 0; font-size: 13px; color: #686868; flex-grow: 1;`;
+      desc.classList.add("media-desc");
 
-      const host = document.createElement("span");
+      const host = document.createElement("p");
       host.textContent = meta.host;
-      host.style.cssText = `font-size: 12px; color: #aaa;`;
+      host.classList.add("media-host");
 
       content.appendChild(title);
       content.appendChild(desc);
@@ -1120,7 +1102,7 @@ function setupMediaAndPress(parsedBody) {
     });
 
     swiperContainer.appendChild(swiperWrapper);
-    themediacontainer.appendChild(swiperContainer);
+    themediaSwiperContainer.appendChild(swiperContainer);
 
     // Load and initialize Swiper
     loadSwiperJS().then(() => {
