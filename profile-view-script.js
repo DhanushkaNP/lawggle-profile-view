@@ -1174,7 +1174,9 @@ function accordionClicked(e) {
   e.stopPropagation();
 
   // Check if the accordion body is already showing
-  const isActive = this.classList.contains("active");
+  const item = e.currentTarget;
+
+  const isActive = item.classList.contains("active");
 
   console.log("Clicked item active status:", isActive); // Debug line
 
