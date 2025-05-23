@@ -400,7 +400,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
                 // Initialize Swiper after DOM is fully loaded
                 loadSwiperJS().then(() => {
-                  new Swiper(notablecasewinscontainer, {
+                  new Swiper(certicateContainer, {
                     slidesPerView: 1.2,
                     spaceBetween: 16,
                     slidesOffsetAfter: 30,
