@@ -507,7 +507,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             notablecasewinscontainer.append(swiperWrapper);
 
             loadSwiperJS().then(() => {
-              new Swiper(".case-card-wrap", {
+              new Swiper(notablecasewinscontainer, {
                 slidesPerView: 1.2,
                 spaceBetween: 20,
                 // Better touch handling
@@ -523,26 +523,6 @@ document.addEventListener("DOMContentLoaded", async function () {
                   momentumBounceRatio: 0.1,
                   minimumVelocity: 0.02,
                   sticky: false,
-                },
-
-                // Responsive design
-                breakpoints: {
-                  480: {
-                    slidesPerView: 1.5,
-                    spaceBetween: 20,
-                  },
-                  768: {
-                    slidesPerView: 2,
-                    spaceBetween: 24,
-                  },
-                  1024: {
-                    slidesPerView: 2.5,
-                    spaceBetween: 28,
-                  },
-                  1200: {
-                    slidesPerView: 3,
-                    spaceBetween: 32,
-                  },
                 },
 
                 // Performance optimizations
