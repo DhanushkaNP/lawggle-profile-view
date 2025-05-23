@@ -622,7 +622,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             videocaseslider.append(swiperWrapper);
 
             loadSwiperJS().then(() => {
-              new Swiper(".swiper", {
+              new Swiper(".case-study-container", {
                 slidesPerView: "auto",
                 spaceBetween: 20,
                 freeMode: true,
