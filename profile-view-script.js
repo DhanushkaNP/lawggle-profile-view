@@ -1153,7 +1153,7 @@ function setupMediaAndPress(parsedBody) {
 
 // Load Swiper JS
 function loadSwiperJS() {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     if (window.Swiper) {
       resolve();
       return;
@@ -1166,26 +1166,13 @@ function loadSwiperJS() {
       swiperCSS.rel = "stylesheet";
       swiperCSS.href =
         "https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css";
-      swiperCSS.onerror = () => reject(new Error("Failed to load Swiper CSS"));
       document.head.appendChild(swiperCSS);
     }
 
-    // Check if script is already loading
-    if (document.getElementById("swiper-js")) {
-      // Wait for existing script to load
-      const existingScript = document.getElementById("swiper-js");
-      existingScript.onload = resolve;
-      existingScript.onerror = () =>
-        reject(new Error("Failed to load Swiper JS"));
-      return;
-    }
-
     const swiperScript = document.createElement("script");
-    swiperScript.id = "swiper-js";
     swiperScript.src =
       "https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js";
     swiperScript.onload = resolve;
-    swiperScript.onerror = () => reject(new Error("Failed to load Swiper JS"));
     document.body.appendChild(swiperScript);
   });
 }
