@@ -512,6 +512,11 @@ document.addEventListener("DOMContentLoaded", async function () {
                 spaceBetween: 20,
                 freeMode: true,
                 pagination: false,
+                pagination: false,
+                grabCursor: true,
+                watchOverflow: true,
+                touchReleaseOnEdges: true,
+                resistanceRatio: 0.7,
               });
             });
           } else {
