@@ -626,7 +626,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
             loadSwiperJS().then(() => {
               new Swiper(clientTestimonialContainer, {
-                slidesPerView: 1.4,
+                slidesPerView: 1.2,
                 spaceBetween: 16,
                 slidesOffsetAfter: 60,
                 centeredSlides: false,
@@ -735,7 +735,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
             loadSwiperJS().then(() => {
               new Swiper(videocaseslider, {
-                slidesPerView: 1.4,
+                slidesPerView: 1.2,
                 spaceBetween: 16,
                 slidesOffsetAfter: 60,
                 centeredSlides: false,
