@@ -628,7 +628,7 @@ document.addEventListener("DOMContentLoaded", async function () {
               new Swiper(clientTestimonialContainer, {
                 slidesPerView: 1.3,
                 spaceBetween: 16,
-                slidesOffsetAfter: 10,
+                slidesOffsetAfter: 30,
                 centeredSlides: false,
 
                 // Smooth slide-by-slide movement
