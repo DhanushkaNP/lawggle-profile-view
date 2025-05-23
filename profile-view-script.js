@@ -1101,8 +1101,7 @@ function setupMediaAndPress(parsedBody) {
       swiperWrapper.appendChild(swiperSlide);
     });
 
-    swiperContainer.appendChild(swiperWrapper);
-    themediaSwiperContainer.appendChild(swiperContainer);
+    themediaSwiperContainer.appendChild(swiperWrapper);
 
     // Load and initialize Swiper
     loadSwiperJS().then(() => {
