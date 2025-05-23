@@ -508,9 +508,15 @@ document.addEventListener("DOMContentLoaded", async function () {
 
             loadSwiperJS().then(() => {
               new Swiper(notablecasewinscontainer, {
-                // Basic setup for smooth sliding
-                slidesPerView: "auto",
+                slidesPerView: 1,
                 spaceBetween: 20,
+                centeredSlides: false,
+
+                // Smooth slide-by-slide movement
+                shortSwipes: true,
+                threshold: 10, // Lower threshold for easier swiping
+                longSwipesRatio: 0.3, // Easier to trigger slide change
+                longSwipesMs: 200, // Shorter time for slide detection
 
                 // CRITICAL: Smooth finger tracking settings
                 touchRatio: 1, // 1:1 touch movement ratio
@@ -518,21 +524,14 @@ document.addEventListener("DOMContentLoaded", async function () {
                 grabCursor: true, // Show grab cursor
                 followFinger: true, // Follow finger movement exactly
 
-                // Free mode for natural scrolling
-                freeMode: {
-                  enabled: true,
-                  momentum: true,
-                  momentumRatio: 1, // More natural momentum
-                  momentumBounceRatio: 0.2, // Gentle bounce
-                  minimumVelocity: 0.1, // Lower threshold for momentum
-                  sticky: false, // No snap points
-                },
+                // Disable free mode for slide-by-slide behavior
+                freeMode: false,
 
                 // Smooth transitions and timing
-                speed: 400, // Slightly slower for smoothness
+                speed: 300, // Smooth transition speed
                 longSwipes: true, // Allow long swipes
-                longSwipesRatio: 0.5, // Easier to trigger long swipes
-                longSwipesMs: 300, // Time threshold for long swipes
+                longSwipesRatio: 0.3, // Easier to trigger slide change
+                longSwipesMs: 200, // Time threshold for slide detection
 
                 // Touch handling optimizations
                 touchStartPreventDefault: false, // Don't prevent default touch
