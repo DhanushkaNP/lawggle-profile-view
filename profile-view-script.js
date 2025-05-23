@@ -365,11 +365,7 @@ document.addEventListener("DOMContentLoaded", async function () {
               let certicateContainer =
                 document.getElementById("certificate-swiper");
               certicateContainer.innerHTML = "";
-              certicateContainer.classList.add(
-                "swiper",
-                "certificate-swiper",
-                "media-swiper"
-              );
+              certicateContainer.classList.add("swiper", "certificate-swiper");
               certicateContainer.style.cssText = `width: 100%; overflow: hidden;`;
 
               let firstCert = certificates[0];
@@ -404,7 +400,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
                 // Initialize Swiper after DOM is fully loaded
                 loadSwiperJS().then(() => {
-                  new Swiper(".media-swiper", {
+                  new Swiper(".certificate-swiper", {
                     slidesPerView: "auto",
                     spaceBetween: 5,
                     freeMode: true,
@@ -535,8 +531,7 @@ document.addEventListener("DOMContentLoaded", async function () {
           ) {
             clientTestimonialContainer.classList.add(
               "swiper",
-              "testmonial-container",
-              "media-swiper"
+              "testmonial-container"
             );
             clientTestimonialContainer.style.cssText = `width: 100%;`;
 
@@ -569,7 +564,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             clientTestimonialContainer.append(swiperWrapper);
 
             loadSwiperJS().then(() => {
-              new Swiper(".case-card-wrap", {
+              new Swiper(".testmonial-container", {
                 slidesPerView: "auto",
                 spaceBetween: 30,
                 freeMode: true,
