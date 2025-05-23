@@ -640,48 +640,48 @@ document.addEventListener("DOMContentLoaded", async function () {
             document.getElementById("sectioncasestudy").style.display = "none";
           }
 
-          let blogs = blogsJson;
-          let themainblogcontainer =
-            document.getElementById("mainblogscontainer");
-          themainblogcontainer.innerHTML = "";
+          // let blogs = blogsJson;
+          // let themainblogcontainer =
+          //   document.getElementById("mainblogscontainer");
+          // themainblogcontainer.innerHTML = "";
 
-          if (
-            blogs != null &&
-            blogs != "" &&
-            blogs != undefined &&
-            blogs.length > 0
-          ) {
-            for (let blog in blogsJson) {
-              blogslide = document.createElement("div");
-              blogslide.classList.add("slide-img", "2ni", "w-slide");
-              blogslide.style.maxWidth = "300px";
-              blogcontainer = document.createElement("div");
-              blogcontainer.classList.add("img-wrap", "blogsnew");
-              theembed = document.createElement("div");
-              theembed.classList.add("code-embed-45", "w-embed");
+          // if (
+          //   blogs != null &&
+          //   blogs != "" &&
+          //   blogs != undefined &&
+          //   blogs.length > 0
+          // ) {
+          //   for (let blog in blogsJson) {
+          //     blogslide = document.createElement("div");
+          //     blogslide.classList.add("slide-img", "2ni", "w-slide");
+          //     blogslide.style.maxWidth = "300px";
+          //     blogcontainer = document.createElement("div");
+          //     blogcontainer.classList.add("img-wrap", "blogsnew");
+          //     theembed = document.createElement("div");
+          //     theembed.classList.add("code-embed-45", "w-embed");
 
-              const previewArticle =
-                document.createElement("previewbox-article");
+          //     const previewArticle =
+          //       document.createElement("previewbox-article");
 
-              previewArticle.setAttribute(
-                "style",
-                "--pb-background-color: #ffffff; --pb-background-color-hover: #4a4a4a; --pb-text-color: white; --pb-text-color-light: #1f1f1f;"
-              );
+          //     previewArticle.setAttribute(
+          //       "style",
+          //       "--pb-background-color: #ffffff; --pb-background-color-hover: #4a4a4a; --pb-text-color: white; --pb-text-color-light: #1f1f1f;"
+          //     );
 
-              previewArticle.setAttribute(
-                "href",
-                "https://web-highlights.com/about"
-              );
+          //     previewArticle.setAttribute(
+          //       "href",
+          //       "https://web-highlights.com/about"
+          //     );
 
-              // Append it to the body or any container
-              theembed.append(previewArticle);
-              blogcontainer.appendChild(theembed);
-              blogslide.append(blogcontainer);
-              themainblogcontainer.append(blogslide);
-            }
-          } else {
-            document.getElementById("sectionblogs").style.display = "none";
-          }
+          //     // Append it to the body or any container
+          //     theembed.append(previewArticle);
+          //     blogcontainer.appendChild(theembed);
+          //     blogslide.append(blogcontainer);
+          //     themainblogcontainer.append(blogslide);
+          //   }
+          // } else {
+          //   document.getElementById("sectionblogs").style.display = "none";
+          // }
           let theQAs = parsedBody["personal qa"];
           let thequizcontainer = document.getElementById("qanaswercontainer");
           thequizcontainer.innerHTML = "";
