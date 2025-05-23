@@ -1267,7 +1267,7 @@ function setupMediaAndPress(parsedBody) {
       new Swiper(swiperContainer, {
         slidesPerView: 1.2,
         spaceBetween: 5,
-        slidesOffsetAfter: 60,
+        slidesOffsetAfter: 20,
         centeredSlides: false,
 
         shortSwipes: true,
