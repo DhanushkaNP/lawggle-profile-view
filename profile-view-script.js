@@ -683,12 +683,18 @@ document.addEventListener("DOMContentLoaded", async function () {
                 // Event handling for debugging (remove in production)
                 on: {
                   touchStart: function () {
-                    // Optional: Add visual feedback on touch start
                     this.el.style.transition = "none";
                   },
                   touchEnd: function () {
-                    // Restore transitions after touch
                     this.el.style.transition = "";
+                  },
+                  slideChange: function () {
+                    // Stop all videos when sliding
+                    const videos = this.el.querySelectorAll("video");
+                    videos.forEach((video) => {
+                      video.pause();
+                      video.currentTime = 0; // Optional: reset to beginning
+                    });
                   },
                 },
               });
