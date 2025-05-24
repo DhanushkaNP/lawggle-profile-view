@@ -520,12 +520,14 @@ document.addEventListener("DOMContentLoaded", async function () {
             profileVideo != ""
           ) {
             console.log("🖼️🖼️🖼️🖼️🖼️", profileVideo);
-            const profileVideo = document.getElementById("theprofilevideo");
-            profileVideo.src = profileVideo;
-            profileVideo.controls = true;
-            profileVideo.preload = "auto";
+            const profileVideoElem = document.getElementById("theprofilevideo");
+            profileVideoElem.src = profileVideo;
+            profileVideoElem.controls = true;
+            profileVideoElem.preload = "auto"; // Ensure video is preloaded
+            profileVideoElem.removeAttribute("poster"); // Remove poster if any
 
-            profileVideo.addEventListener("loadeddata", function () {
+            // Show first frame when loaded
+            profileVideoElem.addEventListener("loadeddata", function () {
               try {
                 profileVideoElem.currentTime = 0;
               } catch (e) {
