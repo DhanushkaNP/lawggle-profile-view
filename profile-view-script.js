@@ -529,7 +529,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             // Show first frame when loaded
             profileVideoElem.addEventListener("loadeddata", function () {
               try {
-                profileVideoElem.currentTime = 5;
+                profileVideoElem.currentTime = 0;
               } catch (e) {
                 // Ignore errors
               }
