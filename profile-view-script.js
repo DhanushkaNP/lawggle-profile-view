@@ -520,7 +520,18 @@ document.addEventListener("DOMContentLoaded", async function () {
             profileVideo != ""
           ) {
             console.log("🖼️🖼️🖼️🖼️🖼️", profileVideo);
-            document.getElementById("theprofilevideo").src = profileVideo;
+            const profileVideo = document.getElementById("theprofilevideo");
+            profileVideo.src = profileVideo;
+            profileVideo.controls = true;
+            profileVideo.preload = "auto";
+
+            profileVideo.addEventListener("loadeddata", function () {
+              try {
+                profileVideoElem.currentTime = 0;
+              } catch (e) {
+                // Ignore errors
+              }
+            });
           } else {
             document.getElementById("sectionprofilevide0").style.display =
               "none";
