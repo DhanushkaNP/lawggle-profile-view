@@ -385,6 +385,9 @@ document.addEventListener("DOMContentLoaded", async function () {
               "none";
           } else {
             document.getElementById("biotext").innerText = dynamicBio;
+            document.getElementById(
+              "user-introduction"
+            ).style.gridTemplateColumns = "1fr";
           }
 
           let certificates = parsedBody["certificates"];
