@@ -1420,8 +1420,8 @@ function setupMediaAndPress(parsedBody) {
     // Load and initialize Swiper
     loadSwiperJS().then(() => {
       new Swiper(swiperContainer, {
-        slidesPerView: 1.1,
-        spaceBetween: 5,
+        slidesPerView: 1.3, // Show one full card and part of next on mobile
+        spaceBetween: 30, // Consistent 30px spacing
         slidesOffsetAfter: 20,
         centeredSlides: false,
 
@@ -1436,7 +1436,6 @@ function setupMediaAndPress(parsedBody) {
         followFinger: true,
 
         freeMode: false,
-
         speed: 400,
         longSwipes: true,
         longSwipesRatio: 0.2,
@@ -1461,29 +1460,39 @@ function setupMediaAndPress(parsedBody) {
 
         pagination: false,
         navigation: false,
-
         cssMode: false,
 
+        // Optimized breakpoints for 300px cards with 30px spacing
         breakpoints: {
+          // 480px: Show 1.3 cards (one full + 30% of next)
+          480: {
+            slidesPerView: 1.3,
+            spaceBetween: 30,
+          },
+          // 768px: Show 2.2 cards (two full + 20% of next)
           768: {
             slidesPerView: 2.2,
-            spaceBetween: 15,
+            spaceBetween: 30,
           },
+          // 1024px: Show 3.2 cards (three full + 20% of next)
           1024: {
             slidesPerView: 3.2,
-            spaceBetween: 20,
+            spaceBetween: 30,
           },
-          1200: {
-            slidesPerView: 2.8,
-            spaceBetween: 20,
+          // 1280px: Show 4.2 cards (four full + 20% of next)
+          1280: {
+            slidesPerView: 4.2,
+            spaceBetween: 30,
           },
-          1400: {
-            slidesPerView: 3.2,
-            spaceBetween: 20,
-          },
+          // 1600px: Show 5.2 cards (five full + 20% of next)
           1600: {
-            slidesPerView: 4.0,
-            spaceBetween: 20,
+            slidesPerView: 5.2,
+            spaceBetween: 30,
+          },
+          // 1920px: Show 6.2 cards (six full + 20% of next)
+          1920: {
+            slidesPerView: 6.2,
+            spaceBetween: 30,
           },
         },
 
