@@ -405,110 +405,77 @@ document.addEventListener("DOMContentLoaded", async function () {
               certicateContainer.classList.add("swiper", "certificate-swiper");
               certicateContainer.style.cssText = `width: 100%; overflow: hidden;`;
 
-              let firstCert = certificates[0];
-              if (
-                firstCert != null &&
-                firstCert != undefined &&
-                firstCert != "null" &&
-                firstCert != ""
-              ) {
-                const swiperWrapper = document.createElement("div");
-                swiperWrapper.classList.add("swiper-wrapper");
+              // Create navigation buttons
+              const prevBtn = document.createElement("div");
+              prevBtn.className = "swiper-button-prev cert-nav-btn";
+              prevBtn.style.display = "none"; // Hide by default
 
-                // Add each certificate as a slide
-                for (let eachcert in certificates) {
-                  const swiperSlide = document.createElement("div");
-                  swiperSlide.classList.add("swiper-slide");
-                  swiperSlide.style.cssText = `width: auto; flex-shrink: 0; padding: 0 10px;`;
+              const nextBtn = document.createElement("div");
+              nextBtn.className = "swiper-button-next cert-nav-btn";
+              nextBtn.style.display = "none"; // Hide by default
 
-                  let imageContainer = document.createElement("div");
-                  imageContainer.classList.add("img-wrap-2");
+              // Create pagination
+              const pagination = document.createElement("div");
+              pagination.className = "swiper-pagination";
 
-                  let certimage = document.createElement("img");
-                  certimage.classList.add("cert-image");
-                  certimage.src = certificates[eachcert].url;
-                  certimage.style.width = "auto";
+              // ...existing code to create swiperWrapper...
 
-                  imageContainer.append(certimage);
-                  swiperSlide.append(imageContainer);
-                  swiperWrapper.append(swiperSlide);
+              certicateContainer.append(
+                prevBtn,
+                nextBtn,
+                swiperWrapper,
+                pagination
+              );
+
+              // Show/hide nav buttons based on screen size
+              function updateNavVisibility() {
+                if (window.innerWidth >= 1024) {
+                  prevBtn.style.display = "block";
+                  nextBtn.style.display = "block";
+                } else {
+                  prevBtn.style.display = "none";
+                  nextBtn.style.display = "none";
                 }
-                certicateContainer.append(swiperWrapper);
-
-                // Initialize Swiper after DOM is fully loaded
-                loadSwiperJS().then(() => {
-                  new Swiper(certicateContainer, {
-                    slidesPerView: 1.2,
-                    spaceBetween: 16,
-                    slidesOffsetAfter: 30,
-                    centeredSlides: false,
-
-                    // Smooth slide-by-slide movement
-                    shortSwipes: true,
-                    threshold: 6, // Lower threshold for easier swiping
-                    longSwipesRatio: 0.3, // Easier to trigger slide change
-                    longSwipesMs: 200, // Shorter time for slide detection
-
-                    // CRITICAL: Smooth finger tracking settings
-                    touchRatio: 1.2, // 1:1 touch movement ratio
-                    touchAngle: 45, // Allow diagonal swipes
-                    grabCursor: true, // Show grab cursor
-                    followFinger: true, // Follow finger movement exactly
-
-                    // Disable free mode for slide-by-slide behavior
-                    freeMode: false,
-
-                    // Smooth transitions and timing
-                    speed: 400, // Smooth transition speed
-                    longSwipes: true, // Allow long swipes
-                    longSwipesRatio: 0.2, // Easier to trigger slide change
-                    longSwipesMs: 200, // Time threshold for slide detection
-
-                    // Touch handling optimizations
-                    touchStartPreventDefault: false, // Don't prevent default touch
-                    touchStartForcePreventDefault: false,
-                    touchMoveStopPropagation: true,
-
-                    // Prevent interference
-                    preventClicks: false, // Allow clicks
-                    preventClicksPropagation: false,
-                    allowTouchMove: true, // Always allow touch
-                    simulateTouch: true, // Enable mouse simulation
-
-                    // Resistance for edge behavior
-                    resistance: true,
-                    resistanceRatio: 0.5, // Less resistance at edges
-
-                    // Performance settings
-                    updateOnWindowResize: true,
-                    observer: true,
-                    observeParents: true,
-                    watchOverflow: true,
-
-                    pagination: true,
-                    navigation: false,
-
-                    // Smooth CSS transitions
-                    cssMode: false, // Use JS mode for better control
-
-                    // Event handling for debugging (remove in production)
-
-                    on: {
-                      touchStart: function () {
-                        // Optional: Add visual feedback on touch start
-                        this.el.style.transition = "none";
-                      },
-                      touchEnd: function () {
-                        // Restore transitions after touch
-                        this.el.style.transition = "";
-                      },
-                    },
-                  });
-                });
-              } else {
-                document.getElementById("certificatethehold").style.display ==
-                  "none";
               }
+              window.addEventListener("resize", updateNavVisibility);
+              updateNavVisibility();
+
+              // Initialize Swiper after DOM is fully loaded
+              loadSwiperJS().then(() => {
+                new Swiper(certicateContainer, {
+                  slidesPerView: 1.2,
+                  spaceBetween: 16,
+                  slidesOffsetAfter: 30,
+                  centeredSlides: false,
+                  pagination: {
+                    el: pagination,
+                    clickable: true,
+                  },
+                  navigation: {
+                    nextEl: nextBtn,
+                    prevEl: prevBtn,
+                  },
+                  // Disable swiping on desktop, enable on mobile
+                  allowTouchMove: window.innerWidth < 1024,
+                  breakpoints: {
+                    0: {
+                      allowTouchMove: true,
+                    },
+                    1024: {
+                      allowTouchMove: false,
+                    },
+                  },
+                  // ...other options...
+                  on: {
+                    touchStart: function () {
+                      this.el.style.transition = "none";
+                    },
+                    touchEnd: function () {
+                      this.el.style.transition = "";
+                    },
+                  },
+                });
+              });
             } else {
               document.getElementById("certificatethehold").style.display =
                 "none";
