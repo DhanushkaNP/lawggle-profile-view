@@ -672,8 +672,6 @@ document.addEventListener("DOMContentLoaded", async function () {
                   nextEl: nextBtn,
                   prevEl: prevBtn,
                 },
-                // Disable swiping on desktop, enable on mobile
-                allowTouchMove: window.innerWidth < 1024,
                 breakpoints: {
                   0: {
                     slidesPerView: 1.2,
