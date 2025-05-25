@@ -1439,63 +1439,24 @@ function setupMediaAndPress(parsedBody) {
     loadSwiperJS().then(() => {
       new Swiper(swiperContainer, {
         slidesPerView: 1.1,
-        spaceBetween: 5,
-        slidesOffsetAfter: 20,
+        spaceBetween: 25,
         centeredSlides: false,
-
-        shortSwipes: true,
-        threshold: 6,
-        longSwipesRatio: 0.3,
-        longSwipesMs: 200,
-
-        touchRatio: 1.2,
-        touchAngle: 45,
-        grabCursor: true,
-        followFinger: true,
-
-        freeMode: false,
-
-        speed: 400,
-        longSwipes: true,
-        longSwipesRatio: 0.2,
-        longSwipesMs: 200,
-
-        touchStartPreventDefault: false,
-        touchStartForcePreventDefault: false,
-        touchMoveStopPropagation: true,
-
-        preventClicks: false,
-        preventClicksPropagation: false,
         allowTouchMove: true,
-        simulateTouch: true,
-
-        resistance: true,
-        resistanceRatio: 0.5,
-
-        updateOnWindowResize: true,
-        observer: true,
-        observeParents: true,
-        watchOverflow: true,
-
-        pagination: false,
         navigation: false,
-
-        cssMode: false,
-
+        pagination: false,
         breakpoints: {
           768: {
-            slidesPerView: 2.5,
-            spaceBetween: 15,
+            slidesPerView: 2,
+            spaceBetween: 25,
+            allowTouchMove: true,
           },
           1024: {
-            slidesPerView: 4,
-            spaceBetween: 20,
-            allowTouchMove: false,
-            centeredSlides: true, // Center the single slide
-            spaceBetween: 20,
+            slidesPerView: 3, // Show all 3 slides
+            spaceBetween: 25,
+            allowTouchMove: false, // Disable sliding on desktop
+            centeredSlides: false,
           },
         },
-
         on: {
           touchStart: function () {
             this.el.style.transition = "none";
