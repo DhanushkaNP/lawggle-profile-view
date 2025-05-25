@@ -776,15 +776,23 @@ document.addEventListener("DOMContentLoaded", async function () {
 
                 breakpoints: {
                   768: {
-                    slidesPerView: 2.2,
+                    slidesPerView: 2.4,
                     spaceBetween: 15,
                   },
                   1024: {
                     slidesPerView: 3.1,
-                    spaceBetween: 20,
+                    spaceBetween: 15,
                   },
                   1200: {
                     slidesPerView: 4.1,
+                    spaceBetween: 15,
+                  },
+                  1400: {
+                    slidesPerView: 4.5,
+                    spaceBetween: 20,
+                  },
+                  1600: {
+                    slidesPerView: 5.1,
                     spaceBetween: 20,
                   },
                 },
