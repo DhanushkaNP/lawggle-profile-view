@@ -543,34 +543,46 @@ document.addEventListener("DOMContentLoaded", async function () {
             }
           } else {
             document.getElementById("language-section").style.display = "none";
+            document.getElementById("sectionmap").style.width = "100%";
           }
 
-          let profileVideo = parsedBody["profile video"];
-          console.log("🖼️🖼️🖼️🖼️🖼️", profileVideo);
+          let videoIntroduction = parsedBody["profile video"];
+          console.log("🖼️🖼️🖼️🖼️🖼️", videoIntroduction);
           if (
-            profileVideo != null &&
-            profileVideo != undefined &&
-            profileVideo != "null" &&
-            profileVideo != ""
+            videoIntroduction != null &&
+            videoIntroduction != undefined &&
+            videoIntroduction != "null" &&
+            videoIntroduction != ""
           ) {
-            console.log("🖼️🖼️🖼️🖼️🖼️", profileVideo);
-            const profileVideoElem = document.getElementById("theprofilevideo");
-            profileVideoElem.src = profileVideo;
-            profileVideoElem.controls = true;
-            profileVideoElem.preload = "auto"; // Ensure video is preloaded
-            profileVideoElem.removeAttribute("poster"); // Remove poster if any
+            console.log("🖼️🖼️🖼️🖼️🖼️", videoIntroduction);
+            const videoIntroductionElement =
+              document.getElementById("theprofilevideo");
+            videoIntroductionElement.src = videoIntroduction;
+            videoIntroductionElement.controls = true;
+            videoIntroductionElement.preload = "auto"; // Ensure video is preloaded
+            videoIntroductionElement.removeAttribute("poster"); // Remove poster if any
 
             // Show first frame when loaded
-            profileVideoElem.addEventListener("loadeddata", function () {
-              try {
-                profileVideoElem.currentTime = 0;
-              } catch (e) {
-                // Ignore errors
+            videoIntroductionElement.addEventListener(
+              "loadeddata",
+              function () {
+                try {
+                  videoIntroductionElement.currentTime = 0;
+                } catch (e) {
+                  // Ignore errors
+                }
               }
-            });
+            );
           } else {
             document.getElementById("sectionprofilevide0").style.display =
               "none";
+            document.getElementById(
+              "sectionprofilevide-large-s"
+            ).style.display = "none";
+
+            document.getElementById(
+              "user-introduction"
+            ).style.gridTemplateColumns = "1fr";
           }
 
           let notableCaseWins = parsedBody["notable case wins"];
