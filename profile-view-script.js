@@ -383,11 +383,11 @@ document.addEventListener("DOMContentLoaded", async function () {
           ) {
             document.getElementById("biography-container").style.display =
               "none";
-          } else {
-            document.getElementById("biotext").innerText = dynamicBio;
             document.getElementById(
               "user-introduction"
             ).style.gridTemplateColumns = "1fr";
+          } else {
+            document.getElementById("biotext").innerText = dynamicBio;
           }
 
           let certificates = parsedBody["certificates"];
