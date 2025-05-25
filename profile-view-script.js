@@ -203,7 +203,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             freeconsult;
           document.getElementById("freeconsultation-mobile").innerText =
             freeconsult;
-          document.getElementById("probono-desktop").innerText = probono;
+          document.getElementById("probono-large-s").innerText = probono;
           document.getElementById("probono-mobile").innerText = probono;
           document.getElementById("offercontingency-large-s").innerText =
             contingency;
