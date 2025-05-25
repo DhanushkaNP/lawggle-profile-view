@@ -628,6 +628,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 "crd",
                 "crd-cutom-width"
               );
+              caseWinDiv.style.width = "500px"; // Set a fixed width for each slide
               let caseHeading = document.createElement("h4");
               caseHeading.classList.add("notable-case-heading");
               caseHeading.innerText = notableCaseWins[eachcase].title;
