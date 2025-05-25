@@ -1488,7 +1488,7 @@ function setupMediaAndPress(parsedBody) {
             spaceBetween: 15,
           },
           1024: {
-            slidesPerView: 3,
+            slidesPerView: 4,
             spaceBetween: 20,
             allowTouchMove: false,
             centeredSlides: true, // Center the single slide
