@@ -1481,17 +1481,17 @@ function setupMediaAndPress(parsedBody) {
           },
           // 1280px: Show 4.2 cards (four full + 20% of next)
           1280: {
-            slidesPerView: 4.2,
+            slidesPerView: 3.8,
             spaceBetween: 30,
           },
           // 1600px: Show 5.2 cards (five full + 20% of next)
           1600: {
-            slidesPerView: 5.2,
+            slidesPerView: 4.2,
             spaceBetween: 30,
           },
           // 1920px: Show 6.2 cards (six full + 20% of next)
           1920: {
-            slidesPerView: 6.2,
+            slidesPerView: 5.2,
             spaceBetween: 30,
           },
         },
