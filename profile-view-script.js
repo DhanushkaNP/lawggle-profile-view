@@ -1484,7 +1484,7 @@ function setupMediaAndPress(parsedBody) {
 
         breakpoints: {
           768: {
-            slidesPerView: 2.2,
+            slidesPerView: 2.5,
             spaceBetween: 15,
           },
           1024: {
