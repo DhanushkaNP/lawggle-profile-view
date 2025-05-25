@@ -1411,6 +1411,21 @@ function setupMediaAndPress(parsedBody) {
 
         cssMode: false,
 
+        breakpoints: {
+          768: {
+            slidesPerView: 2.2,
+            spaceBetween: 15,
+          },
+          1024: {
+            slidesPerView: 3.1,
+            spaceBetween: 20,
+          },
+          1200: {
+            slidesPerView: 4.1,
+            spaceBetween: 20,
+          },
+        },
+
         on: {
           touchStart: function () {
             this.el.style.transition = "none";
