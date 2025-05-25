@@ -1474,7 +1474,15 @@ function setupMediaAndPress(parsedBody) {
             spaceBetween: 20,
           },
           1200: {
+            slidesPerView: 3.2,
+            spaceBetween: 20,
+          },
+          1400: {
             slidesPerView: 3.7,
+            spaceBetween: 20,
+          },
+          1600: {
+            slidesPerView: 4.2,
             spaceBetween: 20,
           },
         },
