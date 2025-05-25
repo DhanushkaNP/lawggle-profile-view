@@ -479,7 +479,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                     watchOverflow: true,
 
                     // No pagination or navigation for cleaner experience
-                    pagination: false,
+                    pagination: true,
                     navigation: false,
 
                     // Smooth CSS transitions
@@ -660,7 +660,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 watchOverflow: true,
 
                 // No pagination or navigation for cleaner experience
-                pagination: false,
+                pagination: true,
                 navigation: false,
 
                 // Smooth CSS transitions
