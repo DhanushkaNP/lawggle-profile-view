@@ -478,14 +478,36 @@ document.addEventListener("DOMContentLoaded", async function () {
                     observeParents: true,
                     watchOverflow: true,
 
-                    // No pagination or navigation for cleaner experience
-                    pagination: true,
-                    navigation: false,
+                    pagination: {
+                      el: ".swiper-pagination",
+                      clickable: true,
+                      dynamicBullets: true,
+                    },
+                    navigation: {
+                      nextEl: ".swiper-button-next",
+                      prevEl: ".swiper-button-prev",
+                    },
+                    allowTouchMove: window.innerWidth <= 768,
+                    simulateTouch: window.innerWidth <= 768,
 
                     // Smooth CSS transitions
                     cssMode: false, // Use JS mode for better control
 
                     // Event handling for debugging (remove in production)
+                    breakpoints: {
+                      768: {
+                        slidesPerView: 2.2,
+                        spaceBetween: 20,
+                        allowTouchMove: false,
+                        simulateTouch: false,
+                      },
+                      1024: {
+                        slidesPerView: 3.1,
+                        spaceBetween: 24,
+                        allowTouchMove: false,
+                        simulateTouch: false,
+                      },
+                    },
                     on: {
                       touchStart: function () {
                         // Optional: Add visual feedback on touch start
