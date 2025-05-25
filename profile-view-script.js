@@ -676,20 +676,16 @@ document.addEventListener("DOMContentLoaded", async function () {
                 allowTouchMove: window.innerWidth < 1024,
                 breakpoints: {
                   0: {
-                    allowTouchMove: true,
-                  },
-                  1024: {
-                    allowTouchMove: false,
-                  },
-                },
-                breakpoints: {
-                  0: {
                     slidesPerView: 1.2,
                     allowTouchMove: true,
+                    centeredSlides: false,
+                    slidesOffsetAfter: 30,
                   },
                   1024: {
-                    slidesPerView: 1, // 1 slide per view on large screens
+                    slidesPerView: 1,
                     allowTouchMove: false,
+                    centeredSlides: true, // Center the single slide
+                    slidesOffsetAfter: 0, // Remove offset for true centering
                   },
                 },
                 on: {
