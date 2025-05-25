@@ -209,17 +209,27 @@ document.addEventListener("DOMContentLoaded", async function () {
             contingency;
           document.getElementById("offercontingency-mobile").innerText =
             contingency;
-          let expertholder = document.getElementById("expertisewrap");
-          expertholder.innerHTML = "";
+
+          const expertholderLargeS = document.getElementById(
+            "expertisewrap-large-s"
+          );
+          expertholderLargeS.innerHTML = "";
+          const expertholderMobile = document.getElementById(
+            "expertisewrap-mobile"
+          );
+          expertholderMobile.innerHTML = "";
 
           let theexpertise = parsedBody["area of expertise"];
           if (theexpertise.length > 0) {
             for (let eachexpertise in theexpertise) {
-              expertcontainer = document.createElement("div");
+              const expertcontainer = document.createElement("div");
               expertcontainer.classList.add("expertisecontainer");
               let expertText = theexpertise[eachexpertise];
               expertcontainer.innerText = capitalizeWords(expertText);
-              expertholder.append(expertcontainer);
+
+              const expertContainerClone = expertcontainer.cloneNode(true);
+              expertholderLargeS.append(expertcontainer);
+              expertholderMobile.append(expertContainerClone);
             }
           } else {
             document.getElementById("area-expertise-container").style.display =
