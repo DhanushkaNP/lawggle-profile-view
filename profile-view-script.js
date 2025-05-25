@@ -491,7 +491,16 @@ document.addEventListener("DOMContentLoaded", async function () {
                         allowTouchMove: false,
                       },
                     },
-                    // ...other options...
+                    breakpoints: {
+                      0: {
+                        slidesPerView: 1.2,
+                        allowTouchMove: true,
+                      },
+                      1024: {
+                        slidesPerView: 1, // 1 slide per view on large screens
+                        allowTouchMove: false,
+                      },
+                    },
                     on: {
                       touchStart: function () {
                         this.el.style.transition = "none";
@@ -599,6 +608,20 @@ document.addEventListener("DOMContentLoaded", async function () {
               "case-card-custom",
               "case-card-wrap-custom"
             );
+
+            // Create navigation buttons
+            const prevBtn = document.createElement("div");
+            prevBtn.className = "swiper-button-prev cases-nav-btn";
+            prevBtn.style.display = "none"; // Hide by default
+
+            const nextBtn = document.createElement("div");
+            nextBtn.className = "swiper-button-next cases-nav-btn";
+            nextBtn.style.display = "none"; // Hide by default
+
+            // Create pagination
+            const pagination = document.createElement("div");
+            pagination.className = "swiper-pagination";
+
             let swiperWrapper = document.createElement("div");
             swiperWrapper.classList.add("swiper-wrapper", "case-win-swip");
             notablecasewinscontainer.style.cssText = `width: 100%;`;
@@ -620,72 +643,65 @@ document.addEventListener("DOMContentLoaded", async function () {
               caseWinDiv.append(caseText);
               swiperWrapper.append(caseWinDiv);
             }
-            notablecasewinscontainer.append(swiperWrapper);
+            notablecasewinscontainer.append(
+              prevBtn,
+              nextBtn,
+              swiperWrapper,
+              pagination
+            );
+
+            // Show/hide nav buttons based on screen size
+            function updateNavVisibility() {
+              if (window.innerWidth >= 1024) {
+                prevBtn.style.display = "block";
+                nextBtn.style.display = "block";
+              } else {
+                prevBtn.style.display = "none";
+                nextBtn.style.display = "none";
+              }
+            }
+            window.addEventListener("resize", updateNavVisibility);
+            updateNavVisibility();
 
             loadSwiperJS().then(() => {
-              new Swiper(notablecasewinscontainer, {
-                slidesPerView: 1.1,
+              new Swiper(certicateContainer, {
+                slidesPerView: 1.2,
                 spaceBetween: 16,
                 slidesOffsetAfter: 30,
                 centeredSlides: false,
-
-                // Smooth slide-by-slide movement
-                shortSwipes: true,
-                threshold: 6, // Lower threshold for easier swiping
-                longSwipesRatio: 0.3, // Easier to trigger slide change
-                longSwipesMs: 200, // Shorter time for slide detection
-
-                // CRITICAL: Smooth finger tracking settings
-                touchRatio: 1.2, // 1:1 touch movement ratio
-                touchAngle: 45, // Allow diagonal swipes
-                grabCursor: true, // Show grab cursor
-                followFinger: true, // Follow finger movement exactly
-
-                // Disable free mode for slide-by-slide behavior
-                freeMode: false,
-
-                // Smooth transitions and timing
-                speed: 400, // Smooth transition speed
-                longSwipes: true, // Allow long swipes
-                longSwipesRatio: 0.2, // Easier to trigger slide change
-                longSwipesMs: 200, // Time threshold for slide detection
-
-                // Touch handling optimizations
-                touchStartPreventDefault: false, // Don't prevent default touch
-                touchStartForcePreventDefault: false,
-                touchMoveStopPropagation: true,
-
-                // Prevent interference
-                preventClicks: false, // Allow clicks
-                preventClicksPropagation: false,
-                allowTouchMove: true, // Always allow touch
-                simulateTouch: true, // Enable mouse simulation
-
-                // Resistance for edge behavior
-                resistance: true,
-                resistanceRatio: 0.5, // Less resistance at edges
-
-                // Performance settings
-                updateOnWindowResize: true,
-                observer: true,
-                observeParents: true,
-                watchOverflow: true,
-
-                // No pagination or navigation for cleaner experience
-                pagination: true,
-                navigation: false,
-
-                // Smooth CSS transitions
-                cssMode: false, // Use JS mode for better control
-
-                // Event handling for debugging (remove in production)
+                pagination: {
+                  el: pagination,
+                  clickable: true,
+                },
+                navigation: {
+                  nextEl: nextBtn,
+                  prevEl: prevBtn,
+                },
+                // Disable swiping on desktop, enable on mobile
+                allowTouchMove: window.innerWidth < 1024,
+                breakpoints: {
+                  0: {
+                    allowTouchMove: true,
+                  },
+                  1024: {
+                    allowTouchMove: false,
+                  },
+                },
+                breakpoints: {
+                  0: {
+                    slidesPerView: 1.2,
+                    allowTouchMove: true,
+                  },
+                  1024: {
+                    slidesPerView: 1, // 1 slide per view on large screens
+                    allowTouchMove: false,
+                  },
+                },
                 on: {
                   touchStart: function () {
-                    // Optional: Add visual feedback on touch start
                     this.el.style.transition = "none";
                   },
                   touchEnd: function () {
-                    // Restore transitions after touch
                     this.el.style.transition = "";
                   },
                 },
