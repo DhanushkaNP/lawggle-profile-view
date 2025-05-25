@@ -71,7 +71,10 @@ document.addEventListener("DOMContentLoaded", async function () {
               ratecombined = "$" + `${maxrate}/Hour`;
             }
 
-            document.getElementById("ratetext").innerText = ratecombined;
+            document.getElementById("hourly-rate-large-s").innerText =
+              ratecombined;
+            document.getElementById("hourly-rate-mobile").innerText =
+              ratecombined;
           }
 
           let bannerimage = parsedBody["profile banner"];
@@ -196,9 +199,16 @@ document.addEventListener("DOMContentLoaded", async function () {
           ) {
             contingency = "no";
           }
-          document.getElementById("freeconsultation").innerText = freeconsult;
-          document.getElementById("probono").innerText = probono;
-          document.getElementById("offercontingency").innerText = contingency;
+          document.getElementById("freeconsultation-large-s").innerText =
+            freeconsult;
+          document.getElementById("freeconsultation-mobile").innerText =
+            freeconsult;
+          document.getElementById("probono-desktop").innerText = probono;
+          document.getElementById("probono-mobile").innerText = probono;
+          document.getElementById("offercontingency-large-s").innerText =
+            contingency;
+          document.getElementById("offercontingency-mobile").innerText =
+            contingency;
           let expertholder = document.getElementById("expertisewrap");
           expertholder.innerHTML = "";
 
@@ -250,9 +260,14 @@ document.addEventListener("DOMContentLoaded", async function () {
             if (educactionList.length > 0) {
               education1 = educactionList[0].education;
 
-              let allEducationWrapper =
-                document.getElementById("all-education");
-              allEducationWrapper.innerHTML = "";
+              let allEducationWrapperMobile = document.getElementById(
+                "all-education-mobile"
+              );
+              let allEducationWrapperLargeS = document.getElementById(
+                "all-education-large-s"
+              );
+              allEducationWrapperMobile.innerHTML = "";
+              allEducationWrapperLargeS.innerHTML = "";
               if (
                 education1 != null &&
                 education1 != undefined &&
@@ -260,7 +275,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 education1 != ""
               ) {
                 for (let eachEducation in educactionList) {
-                  let educationWrap = document.createElement("div");
+                  const educationWrap = document.createElement("div");
                   educationWrap.classList.add("educationwrap");
                   let educationText = educactionList[eachEducation].education;
                   if (
@@ -326,7 +341,12 @@ document.addEventListener("DOMContentLoaded", async function () {
                   }
 
                   educationInfo ? educationWrap.append(educationInfo) : null;
-                  allEducationWrapper.append(educationWrap);
+
+                  const educationWrapClone = educationWrap.cloneNode(true);
+
+                  // Append to both containers
+                  allEducationWrapperMobile.appendChild(educationWrap);
+                  allEducationWrapperLargeS.appendChild(educationWrapClone);
                 }
               }
             } else {
