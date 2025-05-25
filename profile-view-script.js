@@ -627,7 +627,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
             loadSwiperJS().then(() => {
               new Swiper(notablecasewinscontainer, {
-                slidesPerView: 1.2,
+                slidesPerView: 1.1,
                 spaceBetween: 16,
                 slidesOffsetAfter: 30,
                 centeredSlides: false,
