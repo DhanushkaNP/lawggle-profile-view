@@ -577,7 +577,7 @@ document.addEventListener("DOMContentLoaded", async function () {
               }
             );
           } else {
-            document.getElementById("sectionprofilevide0").style.display =
+            document.getElementById("profile-video-section").style.display =
               "none";
             document.getElementById(
               "sectionprofilevide-large-s"
