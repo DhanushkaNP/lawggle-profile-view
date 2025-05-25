@@ -1487,19 +1487,10 @@ function setupMediaAndPress(parsedBody) {
             spaceBetween: 15,
           },
           1024: {
-            slidesPerView: 3.2,
+            slidesPerView: 3,
             spaceBetween: 20,
-          },
-          1200: {
-            slidesPerView: 2.8,
-            spaceBetween: 20,
-          },
-          1400: {
-            slidesPerView: 3.2,
-            spaceBetween: 20,
-          },
-          1600: {
-            slidesPerView: 4.0,
+            allowTouchMove: false,
+            centeredSlides: true, // Center the single slide
             spaceBetween: 20,
           },
         },
