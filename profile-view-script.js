@@ -444,8 +444,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
                   imageContainer.append(certimage);
                   swiperSlide.append(imageContainer);
-                  swiperWrapper.a;
-                  ppend(swiperSlide);
+                  swiperWrapper.append(swiperSlide);
                 }
                 certicateContainer.append(
                   prevBtn,
