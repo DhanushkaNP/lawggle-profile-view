@@ -580,10 +580,6 @@ document.addEventListener("DOMContentLoaded", async function () {
             document.getElementById("profile-video-section").style.display =
               "none";
             document.getElementById(
-              "sectionprofilevide-large-s"
-            ).style.display = "none";
-
-            document.getElementById(
               "user-introduction"
             ).style.gridTemplateColumns = "1fr";
           }
