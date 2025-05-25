@@ -232,8 +232,12 @@ document.addEventListener("DOMContentLoaded", async function () {
               expertholderMobile.append(expertContainerClone);
             }
           } else {
-            document.getElementById("area-expertise-container").style.display =
-              "none";
+            document.getElementById(
+              "area-expertise-section-mobile"
+            ).style.display = "none";
+            document.getElementById(
+              "area-expertise-section-large-s"
+            ).style.display = "none";
           }
 
           let thehobbies = parsedBody["interests and hobbies"];
