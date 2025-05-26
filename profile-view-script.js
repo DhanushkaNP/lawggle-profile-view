@@ -48,7 +48,11 @@ document.addEventListener("DOMContentLoaded", async function () {
           if (firmUrl != null && firmUrl != undefined && firmUrl != "") {
             document.getElementById("thefirmurl").innerText =
               firmUrl.length > 22 ? firmUrl.substring(0, 22) + "..." : firmUrl;
-            document.getElementById("thefirmurl").href = firmUrl;
+
+            let firmFullUrl = firmUrl.startsWith("http")
+              ? firmUrl
+              : "https://" + firmUrl;
+            document.getElementById("thefirmurl").href = firmFullUrl;
           } else {
             document.getElementById("thefirmurl").style.display = "none";
           }
