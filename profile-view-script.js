@@ -373,12 +373,19 @@ document.addEventListener("DOMContentLoaded", async function () {
               }
             } else {
               console.log("No education found");
-              document.getElementById("education-container").style.display =
-                "none";
+              document.getElementById(
+                "education-section-mobile"
+              ).style.display = "none";
+
+              document.getElementById(
+                "education-section-large-s"
+              ).style.display = "none";
             }
           } else {
             console.log("No education found");
-            document.getElementById("education-container").style.display =
+            document.getElementById("education-section-mobile").style.display =
+              "none";
+            document.getElementById("education-section-large-s").style.display =
               "none";
           }
 
