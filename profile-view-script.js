@@ -1381,7 +1381,7 @@ function setupMediaAndPress(parsedBody) {
     // Create Swiper container
     const swiperContainer = document.createElement("div");
     swiperContainer.classList.add("swiper", "media-swiper");
-    swiperContainer.style.cssText = `width: 100%; padding: 0 0; overflow: hidden;`;
+    swiperContainer.style.cssText = `width: 100%; overflow: hidden; padding-top: 1.5rem;`;
 
     const swiperWrapper = document.createElement("div");
     swiperWrapper.classList.add("swiper-wrapper");
