@@ -570,7 +570,8 @@ document.addEventListener("DOMContentLoaded", async function () {
               languagecontainer.append(langholder);
             }
           } else {
-            document.getElementById("language-section").style.display = "none";
+            document.getElementById("language-main-section").style.display =
+              "none";
             document.getElementById("sectionmap").style.width = "100%";
           }
 
