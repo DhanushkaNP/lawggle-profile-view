@@ -132,6 +132,8 @@ document.addEventListener("DOMContentLoaded", async function () {
             instagramLink == ""
           ) {
             document.getElementById("socialmediahold").style.display = "none";
+            document.getElementById("social-media-section").style.display =
+              "none";
           }
 
           if (
@@ -184,16 +186,6 @@ document.addEventListener("DOMContentLoaded", async function () {
             instagramgo.style.display = "block";
           } else {
             document.getElementById("instagramlink").style.display = "none";
-          }
-
-          if (
-            twitterLink == "" &&
-            linkedinLink == "" &&
-            facebookLink == "" &&
-            instagramLink == ""
-          ) {
-            document.getElementById("social-media-section").style.display =
-              "none";
           }
 
           let freeconsult = parsedBody["free consultation"];
