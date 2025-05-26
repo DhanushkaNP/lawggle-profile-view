@@ -266,7 +266,7 @@ document.addEventListener("DOMContentLoaded", async function () {
               hobbiesContainer.append(hobbyholder);
             }
           } else {
-            document.getElementById("interest-hobby-container").style.display =
+            document.getElementById("interest-hobby-section").style.display =
               "none";
           }
 
