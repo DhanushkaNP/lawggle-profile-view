@@ -206,16 +206,17 @@ document.addEventListener("DOMContentLoaded", async function () {
           ) {
             contingency = "no";
           }
-          document.getElementById("freeconsultation-large-s").innerText =
-            freeconsult;
-          document.getElementById("freeconsultation-mobile").innerText =
-            freeconsult;
-          document.getElementById("probono-large-s").innerText = probono;
-          document.getElementById("probono-mobile").innerText = probono;
-          document.getElementById("offercontingency-large-s").innerText =
-            contingency;
-          document.getElementById("offercontingency-mobile").innerText =
-            contingency;
+          // To do
+          // document.getElementById("freeconsultation-large-s").innerText =
+          //   freeconsult;
+          // document.getElementById("freeconsultation-mobile").innerText =
+          //   freeconsult;
+          // document.getElementById("probono-large-s").innerText = probono;
+          // document.getElementById("probono-mobile").innerText = probono;
+          // document.getElementById("offercontingency-large-s").innerText =
+          //   contingency;
+          // document.getElementById("offercontingency-mobile").innerText =
+          //   contingency;
 
           const expertholderLargeS = document.getElementById(
             "expertisewrap-large-s"
