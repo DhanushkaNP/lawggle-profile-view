@@ -394,7 +394,8 @@ document.addEventListener("DOMContentLoaded", async function () {
             dynamicBio == null ||
             dynamicBio == "null" ||
             dynamicBio == undefined ||
-            dynamicBio == ""
+            dynamicBio == "" ||
+            dynamicBio == "\n"
           ) {
             document.getElementById("biography-container").style.display =
               "none";
