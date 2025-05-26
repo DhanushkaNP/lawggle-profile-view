@@ -90,9 +90,13 @@ document.addEventListener("DOMContentLoaded", async function () {
             thebannercontainer.style.backgroundPosition = "center";
             thebannercontainer.style.backgroundRepeat = "no-repeat";
           } else {
-            thebannercontainer.style.height = "12rem";
-            document.getElementById("profile-img-main-container").style.bottom =
-              "-40%";
+            if (window.innerWidth >= 768) {
+              // Apply only if screen width is tablet or larger
+              thebannercontainer.style.height = "12rem";
+              document.getElementById(
+                "profile-img-main-container"
+              ).style.bottom = "-40%";
+            }
           }
 
           let theLawyeraddress = parsedBody["address"];
