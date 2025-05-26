@@ -186,6 +186,16 @@ document.addEventListener("DOMContentLoaded", async function () {
             document.getElementById("instagramlink").style.display = "none";
           }
 
+          if (
+            twitterLink == "" &&
+            linkedinLink == "" &&
+            facebookLink == "" &&
+            instagramLink == ""
+          ) {
+            document.getElementById("social-media-section").style.display =
+              "none";
+          }
+
           let freeconsult = parsedBody["free consultation"];
           if (
             freeconsult == null ||
@@ -206,6 +216,7 @@ document.addEventListener("DOMContentLoaded", async function () {
           ) {
             contingency = "no";
           }
+
           // To do
           // document.getElementById("freeconsultation-large-s").innerText =
           //   freeconsult;
