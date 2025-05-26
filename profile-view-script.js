@@ -391,9 +391,6 @@ document.addEventListener("DOMContentLoaded", async function () {
           ) {
             document.getElementById("biography-container").style.display =
               "none";
-            document.getElementById(
-              "user-introduction"
-            ).style.gridTemplateColumns = "1fr";
           } else {
             document.getElementById("biotext").innerText = dynamicBio;
           }
@@ -588,9 +585,6 @@ document.addEventListener("DOMContentLoaded", async function () {
           } else {
             document.getElementById("profile-video-section").style.display =
               "none";
-            document.getElementById(
-              "user-introduction"
-            ).style.gridTemplateColumns = "1fr";
           }
 
           let notableCaseWins = parsedBody["notable case wins"];
