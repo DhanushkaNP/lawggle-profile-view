@@ -412,7 +412,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             document.getElementById("biography-container").style.display =
               "none";
           } else {
-            document.getElementById("biotext").innerText = dynamicBio;
+            document.getElementById("biotext").innerHTML = dynamicBio;
           }
 
           let certificates = parsedBody["certificates"];
