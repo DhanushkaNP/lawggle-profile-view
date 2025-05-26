@@ -358,10 +358,15 @@ document.addEventListener("DOMContentLoaded", async function () {
                       return `${month} ${year}`;
                     };
 
-                    timePeriod.innerText =
-                      formatDate(educactionList[eachEducation]["start date"]) +
-                      " - " +
-                      formatDate(educactionList[eachEducation]["end date"]);
+                    const startDate =
+                      educactionList[eachEducation]["start date"];
+                    const endDate = educactionList[eachEducation]["end date"];
+
+                    if (startDate && endDate) {
+                      timePeriod.innerText =
+                        formatDate(startDate) + " - " + formatDate(endDate);
+                      educationInfo.append(timePeriod);
+                    }
                     educationInfo.append(timePeriod);
                   }
 
