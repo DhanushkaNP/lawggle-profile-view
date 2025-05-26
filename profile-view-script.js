@@ -79,17 +79,18 @@ document.addEventListener("DOMContentLoaded", async function () {
 
           let bannerimage = parsedBody["profile banner"];
           console.log("🥪🥪🔷", bannerimage);
-
+          let thebannercontainer = document.getElementById("bannercontainer");
           if (
             bannerimage != null &&
             bannerimage != "" &&
             bannerimage != undefined
           ) {
-            let thebannercontainer = document.getElementById("bannercontainer");
             thebannercontainer.style.backgroundImage = `url(${bannerimage})`;
             thebannercontainer.style.backgroundSize = "cover";
             thebannercontainer.style.backgroundPosition = "center";
             thebannercontainer.style.backgroundRepeat = "no-repeat";
+          } else {
+            thebannercontainer.style.height = "16rem";
           }
 
           let theLawyeraddress = parsedBody["address"];
