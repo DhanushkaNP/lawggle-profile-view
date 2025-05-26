@@ -90,7 +90,9 @@ document.addEventListener("DOMContentLoaded", async function () {
             thebannercontainer.style.backgroundPosition = "center";
             thebannercontainer.style.backgroundRepeat = "no-repeat";
           } else {
-            thebannercontainer.style.height = "16rem";
+            thebannercontainer.style.height = "12rem";
+            document.getElementById("profile-img-main-container").style.bottom =
+              "-40%";
           }
 
           let theLawyeraddress = parsedBody["address"];
