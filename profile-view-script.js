@@ -675,15 +675,18 @@ document.addEventListener("DOMContentLoaded", async function () {
                 "crd",
                 "crd-cutom-width"
               );
-              caseWinDiv.style.width = "500px"; // Set a fixed width for each slide
+              // caseWinDiv.style.width = "500px"; // Set a fixed width for each slide
+              const caseContent = document.createElement("div");
+              caseContent.classList.add("pv-case-content");
               let caseHeading = document.createElement("h4");
               caseHeading.classList.add("notable-case-heading");
               caseHeading.innerText = notableCaseWins[eachcase].title;
-              caseWinDiv.append(caseHeading);
+              caseContent.append(caseHeading);
               let caseText = document.createElement("p");
               caseText.classList.add("notablecasewintext");
               caseText.innerText = notableCaseWins[eachcase].description;
-              caseWinDiv.append(caseText);
+              caseContent.append(caseText);
+              caseWinDiv.append(caseContent);
               swiperWrapper.append(caseWinDiv);
             }
             notablecasewinscontainer.append(
