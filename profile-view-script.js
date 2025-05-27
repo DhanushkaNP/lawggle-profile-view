@@ -509,7 +509,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                     allowTouchMove: window.innerWidth < 1024,
                     breakpoints: {
                       0: {
-                        slidesPerView: 1.2,
+                        slidesPerView: 1.1,
                         allowTouchMove: true,
                         centeredSlides: false,
                         slidesOffsetAfter: 30,
