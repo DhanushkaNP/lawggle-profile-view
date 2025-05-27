@@ -707,7 +707,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             updateNavVisibility();
 
             loadSwiperJS().then(() => {
-              new Swiper(certicateContainer, {
+              new Swiper(notablecasewinscontainer, {
                 spaceBetween: 16,
                 centeredSlides: false,
                 pagination: {
