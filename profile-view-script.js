@@ -728,10 +728,10 @@ document.addEventListener("DOMContentLoaded", async function () {
                     slidesOffsetAfter: 30,
                   },
                   1024: {
-                    slidesPerView: 1,
+                    slidesPerView: 0.8,
                     allowTouchMove: false,
-                    centeredSlides: true, // Center the single slide
-                    slidesOffsetAfter: 0, // Remove offset for true centering
+                    centeredSlides: false, // Center the single slide
+                    slidesOffsetAfter: 30, // Remove offset for true centering
                   },
                 },
                 on: {
