@@ -794,108 +794,86 @@ document.addEventListener("DOMContentLoaded", async function () {
             }
 
             clientTestimonialContainer.append(swiperWrapper);
+            if (window.innerWidth < 1024) {
+              loadSwiperJS().then(() => {
+                new Swiper(clientTestimonialContainer, {
+                  slidesPerView: 1.3,
+                  spaceBetween: 16,
+                  slidesOffsetAfter: 60,
+                  centeredSlides: false,
 
-            loadSwiperJS().then(() => {
-              new Swiper(clientTestimonialContainer, {
-                slidesPerView: 1.3,
-                spaceBetween: 16,
-                slidesOffsetAfter: 60,
-                centeredSlides: false,
+                  shortSwipes: true,
+                  threshold: 6,
+                  longSwipesRatio: 0.3,
+                  longSwipesMs: 200,
 
-                shortSwipes: true,
-                threshold: 6,
-                longSwipesRatio: 0.3,
-                longSwipesMs: 200,
+                  touchRatio: 1.2,
+                  touchAngle: 45,
+                  grabCursor: true,
+                  followFinger: true,
 
-                touchRatio: 1.2,
-                touchAngle: 45,
-                grabCursor: true,
-                followFinger: true,
+                  freeMode: false,
 
-                freeMode: false,
+                  speed: 400,
+                  longSwipes: true,
+                  longSwipesRatio: 0.2,
+                  longSwipesMs: 200,
 
-                speed: 400,
-                longSwipes: true,
-                longSwipesRatio: 0.2,
-                longSwipesMs: 200,
+                  touchStartPreventDefault: false,
+                  touchStartForcePreventDefault: false,
+                  touchMoveStopPropagation: true,
 
-                touchStartPreventDefault: false,
-                touchStartForcePreventDefault: false,
-                touchMoveStopPropagation: true,
+                  preventClicks: false,
+                  preventClicksPropagation: false,
+                  allowTouchMove: true,
+                  simulateTouch: true,
 
-                preventClicks: false,
-                preventClicksPropagation: false,
-                allowTouchMove: true,
-                simulateTouch: true,
+                  resistance: true,
+                  resistanceRatio: 0.5,
 
-                resistance: true,
-                resistanceRatio: 0.5,
+                  updateOnWindowResize: true,
+                  observer: true,
+                  observeParents: true,
+                  watchOverflow: true,
 
-                updateOnWindowResize: true,
-                observer: true,
-                observeParents: true,
-                watchOverflow: true,
+                  pagination: false,
+                  navigation: false,
 
-                pagination: false,
-                navigation: false,
+                  cssMode: false,
 
-                cssMode: false,
-
-                // breakpoints: {
-                //   768: {
-                //     slidesPerView: 2.4,
-                //     spaceBetween: 15,
-                //   },
-                //   1024: {
-                //     slidesPerView: 3.1,
-                //     spaceBetween: 15,
-                //   },
-                //   1200: {
-                //     slidesPerView: 4.1,
-                //     spaceBetween: 15,
-                //   },
-                //   1400: {
-                //     slidesPerView: 4.5,
-                //     spaceBetween: 20,
-                //   },
-                //   1600: {
-                //     slidesPerView: 5.1,
-                //     spaceBetween: 20,
-                //   },
-                // },
-
-                breakpoints: {
-                  768: {
-                    slidesPerView: 2.2,
-                    spaceBetween: 15,
+                  breakpoints: {
+                    768: {
+                      slidesPerView: 2.2,
+                      spaceBetween: 15,
+                    },
+                    1024: {
+                      slidesPerView: 3.1,
+                      spaceBetween: 20,
+                    },
+                    1200: {
+                      slidesPerView: 4.1,
+                      spaceBetween: 20,
+                    },
                   },
-                  1024: {
-                    slidesPerView: 3.1,
-                    spaceBetween: 20,
-                  },
-                  1200: {
-                    slidesPerView: 4.1,
-                    spaceBetween: 20,
-                  },
-                },
 
-                on: {
-                  touchStart: function () {
-                    this.el.style.transition = "none";
+                  on: {
+                    touchStart: function () {
+                      this.el.style.transition = "none";
+                    },
+                    touchEnd: function () {
+                      this.el.style.transition = "";
+                    },
+                    slideChange: function () {
+                      // Stop all videos when sliding
+                      const videos = this.el.querySelectorAll("video");
+                      videos.forEach((video) => {
+                        video.pause();
+                      });
+                    },
                   },
-                  touchEnd: function () {
-                    this.el.style.transition = "";
-                  },
-                  slideChange: function () {
-                    // Stop all videos when sliding
-                    const videos = this.el.querySelectorAll("video");
-                    videos.forEach((video) => {
-                      video.pause();
-                    });
-                  },
-                },
+                });
               });
-            });
+            }
           } else {
             document.getElementById("sectiontestimonials").style.display =
               "none";
