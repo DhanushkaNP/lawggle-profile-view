@@ -590,22 +590,46 @@ document.addEventListener("DOMContentLoaded", async function () {
             videoIntroductionElement.src = videoIntroduction;
             videoIntroductionElement.controls = true;
             videoIntroductionElement.preload = "auto"; // Ensure video is preloaded
-            videoIntroductionElement.removeAttribute("poster"); // Remove poster if any
 
-            // Show first frame when loaded
-            videoIntroductionElement.addEventListener(
-              "loadeddata",
-              function () {
-                try {
-                  videoIntroductionElement.currentTime = 0;
-                } catch (e) {
-                  // Ignore errors
-                }
+            // Generate poster from first frame
+            generateVideoPoster(videoIntroduction, function (posterDataUrl) {
+              if (posterDataUrl) {
+                videoIntroductionElement.setAttribute("poster", posterDataUrl);
               }
-            );
+            });
           } else {
             document.getElementById("profile-video-section").style.display =
               "none";
+          }
+
+          // Helper function to generate poster from first frame
+          function generateVideoPoster(videoUrl, callback) {
+            const video = document.createElement("video");
+            video.src = videoUrl;
+            video.crossOrigin = "anonymous";
+            video.muted = true;
+            video.playsInline = true;
+            video.preload = "auto";
+            video.currentTime = 0.1; // Slightly after 0 for better reliability
+
+            video.addEventListener("loadeddata", function () {
+              // Create canvas
+              const canvas = document.createElement("canvas");
+              canvas.width = video.videoWidth;
+              canvas.height = video.videoHeight;
+              const ctx = canvas.getContext("2d");
+              ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+              try {
+                const dataURL = canvas.toDataURL("image/jpeg");
+                callback(dataURL);
+              } catch (e) {
+                callback(null);
+              }
+            });
+
+            video.addEventListener("error", function () {
+              callback(null);
+            });
           }
 
           let notableCaseWins = parsedBody["notable case wins"];
@@ -1459,37 +1483,33 @@ function setupMediaAndPress(parsedBody) {
     themediacontainer.appendChild(swiperContainer);
 
     // Load and initialize Swiper
-    loadSwiperJS().then(() => {
-      new Swiper(swiperContainer, {
-        slidesPerView: 1.1,
-        spaceBetween: 25,
-        centeredSlides: false,
-        allowTouchMove: true,
-        navigation: false,
-        pagination: false,
-        breakpoints: {
-          768: {
-            slidesPerView: 2,
-            spaceBetween: 25,
-            allowTouchMove: true,
+    if (window.innerWidth < 1024) {
+      loadSwiperJS().then(() => {
+        new Swiper(swiperContainer, {
+          slidesPerView: 1.1,
+          spaceBetween: 25,
+          centeredSlides: false,
+          allowTouchMove: true,
+          navigation: false,
+          pagination: false,
+          breakpoints: {
+            768: {
+              slidesPerView: 2,
+              spaceBetween: 25,
+              allowTouchMove: true,
+            },
           },
-          1024: {
-            slidesPerView: 3, // Show all 3 slides
-            spaceBetween: 25,
-            allowTouchMove: false, // Disable sliding on desktop
-            centeredSlides: false,
+          on: {
+            touchStart: function () {
+              this.el.style.transition = "none";
+            },
+            touchEnd: function () {
+              this.el.style.transition = "";
+            },
           },
-        },
-        on: {
-          touchStart: function () {
-            this.el.style.transition = "none";
-          },
-          touchEnd: function () {
-            this.el.style.transition = "";
-          },
-        },
+        });
       });
-    });
+    }
   } else {
     document.getElementById("sectionmedia").style.display = "none";
   }
