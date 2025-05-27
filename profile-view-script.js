@@ -707,10 +707,8 @@ document.addEventListener("DOMContentLoaded", async function () {
             updateNavVisibility();
 
             loadSwiperJS().then(() => {
-              new Swiper(notablecasewinscontainer, {
-                slidesPerView: 1.2,
+              new Swiper(certicateContainer, {
                 spaceBetween: 16,
-                slidesOffsetAfter: 30,
                 centeredSlides: false,
                 pagination: {
                   el: pagination,
@@ -720,18 +718,19 @@ document.addEventListener("DOMContentLoaded", async function () {
                   nextEl: nextBtn,
                   prevEl: prevBtn,
                 },
+                allowTouchMove: window.innerWidth < 1024,
                 breakpoints: {
                   0: {
-                    slidesPerView: 1.2,
+                    slidesPerView: 1.1,
                     allowTouchMove: true,
                     centeredSlides: false,
                     slidesOffsetAfter: 30,
                   },
                   1024: {
-                    slidesPerView: 0.8,
+                    slidesPerView: 1,
                     allowTouchMove: false,
-                    centeredSlides: false, // Center the single slide
-                    slidesOffsetAfter: 30, // Remove offset for true centering
+                    centeredSlides: true, // Center the single slide
+                    slidesOffsetAfter: 0, // Remove offset for true centering
                   },
                 },
                 on: {
