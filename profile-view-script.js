@@ -617,7 +617,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 });
               },
               {
-                threshold: 0.3, // Play when at least 30% visible
+                threshold: 0.5, // Play when at least 30% visible
               }
             );
 
