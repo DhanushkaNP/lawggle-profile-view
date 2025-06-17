@@ -515,11 +515,11 @@ document.addEventListener("DOMContentLoaded", async function () {
                         centeredSlides: false,
                         slidesOffsetAfter: 0,
                       },
-                         768: {
-                    slidesPerView: 2,
-                    spaceBetween: 15,
-                    allowTouchMove: true,
-                  },
+                      768: {
+                        slidesPerView: 2,
+                        spaceBetween: 15,
+                        allowTouchMove: true,
+                      },
                       1024: {
                         slidesPerView: 1,
                         allowTouchMove: false,
@@ -759,9 +759,9 @@ document.addEventListener("DOMContentLoaded", async function () {
                     allowTouchMove: true,
                     centeredSlides: false,
                     slidesOffsetAfter: 0,
-                   spaceBetween: 15,
+                    spaceBetween: 15,
                   },
-                     768: {
+                  768: {
                     slidesPerView: 2,
                     spaceBetween: 15,
                     allowTouchMove: true,
@@ -835,25 +835,23 @@ document.addEventListener("DOMContentLoaded", async function () {
             }
 
             clientTestimonialContainer.append(swiperWrapper);
-            if(window.innerWidth > 1024){
+            if (window.innerWidth > 1024) {
               loadSwiperJS().then(() => {
-              new Swiper(clientTestimonialContainer, {
-                spaceBetween: 25,
-                breakpoints: {
-                  320: {
-                    slidesPerView: 1,
-                    spaceBetween: 0,
-                  },
-                  1024: {
-                    slidesPerView: 3,
+                new Swiper(clientTestimonialContainer, {
+                  spaceBetween: 25,
+                  breakpoints: {
+                    320: {
+                      slidesPerView: 1,
+                      spaceBetween: 0,
+                    },
+                    1024: {
+                      slidesPerView: 3,
                       spaceBetween: 25,
-                
+                    },
                   },
-                },
-         
+                });
               });
-            });
-           } else if (window.innerWidth < 1024) {
+            } else if (window.innerWidth < 1024) {
               loadSwiperJS().then(() => {
                 new Swiper(clientTestimonialContainer, {
                   slidesPerView: 1,
@@ -871,22 +869,21 @@ document.addEventListener("DOMContentLoaded", async function () {
 
                   resistance: true,
                   resistanceRatio: 0.5,
-                     breakpoints: {
-                  320: {
-                    slidesPerView: 1,
-                    spaceBetween: 0,
-                  },
+                  breakpoints: {
+                    320: {
+                      slidesPerView: 1,
+                      spaceBetween: 0,
+                    },
                     768: {
-                    slidesPerView: 2,
-                    spaceBetween: 15,
-                    allowTouchMove: true,
+                      slidesPerView: 2,
+                      spaceBetween: 15,
+                      allowTouchMove: true,
+                    },
+                    1024: {
+                      slidesPerView: 3,
+                      spaceBetween: 25,
+                    },
                   },
-                  1024: {
-                    slidesPerView: 3,
-                    spaceBetween: 25,
-                
-                  },
-                },
 
                   on: {
                     touchStart: function () {
@@ -975,30 +972,28 @@ document.addEventListener("DOMContentLoaded", async function () {
               swiperWrapper.append(caseSlide);
             }
             videocaseslider.append(swiperWrapper);
-               if(window.innerWidth > 1024){
+            if (window.innerWidth > 1024) {
               loadSwiperJS().then(() => {
-              new Swiper(videocaseslider, {
-                spaceBetween: 25,
-                breakpoints: {
-                  320: {
-                    slidesPerView: 1,
-                    spaceBetween: 0,
-                  },
+                new Swiper(videocaseslider, {
+                  spaceBetween: 25,
+                  breakpoints: {
+                    320: {
+                      slidesPerView: 1,
+                      spaceBetween: 0,
+                    },
                     768: {
-                    slidesPerView: 2,
-                    spaceBetween: 15,
-                    allowTouchMove: true,
+                      slidesPerView: 2,
+                      spaceBetween: 15,
+                      allowTouchMove: true,
+                    },
+                    1024: {
+                      slidesPerView: 3,
+                      spaceBetween: 25,
+                    },
                   },
-                  1024: {
-                    slidesPerView: 3,
-                    spaceBetween: 25,
-                
-                  },
-                },
-         
+                });
               });
-            });
-           } else if (window.innerWidth < 1024) {
+            } else if (window.innerWidth < 1024) {
               loadSwiperJS().then(() => {
                 new Swiper(videocaseslider, {
                   slidesPerView: 1,
@@ -1016,23 +1011,22 @@ document.addEventListener("DOMContentLoaded", async function () {
 
                   resistance: true,
                   resistanceRatio: 0.5,
-                  
-                breakpoints: {
-                  320: {
-                    slidesPerView: 1,
-                    spaceBetween: 0,
-                  },
+
+                  breakpoints: {
+                    320: {
+                      slidesPerView: 1,
+                      spaceBetween: 0,
+                    },
                     768: {
-                    slidesPerView: 2,
-                    spaceBetween: 15,
-                    allowTouchMove: true,
+                      slidesPerView: 2,
+                      spaceBetween: 15,
+                      allowTouchMove: true,
+                    },
+                    1024: {
+                      slidesPerView: 3,
+                      spaceBetween: 25,
+                    },
                   },
-                  1024: {
-                    slidesPerView: 3,
-                    spaceBetween: 25,
-                
-                  },
-                },
                   on: {
                     touchStart: function () {
                       this.el.style.transition = "none";
@@ -1409,66 +1403,6 @@ function setupMediaAndPress(parsedBody) {
       }
     }
 
-    function getMetadataByDomain(url, domain) {
-      if (url.includes("youtube.com") || url.includes("youtu.be")) {
-        return {
-          title: "YouTube Video",
-          description: "Click to watch this video on YouTube",
-          imageUrl: "https://placehold.co/300x200/FF0000/FFFFFF?text=YouTube",
-          favicon: "https://www.youtube.com/favicon.ico",
-          host: "youtube.com",
-        };
-      } else if (url.includes("linkedin.com")) {
-        return {
-          title: "LinkedIn Article",
-          description: "Professional content shared on LinkedIn",
-          imageUrl: "https://placehold.co/300x200/0077B5/FFFFFF?text=LinkedIn",
-          favicon: "https://www.linkedin.com/favicon.ico",
-          host: "linkedin.com",
-        };
-      } else if (url.includes("medium.com")) {
-        return {
-          title: "Medium Article",
-          description: "Read this story on Medium",
-          imageUrl: "https://placehold.co/300x200/000000/FFFFFF?text=Medium",
-          favicon: "https://medium.com/favicon.ico",
-          host: "medium.com",
-        };
-      } else if (url.includes("twitter.com") || url.includes("x.com")) {
-        return {
-          title: "Tweet",
-          description: "View this post on Twitter/X",
-          imageUrl: "https://placehold.co/300x200/1DA1F2/FFFFFF?text=Twitter",
-          favicon: "https://twitter.com/favicon.ico",
-          host: "twitter.com",
-        };
-      } else if (url.includes("instagram.com")) {
-        return {
-          title: "Instagram Post",
-          description: "View this post on Instagram",
-          imageUrl: "https://placehold.co/300x200/E1306C/FFFFFF?text=Instagram",
-          favicon: "https://www.instagram.com/favicon.ico",
-          host: "instagram.com",
-        };
-      } else if (url.includes("facebook.com")) {
-        return {
-          title: "Facebook Post",
-          description: "View this content on Facebook",
-          imageUrl: "https://placehold.co/300x200/4267B2/FFFFFF?text=Facebook",
-          favicon: "https://www.facebook.com/favicon.ico",
-          host: "facebook.com",
-        };
-      } else {
-        return {
-          title: `Article on ${domain}`,
-          description: `View this content on ${domain}`,
-          imageUrl: `https://placehold.co/300x200/333333/cccccc?text=${domain}`,
-          favicon: null,
-          host: domain,
-        };
-      }
-    }
-
     // Create Swiper container
     const swiperContainer = document.createElement("div");
     swiperContainer.classList.add("swiper", "media-swiper");
@@ -1481,7 +1415,6 @@ function setupMediaAndPress(parsedBody) {
     themediaandPress.forEach((mediaItem) => {
       const url = mediaItem.url || "#";
       const domain = extractDomain(url);
-      const meta = getMetadataByDomain(url, domain);
 
       const swiperSlide = document.createElement("div");
       swiperSlide.classList.add("swiper-slide");
@@ -1507,8 +1440,8 @@ function setupMediaAndPress(parsedBody) {
 
       // Image
       const img = document.createElement("img");
-      img.src = meta.imageUrl;
-      img.alt = meta.title;
+      img.src = mediaItem.image;
+      img.alt = mediaItem.title;
       img.style.cssText = `height: 120px; object-fit: cover; width: 100%;`;
 
       // Content
@@ -1516,15 +1449,15 @@ function setupMediaAndPress(parsedBody) {
       content.style.cssText = `padding: 12px; display: flex; flex-direction: column;`;
 
       const title = document.createElement("h3");
-      title.textContent = meta.title;
+      title.textContent = mediaItem.title;
       title.style.cssText = `margin: 0 0 6px 0; font-size: 16px; line-height: 1.3; font-weight: 600;`;
 
       const desc = document.createElement("p");
-      desc.textContent = meta.description;
+      desc.textContent = mediaItem.description;
       desc.style.cssText = `margin: 0 0 6px 0; font-size: 13px; color: #686868; flex-grow: 1;`;
 
       const host = document.createElement("span");
-      host.textContent = meta.host;
+      host.textContent = domain;
       host.style.cssText = `font-size: 12px; color: #aaa;`;
 
       content.appendChild(title);
@@ -1541,30 +1474,28 @@ function setupMediaAndPress(parsedBody) {
     themediacontainer.appendChild(swiperContainer);
 
     // Load and initialize Swiper
-        if(window.innerWidth > 1024){
-              loadSwiperJS().then(() => {
-              new Swiper(swiperContainer, {
-                spaceBetween: 25,
-                breakpoints: {
-                  320: {
-                    slidesPerView: 1,
-                    spaceBetween: 0,
-                  },
-                        768: {
-                    slidesPerView: 2,
-                    spaceBetween: 15,
-                    allowTouchMove: true,
-                  },
-                  1024: {
-                    slidesPerView: 3,
-                        spaceBetween: 25,
-                
-                  },
-                },
-         
-              });
-            });
-           } else if (window.innerWidth < 1024) {
+    if (window.innerWidth > 1024) {
+      loadSwiperJS().then(() => {
+        new Swiper(swiperContainer, {
+          spaceBetween: 25,
+          breakpoints: {
+            320: {
+              slidesPerView: 1,
+              spaceBetween: 0,
+            },
+            768: {
+              slidesPerView: 2,
+              spaceBetween: 15,
+              allowTouchMove: true,
+            },
+            1024: {
+              slidesPerView: 3,
+              spaceBetween: 25,
+            },
+          },
+        });
+      });
+    } else if (window.innerWidth < 1024) {
       loadSwiperJS().then(() => {
         new Swiper(swiperContainer, {
           slidesPerView: 1,
@@ -1579,7 +1510,7 @@ function setupMediaAndPress(parsedBody) {
               spaceBetween: 15,
               allowTouchMove: true,
             },
-               1024: {
+            1024: {
               slidesPerView: 3,
               spaceBetween: 25,
               allowTouchMove: true,
