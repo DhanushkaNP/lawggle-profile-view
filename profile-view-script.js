@@ -590,6 +590,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             videoIntroductionElement.src = videoIntroduction;
             videoIntroductionElement.controls = true;
             videoIntroductionElement.preload = "auto"; // Ensure video is preloaded
+            videoIntroductionElement.muted = true;
 
             // Generate poster from first frame
             // generateVideoPoster(videoIntroduction, function (posterDataUrl) {
