@@ -859,6 +859,31 @@ document.addEventListener("DOMContentLoaded", async function () {
                   },
                 });
               });
+
+              const firstVideo =
+                clientTestimonialContainer.querySelector("video");
+              if (firstVideo) {
+                firstVideo.muted = true; // Ensure muted for autoplay
+
+                const swiperObserver = new IntersectionObserver(
+                  (entries) => {
+                    entries.forEach((entry) => {
+                      if (entry.isIntersecting) {
+                        firstVideo.play().catch(() => {
+                          // Auto-play might be blocked by browser
+                          console.warn(
+                            "Issue with auto-playing video, trying to play on user interaction."
+                          );
+                        });
+                      } else {
+                        firstVideo.pause();
+                      }
+                    });
+                  },
+                  { threshold: 0.5 }
+                );
+                swiperObserver.observe(clientTestimonialContainer);
+              }
             }
           } else {
             document.getElementById("sectiontestimonials").style.display =
@@ -942,8 +967,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 });
               });
 
-              const firstVideo =
-                clientTestimonialContainer.querySelector("video");
+              const firstVideo = videocaseslider.querySelector("video");
               if (firstVideo) {
                 firstVideo.muted = true; // Ensure muted for autoplay
 
