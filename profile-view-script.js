@@ -592,11 +592,35 @@ document.addEventListener("DOMContentLoaded", async function () {
             videoIntroductionElement.preload = "auto"; // Ensure video is preloaded
 
             // Generate poster from first frame
-            generateVideoPoster(videoIntroduction, function (posterDataUrl) {
-              if (posterDataUrl) {
-                videoIntroductionElement.setAttribute("poster", posterDataUrl);
+            // generateVideoPoster(videoIntroduction, function (posterDataUrl) {
+            //   if (posterDataUrl) {
+            //     videoIntroductionElement.setAttribute("poster", posterDataUrl);
+            //   }
+            // });
+
+            // Auto-play/pause profile video based on visibility
+            const videoObserver = new IntersectionObserver(
+              (entries, observer) => {
+                entries.forEach((entry) => {
+                  const video = entry.target;
+                  if (entry.isIntersecting) {
+                    video.play().catch(() => {
+                      // Auto-play might be blocked by browser
+                      console.warn(
+                        "Issue with auto-playing video, trying to play on user interaction."
+                      );
+                    });
+                  } else {
+                    video.pause();
+                  }
+                });
+              },
+              {
+                threshold: 0.3, // Play when at least 30% visible
               }
-            });
+            );
+
+            videoObserver.observe(videoIntroductionElement);
           } else {
             document.getElementById("profile-video-section").style.display =
               "none";
