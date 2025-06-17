@@ -801,7 +801,11 @@ document.addEventListener("DOMContentLoaded", async function () {
             }
             for (i = 0; i <= max - 1; i++) {
               let slide = document.createElement("div");
-              slide.classList.add("swiper-slide", "testimonial-video-wrap");
+              slide.classList.add(
+                "swiper-slide",
+                "testimonial-video-wrap",
+                "sdas"
+              );
               let testimonialVideo = document.createElement("video");
               testimonialVideo.classList.add("testimonial-video");
               testimonialVideo.setAttribute(
