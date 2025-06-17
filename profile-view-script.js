@@ -950,7 +950,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                   slidesPerView: 1.2,
                   spaceBetween: 15,
                   slidesOffsetAfter: 20,
-                  centeredSlides: false,
+                  centeredSlides: true,
                   shortSwipes: true,
 
                   freeMode: false,
