@@ -988,7 +988,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                   },
                   { threshold: 0.5 }
                 );
-                swiperObserver.observe(clientTestimonialContainer);
+                swiperObserver.observe(videocaseslider);
               }
             }
           } else {
