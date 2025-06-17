@@ -823,7 +823,23 @@ document.addEventListener("DOMContentLoaded", async function () {
             }
 
             clientTestimonialContainer.append(swiperWrapper);
-            if (window.innerWidth < 1024) {
+            if(window.innerWidth > 1024){
+              loadSwiperJS().then(() => {
+              new Swiper(clientTestimonialContainer, {
+                spaceBetween: 25,
+                breakpoints: {
+                  320: {
+                    slidesPerView: 1.1,
+                  },
+                  1024: {
+                    slidesPerView: 3,
+                
+                  },
+                },
+         
+              });
+            });
+           } else if (window.innerWidth < 1024) {
               loadSwiperJS().then(() => {
                 new Swiper(clientTestimonialContainer, {
                   slidesPerView: 1.2,
@@ -929,8 +945,23 @@ document.addEventListener("DOMContentLoaded", async function () {
               swiperWrapper.append(caseSlide);
             }
             videocaseslider.append(swiperWrapper);
-
-            if (window.innerWidth < 1024) {
+               if(window.innerWidth > 1024){
+              loadSwiperJS().then(() => {
+              new Swiper(videocaseslider, {
+                spaceBetween: 25,
+                breakpoints: {
+                  320: {
+                    slidesPerView: 1.1,
+                  },
+                  1024: {
+                    slidesPerView: 3,
+                
+                  },
+                },
+         
+              });
+            });
+           } else if (window.innerWidth < 1024) {
               loadSwiperJS().then(() => {
                 new Swiper(videocaseslider, {
                   slidesPerView: 1.2,
@@ -1408,8 +1439,8 @@ function setupMediaAndPress(parsedBody) {
       card.target = "_blank";
       card.style.cssText = `
         display: block;
-        width: 300px;
-        height: 220px;
+        width: 100%;
+        height: auto;
         border-radius: 8px;
         overflow: hidden;
         background: white;
@@ -1457,7 +1488,23 @@ function setupMediaAndPress(parsedBody) {
     themediacontainer.appendChild(swiperContainer);
 
     // Load and initialize Swiper
-    if (window.innerWidth < 1024) {
+        if(window.innerWidth > 1024){
+              loadSwiperJS().then(() => {
+              new Swiper(swiperContainer, {
+                spaceBetween: 25,
+                breakpoints: {
+                  320: {
+                    slidesPerView: 1.1,
+                  },
+                  1024: {
+                    slidesPerView: 3,
+                
+                  },
+                },
+         
+              });
+            });
+           } else if (window.innerWidth < 1024) {
       loadSwiperJS().then(() => {
         new Swiper(swiperContainer, {
           slidesPerView: 1.1,
@@ -1469,6 +1516,11 @@ function setupMediaAndPress(parsedBody) {
           breakpoints: {
             768: {
               slidesPerView: 2,
+              spaceBetween: 25,
+              allowTouchMove: true,
+            },
+               1024: {
+              slidesPerView: 3,
               spaceBetween: 25,
               allowTouchMove: true,
             },
