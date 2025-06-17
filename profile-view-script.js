@@ -822,32 +822,14 @@ document.addEventListener("DOMContentLoaded", async function () {
             if (window.innerWidth < 1024) {
               loadSwiperJS().then(() => {
                 new Swiper(clientTestimonialContainer, {
-                  slidesPerView: 1.3,
-                  spaceBetween: 16,
-                  slidesOffsetAfter: 60,
-                  centeredSlides: false,
-
+                  slidesPerView: 1.2,
+                  spaceBetween: 15,
+                  slidesOffsetAfter: 20,
+                  centeredSlides: true,
                   shortSwipes: true,
-                  threshold: 6,
-                  longSwipesRatio: 0.3,
-                  longSwipesMs: 200,
-
-                  touchRatio: 1.2,
-                  touchAngle: 45,
-                  grabCursor: true,
-                  followFinger: true,
 
                   freeMode: false,
-
-                  speed: 400,
-                  longSwipes: true,
-                  longSwipesRatio: 0.2,
-                  longSwipesMs: 200,
-
                   touchStartPreventDefault: false,
-                  touchStartForcePreventDefault: false,
-                  touchMoveStopPropagation: true,
-
                   preventClicks: false,
                   preventClicksPropagation: false,
                   allowTouchMove: true,
@@ -856,31 +838,6 @@ document.addEventListener("DOMContentLoaded", async function () {
                   resistance: true,
                   resistanceRatio: 0.5,
 
-                  updateOnWindowResize: true,
-                  observer: true,
-                  observeParents: true,
-                  watchOverflow: true,
-
-                  pagination: false,
-                  navigation: false,
-
-                  cssMode: false,
-
-                  breakpoints: {
-                    768: {
-                      slidesPerView: 2.2,
-                      spaceBetween: 15,
-                    },
-                    1024: {
-                      slidesPerView: 3.1,
-                      spaceBetween: 20,
-                    },
-                    1200: {
-                      slidesPerView: 4.1,
-                      spaceBetween: 20,
-                    },
-                  },
-
                   on: {
                     touchStart: function () {
                       this.el.style.transition = "none";
@@ -888,13 +845,13 @@ document.addEventListener("DOMContentLoaded", async function () {
                     touchEnd: function () {
                       this.el.style.transition = "";
                     },
-                    slideChange: function () {
-                      // Stop all videos when sliding
-                      const videos = this.el.querySelectorAll("video");
-                      videos.forEach((video) => {
-                        video.pause();
-                      });
-                    },
+                    // slideChange: function () {
+                    //   // Stop all videos when sliding
+                    //   const videos = this.el.querySelectorAll("video");
+                    //   videos.forEach((video) => {
+                    //     video.pause();
+                    //   });
+                    // },
                   },
                 });
               });
