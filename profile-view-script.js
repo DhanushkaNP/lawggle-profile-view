@@ -514,6 +514,11 @@ document.addEventListener("DOMContentLoaded", async function () {
                         centeredSlides: false,
                         slidesOffsetAfter: 30,
                       },
+                         768: {
+                    slidesPerView: 2,
+                    spaceBetween: 15,
+                    allowTouchMove: true,
+                  },
                       1024: {
                         slidesPerView: 1,
                         allowTouchMove: false,
@@ -748,11 +753,17 @@ document.addEventListener("DOMContentLoaded", async function () {
                 },
                 allowTouchMove: window.innerWidth < 1024,
                 breakpoints: {
-                  0: {
-                    slidesPerView: 1.1,
+                  320: {
+                    slidesPerView: 1,
                     allowTouchMove: true,
                     centeredSlides: false,
-                    slidesOffsetAfter: 30,
+                    slidesOffsetAfter: 20,
+                    spaceBetween: 0,
+                  },
+                     768: {
+                    slidesPerView: 2,
+                    spaceBetween: 15,
+                    allowTouchMove: true,
                   },
                   1024: {
                     slidesPerView: 1,
@@ -829,10 +840,12 @@ document.addEventListener("DOMContentLoaded", async function () {
                 spaceBetween: 25,
                 breakpoints: {
                   320: {
-                    slidesPerView: 1.1,
+                    slidesPerView: 1,
+                    spaceBetween: 0,
                   },
                   1024: {
                     slidesPerView: 3,
+                      spaceBetween: 25,
                 
                   },
                 },
@@ -842,7 +855,7 @@ document.addEventListener("DOMContentLoaded", async function () {
            } else if (window.innerWidth < 1024) {
               loadSwiperJS().then(() => {
                 new Swiper(clientTestimonialContainer, {
-                  slidesPerView: 1.2,
+                  slidesPerView: 1,
                   spaceBetween: 15,
                   slidesOffsetAfter: 20,
                   centeredSlides: true,
@@ -857,6 +870,22 @@ document.addEventListener("DOMContentLoaded", async function () {
 
                   resistance: true,
                   resistanceRatio: 0.5,
+                     breakpoints: {
+                  320: {
+                    slidesPerView: 1,
+                    spaceBetween: 0,
+                  },
+                    768: {
+                    slidesPerView: 2,
+                    spaceBetween: 15,
+                    allowTouchMove: true,
+                  },
+                  1024: {
+                    slidesPerView: 3,
+                    spaceBetween: 25,
+                
+                  },
+                },
 
                   on: {
                     touchStart: function () {
@@ -951,10 +980,17 @@ document.addEventListener("DOMContentLoaded", async function () {
                 spaceBetween: 25,
                 breakpoints: {
                   320: {
-                    slidesPerView: 1.1,
+                    slidesPerView: 1,
+                    spaceBetween: 0,
+                  },
+                    768: {
+                    slidesPerView: 2,
+                    spaceBetween: 15,
+                    allowTouchMove: true,
                   },
                   1024: {
                     slidesPerView: 3,
+                    spaceBetween: 25,
                 
                   },
                 },
@@ -964,8 +1000,8 @@ document.addEventListener("DOMContentLoaded", async function () {
            } else if (window.innerWidth < 1024) {
               loadSwiperJS().then(() => {
                 new Swiper(videocaseslider, {
-                  slidesPerView: 1.2,
-                  spaceBetween: 15,
+                  slidesPerView: 1,
+                  spaceBetween: 0,
                   slidesOffsetAfter: 20,
                   centeredSlides: true,
                   shortSwipes: true,
@@ -979,7 +1015,23 @@ document.addEventListener("DOMContentLoaded", async function () {
 
                   resistance: true,
                   resistanceRatio: 0.5,
-
+                  
+                breakpoints: {
+                  320: {
+                    slidesPerView: 1,
+                    spaceBetween: 0,
+                  },
+                    768: {
+                    slidesPerView: 2,
+                    spaceBetween: 15,
+                    allowTouchMove: true,
+                  },
+                  1024: {
+                    slidesPerView: 3,
+                    spaceBetween: 25,
+                
+                  },
+                },
                   on: {
                     touchStart: function () {
                       this.el.style.transition = "none";
@@ -1494,10 +1546,17 @@ function setupMediaAndPress(parsedBody) {
                 spaceBetween: 25,
                 breakpoints: {
                   320: {
-                    slidesPerView: 1.1,
+                    slidesPerView: 1,
+                    spaceBetween: 0,
+                  },
+                        768: {
+                    slidesPerView: 2,
+                    spaceBetween: 15,
+                    allowTouchMove: true,
                   },
                   1024: {
                     slidesPerView: 3,
+                        spaceBetween: 25,
                 
                   },
                 },
@@ -1507,8 +1566,8 @@ function setupMediaAndPress(parsedBody) {
            } else if (window.innerWidth < 1024) {
       loadSwiperJS().then(() => {
         new Swiper(swiperContainer, {
-          slidesPerView: 1.1,
-          spaceBetween: 25,
+          slidesPerView: 1,
+          spaceBetween: 0,
           centeredSlides: false,
           allowTouchMove: true,
           navigation: false,
@@ -1516,7 +1575,7 @@ function setupMediaAndPress(parsedBody) {
           breakpoints: {
             768: {
               slidesPerView: 2,
-              spaceBetween: 25,
+              spaceBetween: 15,
               allowTouchMove: true,
             },
                1024: {
