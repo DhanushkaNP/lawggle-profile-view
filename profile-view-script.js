@@ -937,9 +937,6 @@ document.addEventListener("DOMContentLoaded", async function () {
               caseVideo.controls = true;
               caseVideo.preload = "metadata";
               caseVideo.playsInline = true;
-              caseVideo.poster =
-                "https://cdn.prod.website-files.com/67e360f08a15ef65d8814b41/683031d15554289474aca28d_case%20study%20banner.png";
-
               caseSlide.append(caseVideo);
               swiperWrapper.append(caseSlide);
             }
