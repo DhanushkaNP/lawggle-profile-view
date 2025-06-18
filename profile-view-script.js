@@ -593,7 +593,8 @@ document.addEventListener("DOMContentLoaded", async function () {
             console.log("🖼️🖼️🖼️🖼️🖼️", videoIntroduction);
             const videoIntroductionElement =
               document.getElementById("theprofilevideo");
-            videoIntroductionElement.src = videoIntroduction;
+            videoIntroductionElement.src = videoIntroduction.url;
+            videoIntroductionElement.poster = videoIntroduction.thumbnail;
             videoIntroductionElement.controls = true;
             videoIntroductionElement.preload = "auto"; // Ensure video is preloaded
             videoIntroductionElement.muted = true;
