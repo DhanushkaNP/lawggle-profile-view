@@ -635,35 +635,6 @@ document.addEventListener("DOMContentLoaded", async function () {
           }
 
           // Helper function to generate poster from first frame
-          function generateVideoPoster(videoUrl, callback) {
-            const video = document.createElement("video");
-            video.src = videoUrl;
-            video.crossOrigin = "anonymous";
-            video.muted = true;
-            video.playsInline = true;
-            video.preload = "auto";
-            video.currentTime = 0.1; // Slightly after 0 for better reliability
-
-            video.addEventListener("loadeddata", function () {
-              // Create canvas
-              const canvas = document.createElement("canvas");
-              canvas.width = video.videoWidth;
-              canvas.height = video.videoHeight;
-              const ctx = canvas.getContext("2d");
-              ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-              try {
-                const dataURL = canvas.toDataURL("image/jpeg");
-                callback(dataURL);
-              } catch (e) {
-                callback(null);
-              }
-            });
-
-            video.addEventListener("error", function () {
-              callback(null);
-            });
-          }
-
           let notableCaseWins = parsedBody["notable case wins"];
           let notablecasewinscontainer = document.getElementById(
             "notablecasewinscontainer"
