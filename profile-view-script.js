@@ -800,8 +800,7 @@ document.addEventListener("DOMContentLoaded", async function () {
               testimonialVideo.controls = true;
               testimonialVideo.preload = "auto";
               testimonialVideo.playsInline = true;
-              testimonialVideo.poster =
-                "https://cdn.prod.website-files.com/67e360f08a15ef65d8814b41/683031cdac0c6f32e14d0cd6_Testimonial%20banner.png";
+              testimonialVideo.poster = clientTestimonials[i].thumbnail;
               slide.append(testimonialVideo);
               swiperWrapper.append(slide);
             }
@@ -934,6 +933,7 @@ document.addEventListener("DOMContentLoaded", async function () {
               let caseVideo = document.createElement("video");
               caseVideo.classList.add("case-study-video");
               caseVideo.src = thecasestudies[eachcase].url;
+              caseVideo.poster = thecasestudies[eachcase].thumbnail;
               caseVideo.controls = true;
               caseVideo.preload = "metadata";
               caseVideo.playsInline = true;
