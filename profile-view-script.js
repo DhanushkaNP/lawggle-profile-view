@@ -1453,7 +1453,11 @@ function setupMediaAndPress(parsedBody) {
       title.style.cssText = `margin: 0 0 6px 0; font-size: 16px; line-height: 1.3; font-weight: 600;`;
 
       const desc = document.createElement("p");
-      desc.textContent = mediaItem.description;
+      if (mediaItem.description && mediaItem.description.length > 90) {
+        desc.textContent = mediaItem.description.slice(0, 90) + "...";
+      } else {
+        desc.textContent = mediaItem.description || "";
+      }
       desc.style.cssText = `margin: 0 0 6px 0; font-size: 13px; color: #686868; flex-grow: 1;`;
 
       const host = document.createElement("span");
