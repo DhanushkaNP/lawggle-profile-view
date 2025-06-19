@@ -595,16 +595,34 @@ document.addEventListener("DOMContentLoaded", async function () {
               document.getElementById("theprofilevideo");
             videoIntroductionElement.src = videoIntroduction.url;
             videoIntroductionElement.poster = videoIntroduction.thumbnail;
-            videoIntroductionElement.controls = true;
+            // Show controls only after user interacts (click/tap/focus)
+            videoIntroductionElement.controls = false;
+
+            const showControls = () => {
+              videoIntroductionElement.controls = true;
+              // Remove listeners after first interaction
+              videoIntroductionElement.removeEventListener(
+                "click",
+                showControls
+              );
+              videoIntroductionElement.removeEventListener(
+                "focus",
+                showControls
+              );
+              videoIntroductionElement.removeEventListener(
+                "touchstart",
+                showControls
+              );
+            };
+            videoIntroductionElement.addEventListener("click", showControls);
+            videoIntroductionElement.addEventListener("focus", showControls);
+            videoIntroductionElement.addEventListener(
+              "touchstart",
+              showControls
+            );
+
             videoIntroductionElement.preload = "auto"; // Ensure video is preloaded
             videoIntroductionElement.muted = true;
-
-            // Generate poster from first frame
-            // generateVideoPoster(videoIntroduction, function (posterDataUrl) {
-            //   if (posterDataUrl) {
-            //     videoIntroductionElement.setAttribute("poster", posterDataUrl);
-            //   }
-            // });
 
             // Auto-play/pause profile video based on visibility
             const videoObserver = new IntersectionObserver(
