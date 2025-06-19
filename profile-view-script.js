@@ -595,31 +595,8 @@ document.addEventListener("DOMContentLoaded", async function () {
               document.getElementById("theprofilevideo");
             videoIntroductionElement.src = videoIntroduction.url;
             videoIntroductionElement.poster = videoIntroduction.thumbnail;
+            setupVideoControls(videoIntroductionElement);
             // Show controls only after user interacts (click/tap/focus)
-            videoIntroductionElement.controls = false;
-
-            const showControls = () => {
-              videoIntroductionElement.controls = true;
-              // Remove listeners after first interaction
-              videoIntroductionElement.removeEventListener(
-                "click",
-                showControls
-              );
-              videoIntroductionElement.removeEventListener(
-                "focus",
-                showControls
-              );
-              videoIntroductionElement.removeEventListener(
-                "touchstart",
-                showControls
-              );
-            };
-            videoIntroductionElement.addEventListener("click", showControls);
-            videoIntroductionElement.addEventListener("focus", showControls);
-            videoIntroductionElement.addEventListener(
-              "touchstart",
-              showControls
-            );
 
             videoIntroductionElement.preload = "auto"; // Ensure video is preloaded
             videoIntroductionElement.muted = true;
@@ -815,7 +792,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 clientTestimonials[i].url
               );
               testimonialVideo.src = clientTestimonials[i].url;
-              testimonialVideo.controls = true;
+              setupVideoControls(testimonialVideo);
               testimonialVideo.preload = "auto";
               testimonialVideo.playsInline = true;
               testimonialVideo.poster = clientTestimonials[i].thumbnail;
@@ -952,7 +929,7 @@ document.addEventListener("DOMContentLoaded", async function () {
               caseVideo.classList.add("case-study-video");
               caseVideo.src = thecasestudies[eachcase].url;
               caseVideo.poster = thecasestudies[eachcase].thumbnail;
-              caseVideo.controls = true;
+              setupVideoControls(caseVideo);
               caseVideo.preload = "metadata";
               caseVideo.playsInline = true;
               caseSlide.append(caseVideo);
@@ -1576,4 +1553,19 @@ function accordionClicked(e) {
   } else {
     console.log("Item was active, now closed"); // Debug line
   }
+}
+
+function setupVideoControls(videoElement) {
+  videoElement.controls = false;
+
+  const showControls = () => {
+    videoElement.controls = true;
+    // Remove listeners after first interaction
+    videoElement.removeEventListener("click", showControls);
+    videoElement.removeEventListener("focus", showControls);
+    videoElement.removeEventListener("touchstart", showControls);
+  };
+  videoElement.addEventListener("click", showControls);
+  videoElement.addEventListener("focus", showControls);
+  videoElement.addEventListener("touchstart", showControls);
 }
