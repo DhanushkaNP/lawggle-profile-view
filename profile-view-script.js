@@ -46,8 +46,13 @@ document.addEventListener("DOMContentLoaded", async function () {
           const firmUrl = parsedBody["firm url"];
 
           if (firmUrl != null && firmUrl != undefined && firmUrl != "") {
-            document.getElementById("thefirmurl").innerText =
+            // Capitalize first letter of the displayed URL
+            let displayUrl =
               firmUrl.length > 22 ? firmUrl.substring(0, 22) + "..." : firmUrl;
+            displayUrl =
+              displayUrl.charAt(0).toUpperCase() + displayUrl.slice(1);
+
+            document.getElementById("thefirmurl").innerText = displayUrl;
 
             let firmFullUrl = firmUrl.startsWith("http")
               ? firmUrl
