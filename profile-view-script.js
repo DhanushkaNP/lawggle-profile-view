@@ -691,7 +691,8 @@ document.addEventListener("DOMContentLoaded", async function () {
               caseContent.append(caseHeading);
               let caseText = document.createElement("p");
             let readmoreBtn = document.createElement("button");
-              readmoreBtn.className = "toggle-readmore";
+                readmoreBtn.className = "toggle-readmore";
+                readmoreBtn.textContent = "Read more";
               caseText.classList.add("notablecasewintext");
               caseText.innerText = notableCaseWins[eachcase].description;
               caseContent.append(caseText);
@@ -706,13 +707,18 @@ document.addEventListener("DOMContentLoaded", async function () {
               pagination
             );
 
-            const textBlock = document.querySelector('.notablecasewintext');
-            const toggleBtn = textBlock.querySelector('.toggle-readmore');
+         
 
-            toggleBtn.addEventListener('click', (e) => {
-              e.stopPropagation(); 
-              textBlock.classList.toggle('expanded');
-              toggleBtn.textContent = textBlock.classList.contains('expanded') ? 'Read less' : 'Read more';
+           document.querySelectorAll(".toggle-readmore").forEach((toggleBtn) => {
+              const textBlock = toggleBtn.previousElementSibling;
+
+              toggleBtn.addEventListener("click", (e) => {
+                e.stopPropagation();
+                textBlock.classList.toggle("expanded");
+                toggleBtn.textContent = textBlock.classList.contains("expanded")
+                  ? "Read less"
+                  : "Read more";
+              });
             });
 
             // Show/hide nav buttons based on screen size
