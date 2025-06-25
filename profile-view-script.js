@@ -406,19 +406,22 @@ document.addEventListener("DOMContentLoaded", async function () {
               "none";
           }
 
-          let dynamicBio = parsedBody["dynamic bio"];
-          if (
-            dynamicBio == null ||
-            dynamicBio == "null" ||
-            dynamicBio == undefined ||
-            dynamicBio == "" ||
-            dynamicBio == "\n"
-          ) {
-            document.getElementById("biography-container").style.display =
-              "none";
-          } else {
-            document.getElementById("biotext").innerHTML = dynamicBio;
-          }
+        let dynamicBio = parsedBody["dynamic bio"];
+        if (
+          dynamicBio == null ||
+          dynamicBio == "null" ||
+          dynamicBio == undefined ||
+          dynamicBio == "" ||
+          dynamicBio == "\n"
+        ) {
+          // Hide both desktop and mobile biography containers
+          document.getElementById("biography-container").style.display = "none";
+          document.getElementById("biography-container-mob").style.display = "none";
+        } else {
+          // Set content for both desktop and mobile bio text elements
+          document.getElementById("biotext").innerHTML = dynamicBio;
+          document.getElementById("biotext-mob").innerHTML = dynamicBio;
+        }
 
           let certificates = parsedBody["certificates"];
           if (
