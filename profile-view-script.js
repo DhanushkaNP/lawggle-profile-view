@@ -666,6 +666,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             nextBtn.className = "swiper-button-next cases-nav-btn";
             nextBtn.style.display = "none"; // Hide by default
 
+       
             // Create pagination
             const pagination = document.createElement("div");
             pagination.className = "swiper-pagination";
@@ -681,7 +682,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 "crd",
                 "crd-cutom-width"
               );
-              // caseWinDiv.style.width = "500px"; // Set a fixed width for each slide
+
               const caseContent = document.createElement("div");
               caseContent.classList.add("pv-case-content");
               let caseHeading = document.createElement("h4");
@@ -689,9 +690,12 @@ document.addEventListener("DOMContentLoaded", async function () {
               caseHeading.innerText = notableCaseWins[eachcase].title;
               caseContent.append(caseHeading);
               let caseText = document.createElement("p");
+            let readmoreBtn = document.createElement("button");
+              readmoreBtn.className = "toggle-readmore";
               caseText.classList.add("notablecasewintext");
               caseText.innerText = notableCaseWins[eachcase].description;
               caseContent.append(caseText);
+              caseContent.append(readmoreBtn);
               caseWinDiv.append(caseContent);
               swiperWrapper.append(caseWinDiv);
             }
@@ -701,6 +705,15 @@ document.addEventListener("DOMContentLoaded", async function () {
               swiperWrapper,
               pagination
             );
+
+            const textBlock = document.querySelector('.notablecasewintext');
+            const toggleBtn = textBlock.querySelector('.toggle-readmore');
+
+            toggleBtn.addEventListener('click', (e) => {
+              e.stopPropagation(); 
+              textBlock.classList.toggle('expanded');
+              toggleBtn.textContent = textBlock.classList.contains('expanded') ? 'Read less' : 'Read more';
+            });
 
             // Show/hide nav buttons based on screen size
             function updateNavVisibility() {
