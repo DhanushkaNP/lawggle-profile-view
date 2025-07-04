@@ -205,12 +205,12 @@ document.addEventListener("DOMContentLoaded", async function () {
             freeconsult == undefined ||
             freeconsult == ""
           ) {
-            freeconsult = "no";
+            freeconsult = "yes";
           }
 
           let probono = parsedBody["pro bono work"];
           if (probono == null || probono == undefined || probono == "") {
-            probono = "no";
+            probono = "yes";
           }
 
           let contingency = parsedBody["offer contingency"];
@@ -219,7 +219,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             contingency == undefined ||
             contingency == ""
           ) {
-            contingency = "no";
+            contingency = "yes";
           }
 
           if (freeconsult == "yes") {
