@@ -208,7 +208,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             freeconsult = "yes";
           }
 
-          let probono = parsedBody["pro bono work"];
+          let probono = parsedBody["community pro bono work"];
           if (probono == null || probono == undefined || probono == "") {
             probono = "yes";
           }
