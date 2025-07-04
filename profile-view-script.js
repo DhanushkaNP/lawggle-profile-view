@@ -205,17 +205,43 @@ document.addEventListener("DOMContentLoaded", async function () {
           ) {
             freeconsult = "no";
           }
-          let probono = parsedBody["free consultation"];
+
+          let probono = parsedBody["pro bono work"];
           if (probono == null || probono == undefined || probono == "") {
             probono = "no";
           }
-          let contingency = parsedBody["free consultation"];
+
+          let contingency = parsedBody["offer contingency"];
           if (
             contingency == null ||
             contingency == undefined ||
             contingency == ""
           ) {
             contingency = "no";
+          }
+
+          if (freeconsult == "yes") {
+            document.getElementById("free-consult-yes").style.display = "block";
+            document.getElementById("free-consult-no").style.display = "none";
+          } else {
+            document.getElementById("free-consult-yes").style.display = "none";
+            document.getElementById("free-consult-no").style.display = "block";
+          }
+
+          if (probono == "yes") {
+            document.getElementById("cpbw-yes").style.display = "block";
+            document.getElementById("cpbw-no").style.display = "none";
+          } else {
+            document.getElementById("cpbw-yes").style.display = "none";
+            document.getElementById("cpbw-no").style.display = "block";
+          }
+
+          if (contingency == "yes") {
+            document.getElementById("offer-cg-yes").style.display = "block";
+            document.getElementById("offer-cg-no").style.display = "none";
+          } else {
+            document.getElementById("offer-cg-yes").style.display = "none";
+            document.getElementById("offer-cg-no").style.display = "block";
           }
 
           // To do
@@ -406,22 +432,24 @@ document.addEventListener("DOMContentLoaded", async function () {
               "none";
           }
 
-        let dynamicBio = parsedBody["dynamic bio"];
-        if (
-          dynamicBio == null ||
-          dynamicBio == "null" ||
-          dynamicBio == undefined ||
-          dynamicBio == "" ||
-          dynamicBio == "\n"
-        ) {
-          // Hide both desktop and mobile biography containers
-          document.getElementById("biography-container").style.display = "none";
-          document.getElementById("biography-container-mob").style.display = "none";
-        } else {
-          // Set content for both desktop and mobile bio text elements
-          document.getElementById("biotext").innerHTML = dynamicBio;
-          document.getElementById("biotext-mob").innerHTML = dynamicBio;
-        }
+          let dynamicBio = parsedBody["dynamic bio"];
+          if (
+            dynamicBio == null ||
+            dynamicBio == "null" ||
+            dynamicBio == undefined ||
+            dynamicBio == "" ||
+            dynamicBio == "\n"
+          ) {
+            // Hide both desktop and mobile biography containers
+            document.getElementById("biography-container").style.display =
+              "none";
+            document.getElementById("biography-container-mob").style.display =
+              "none";
+          } else {
+            // Set content for both desktop and mobile bio text elements
+            document.getElementById("biotext").innerHTML = dynamicBio;
+            document.getElementById("biotext-mob").innerHTML = dynamicBio;
+          }
 
           let certificates = parsedBody["certificates"];
           if (
@@ -666,7 +694,6 @@ document.addEventListener("DOMContentLoaded", async function () {
             nextBtn.className = "swiper-button-next cases-nav-btn";
             nextBtn.style.display = "none"; // Hide by default
 
-       
             // Create pagination
             const pagination = document.createElement("div");
             pagination.className = "swiper-pagination";
@@ -690,9 +717,9 @@ document.addEventListener("DOMContentLoaded", async function () {
               caseHeading.innerText = notableCaseWins[eachcase].title;
               caseContent.append(caseHeading);
               let caseText = document.createElement("p");
-            let readmoreBtn = document.createElement("button");
-                readmoreBtn.className = "toggle-readmore";
-                readmoreBtn.textContent = "Read more";
+              let readmoreBtn = document.createElement("button");
+              readmoreBtn.className = "toggle-readmore";
+              readmoreBtn.textContent = "Read more";
               caseText.classList.add("notablecasewintext");
               caseText.innerText = notableCaseWins[eachcase].description;
               caseContent.append(caseText);
@@ -707,19 +734,21 @@ document.addEventListener("DOMContentLoaded", async function () {
               pagination
             );
 
-         
+            document
+              .querySelectorAll(".toggle-readmore")
+              .forEach((toggleBtn) => {
+                const textBlock = toggleBtn.previousElementSibling;
 
-           document.querySelectorAll(".toggle-readmore").forEach((toggleBtn) => {
-              const textBlock = toggleBtn.previousElementSibling;
-
-              toggleBtn.addEventListener("click", (e) => {
-                e.stopPropagation();
-                textBlock.classList.toggle("expanded");
-                toggleBtn.textContent = textBlock.classList.contains("expanded")
-                  ? "Read less"
-                  : "Read more";
+                toggleBtn.addEventListener("click", (e) => {
+                  e.stopPropagation();
+                  textBlock.classList.toggle("expanded");
+                  toggleBtn.textContent = textBlock.classList.contains(
+                    "expanded"
+                  )
+                    ? "Read less"
+                    : "Read more";
+                });
               });
-            });
 
             // Show/hide nav buttons based on screen size
             function updateNavVisibility() {
