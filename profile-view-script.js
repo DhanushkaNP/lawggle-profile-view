@@ -64,10 +64,12 @@ document.addEventListener("DOMContentLoaded", async function () {
 
           let minrate = parsedBody["min hourly rate"];
           let maxrate = parsedBody["max hourly rate"];
+          let ratecombined;
 
           if (!minrate && !maxrate) {
             // Neither rate available - show "N/A"
-            document.getElementById("hourly-rate").style.display = "none";
+            document.getElementById("hourly-rate-section").style.display =
+              "none";
           } else {
             if (minrate && maxrate) {
               // Both rates available - show range
@@ -80,10 +82,10 @@ document.addEventListener("DOMContentLoaded", async function () {
               ratecombined = "$" + `${maxrate}/Hour`;
             }
 
-            document.getElementById("hourly-rate-large-s").innerText =
+            document.getElementById("hourly-rate-text").innerText =
               ratecombined;
-            document.getElementById("hourly-rate-mobile").innerText =
-              ratecombined;
+            document.getElementById("hourly-rate-section").style.display =
+              "flex";
           }
 
           let bannerimage = parsedBody["profile banner"];
