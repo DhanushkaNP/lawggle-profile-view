@@ -221,27 +221,27 @@ document.addEventListener("DOMContentLoaded", async function () {
           }
 
           if (freeconsult == "yes") {
-            document.getElementById("free-consult-yes").style.display = "block";
+            document.getElementById("free-consult-yes").style.display = "flex";
             document.getElementById("free-consult-no").style.display = "none";
           } else {
             document.getElementById("free-consult-yes").style.display = "none";
-            document.getElementById("free-consult-no").style.display = "block";
+            document.getElementById("free-consult-no").style.display = "flex";
           }
 
           if (probono == "yes") {
-            document.getElementById("cpbw-yes").style.display = "block";
+            document.getElementById("cpbw-yes").style.display = "flex";
             document.getElementById("cpbw-no").style.display = "none";
           } else {
             document.getElementById("cpbw-yes").style.display = "none";
-            document.getElementById("cpbw-no").style.display = "block";
+            document.getElementById("cpbw-no").style.display = "flex";
           }
 
           if (contingency == "yes") {
-            document.getElementById("offer-cg-yes").style.display = "block";
+            document.getElementById("offer-cg-yes").style.display = "flex";
             document.getElementById("offer-cg-no").style.display = "none";
           } else {
             document.getElementById("offer-cg-yes").style.display = "none";
-            document.getElementById("offer-cg-no").style.display = "block";
+            document.getElementById("offer-cg-no").style.display = "flex";
           }
 
           // To do
