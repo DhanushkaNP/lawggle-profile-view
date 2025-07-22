@@ -14,12 +14,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   if (lawyerId != null && lawyerId != "") {
     let lawyerstring = lawyerId.toString();
     let thisUser = await getUserById(lawyerstring);
-    let blogs = await fetchBlogByCreator(lawyerstring);
-    let blogParse1 = JSON.parse(blogs);
-    console.log(blogParse1);
-    let blogBody = blogParse1.data.body;
-    let blogsJson = JSON.parse(JSON.parse(blogBody));
-    console.log("🦙🦙🦙😂", blogsJson);
 
     if (thisUser != "error") {
       if (thisUser != "error") {
