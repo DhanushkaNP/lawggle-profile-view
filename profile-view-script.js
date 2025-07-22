@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     let thisUser = await getUserById(lawyerstring);
     let blogs = await fetchBlogByCreator(lawyerstring);
     let blogParse1 = JSON.parse(blogs);
+    console.log(blogParse1);
     let blogBody = blogParse1.data.body;
     let blogsJson = JSON.parse(JSON.parse(blogBody));
     console.log("🦙🦙🦙😂", blogsJson);
