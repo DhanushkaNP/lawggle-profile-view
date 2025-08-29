@@ -38,6 +38,9 @@ document.addEventListener("DOMContentLoaded", async function () {
 
           document.getElementById("NameText").innerText = parsedBody["name"];
 
+          // Get lawyer badge data
+          await setupLawyerBadge(lawyerId);
+
           const firmUrl = parsedBody["firm url"];
 
           if (firmUrl != null && firmUrl != undefined && firmUrl != "") {
@@ -1265,6 +1268,87 @@ async function fetchBlogByCreator(creatorId) {
   } catch (error) {
     return "error";
   }
+}
+
+async function getLawyerBadge(memberId) {
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+  myHeaders.append("x-api-key", "EzeDkRz7uA9qKReAQ0YHB3F3VQ2qyfRv5FBY157o");
+
+  const raw = JSON.stringify({
+    member_id: memberId,
+  });
+
+  const requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow",
+  };
+
+  try {
+    const response = await fetch(
+      "https://rkhkex17v2.execute-api.us-east-1.amazonaws.com/prod/badge",
+      requestOptions
+    );
+    const result = await response.json();
+    console.log("Badge data:", result);
+    return result;
+  } catch (error) {
+    console.error("Error fetching badge:", error);
+    return null;
+  }
+}
+
+async function setupLawyerBadge(memberstackId) {
+  try {
+    const badgeData = await getLawyerBadge(memberstackId);
+
+    if (badgeData && badgeData.badge) {
+      const badge = badgeData.badge;
+
+      // Hide all badges first
+      hideLawyerBadges();
+
+      // Show the appropriate badge based on the response
+      switch (badge) {
+        case "Elite Lawyer":
+          document.getElementById("top-lawyer-badge").style.display = "block";
+          break;
+        case "Proactive Lawyer":
+          document.getElementById("power-player-badge").style.display = "block";
+          break;
+        case "Active Lawyer":
+          document.getElementById("rising-star-badge").style.display = "block";
+          break;
+        case "No Badge":
+        default:
+          // Keep all badges hidden
+          break;
+      }
+    } else {
+      hideLawyerBadges();
+    }
+  } catch (error) {
+    console.error("Error setting up lawyer badge:", error);
+    hideLawyerBadges();
+  }
+}
+
+function hideLawyerBadges() {
+  // Hide all lawyer badge elements
+  const badges = [
+    "top-lawyer-badge",
+    "power-player-badge",
+    "rising-star-badge",
+  ];
+
+  badges.forEach((badgeId) => {
+    const badgeElement = document.getElementById(badgeId);
+    if (badgeElement) {
+      badgeElement.style.display = "none";
+    }
+  });
 }
 
 async function mapBoxMap(latitude, longitude) {
